@@ -1,0 +1,30 @@
+/*
+This file is part of McWebPanel.
+Copyright (C) 2020-2024 DEV-MCWEBPANEL
+
+    McWebPanel is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    McWebPanel is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with McWebPanel.  If not, see <https://www.gnu.org/licenses/>.
+*/
+
+#terms-text.standalone {
+    height: auto;
+    overflow: auto;
+}
+
+.terms-text {
+    height: 450px;
+    border: #ddd solid 1px;
+    background-color: #f4f4f4;
+    padding: 30px;
+    overflow: scroll;
+}

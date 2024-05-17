@@ -1,0 +1,265 @@
+/*
+This file is part of McWebPanel.
+Copyright (C) 2020-2024 DEV-MCWEBPANEL
+
+    McWebPanel is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    McWebPanel is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with McWebPanel.  If not, see <https://www.gnu.org/licenses/>.
+*/
+
+.textoconsola {
+    font-family: Consolas, 'Courier New', Courier, 'Nimbus Mono L', monospace !important;
+    font-size: 12pt !important;
+    text-align: left !important;
+    padding-left: 5px;
+    border-style: solid;
+    border-color: #fff;
+    border-width: 1px;
+}
+
+.bgconsolanegra{
+    background-color: rgb(0, 0, 0) !important;
+}
+
+.bgconsolablanca{
+    background-color: #FFF !important;
+}
+
+.textconsolanegro{
+    color: #000000 !important;
+}
+
+.textconsolablanco{
+    color: #ffffff !important;
+}
+
+.barrainput {
+    border: 1px solid #d1d3e2 !important;
+    border-radius: .35rem !important;
+}
+
+.barrahorizonal{
+    overflow-y:scroll !important;
+}
+
+.textnegrita{
+    font-weight: bold;
+}
+
+.textsubrayado{
+    text-decoration: underline;
+}
+
+.textreset{
+    font-weight:normal;
+}
+
+.colbase{
+    color: #AAAAAA!important;
+}
+
+.colnegro{
+    color:#010101;
+}
+
+.colnegroclaro{
+    color:#272727;
+}
+
+.colnegrooscuro{
+    color:#000000;
+}
+
+.colrojo{
+    color:#de382b;
+}
+
+.colrojoclaro{
+    color:#e8766d;
+}
+
+.colrojooscuro{
+    color:#a32319;
+}
+
+.colverde{
+    color:#39b54a;
+}
+
+.colverdeclaro{
+    color:#6ad078
+}
+
+.colverdeoscuro{
+    color:#277b32;
+}
+
+.colamarillo{
+    color:#ffc706;
+}
+
+.colamarilloclaro{
+    color:#ffd853;
+}
+
+.colamarilloscuro{
+    color:#b98f00;
+}
+
+.colazul{
+    color:#006fb8;
+}
+
+.colazulclaro{
+    color:#069cff;
+}
+
+.colazuloscuro{
+    color:#00416c;
+}
+
+.colmagenta{
+    color:#762671;
+}
+
+.colmagentaclaro{
+    color:#b039a8;
+}
+
+.colmagentaoscuro{
+    color:#3c133a;
+}
+
+.colcyan{
+    color:#2cb5e9;
+}
+
+.colcyanclaro{
+    color:#71cdf0;
+}
+
+.colcyanoscuro{
+    color:#1389b6;
+}
+
+.colblanco{
+    color:#cccccc;
+}
+
+.colblancoclaro{
+    color:#f2f2f2;
+}
+
+.colblancooscuro{
+    color:#a6a6a6;
+}
+
+.colbrillantenegro{
+    color:#808080;
+}
+
+.colbrillantenegroclaro{
+    color:#a6a6a6;
+}
+
+.colbrillantenegrooscuro{
+    color:#5a5a5a;
+}
+
+.colbrillanterojo{
+    color:#ff0000;
+}
+
+.colbrillanterojoclaro{
+    color:#ff4d4d;
+}
+
+.colbrillanterojooscuro{
+    color:#b30000;
+}
+
+.colbrillanteverde{
+    color:#00ff00;
+}
+
+.colbrillanteverdeclaro{
+    color:#4dff4d;
+}
+
+.colbrillanteverdeoscuro{
+    color:#00b300;
+}
+
+
+.colverdetest{
+    color:#49db30
+}
+
+.colbrillanteamarillo{
+    color:#ffff00;
+}
+
+.colbrillanteamarilloclaro{
+    color:#ffff4d;
+}
+
+.colbrillanteamarillooscuro{
+    color:#b3b300;
+}
+
+.colbrillanteazul{
+    color:#0000ff;
+}
+
+.colbrillanteazulclaro{
+    color:#4d4dff;
+}
+
+.colbrillanteazuloscuro{
+    color:#0000b3;
+}
+
+.colbrillantemagenta{
+    color:#ff00ff;
+}
+
+.colbrillantemagentaclaro{
+    color:#ff4dff;
+}
+
+.colbrillantemagentaoscuro{
+    color:#b300b3;
+}
+
+.colbrillantecyan{
+    color:#00ffff;
+}
+
+.colbrillantecyanclaro{
+    color:#4dffff;
+}
+
+.colbrillantecyanoscuro{
+    color:#00b3b3;
+}
+
+.colbrillanteblanco{
+    color:#ffffff
+}
+
+.colbrillanteblancoclaro{
+    color:#ffffff
+}
+
+.colbrillanteblancooscuro{
+    color:#d9d9d9;
+}
