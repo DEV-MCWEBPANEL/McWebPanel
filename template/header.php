@@ -42,6 +42,7 @@ header('Expires: 0');
   <link rel="stylesheet" href="css/menu.css">
 
   <!-- Script AJAX -->
+  <!-- openssl dgst -sha384 -binary jquery.min.js | openssl base64 -A -->
   <script src="js/jquery.min.js" integrity="sha384-1H217gwSVyLSIfaLxHbE7dRb3v4mYCKbpQvzx0cegeju1MVsGrX5xXxAvs/HgeFs" crossorigin="anonymous"></script>
   <!-- Favicons -->
   <link rel="apple-touch-icon" href="img/icons/apple-icon-180x180.png" sizes="180x180">

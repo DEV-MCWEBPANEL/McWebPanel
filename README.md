@@ -1,5 +1,5 @@
 # McWebPanel (Versión Desarrollo)
-McWebPanel es un panel de administración de Software Libre exclusivo para Servidores Minecraft, creado para PHP7 para ser utilizado en servidores Apache y Nginx.
+McWebPanel es un panel de administración de Software Libre exclusivo para Servidores Minecraft, creado para PHP8 para ser utilizado en servidores Apache y Nginx.
 
 Diseñado pensando en usuarios con conocimientos limitados a la hora de crear servidores y con el objetivo de utilizar el menor número de dependencias posibles.
 
@@ -20,13 +20,13 @@ Estos son los requisitos para que McWebPanel funcione
 ```
 Sistemas Operativos:
 Debian 10.x | 11.x
-Ubuntu Server 18.04 LTS | 20.04 LTS | 22.04 LTS | 24.04 LTS
+Ubuntu Server 22.04 LTS | 24.04 LTS
 
 Servidor Web:
 Apache2 / Nginx
 
 Versiones PHP compatibles:
-PHP 7.2 | PHP 7.3 | PHP 7.4 | PHP 8.0 | PHP 8.1 | PHP 8.3
+PHP 8.0 | PHP 8.1 | PHP 8.3
 
 OpenJDK             (Maquina Virtual Java)
 screen              (GNU Screen)
