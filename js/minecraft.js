@@ -210,6 +210,12 @@ $(function () {
         }
     }
 
+    if (document.getElementById("label-region-file-compression") !== null) {
+        if (document.getElementById("form-region-file-compression") !== null) {
+            document.getElementById("label-region-file-compression").innerHTML = htmlEntities("region-file-compression=" + document.getElementById("form-region-file-compression").value);
+        }
+    }
+
     if (document.getElementById("label-max-build-height") !== null) {
         if (document.getElementById("form-max-build-height") !== null) {
             document.getElementById("label-max-build-height").innerHTML = htmlEntities("max-build-height=" + document.getElementById("form-max-build-height").value);
@@ -1101,6 +1107,30 @@ $(function () {
 
         });
     }
+
+    $("#form-region-file-compression").change(function () {
+        let envioaction = "region-file-compression";
+        let enviovalor = document.getElementById("form-region-file-compression").value;
+        $.ajax({
+            type: "POST",
+            url: "function/guardarproperties.php",
+            data: {
+                action: envioaction,
+                valor: enviovalor
+            },
+            success: function (data) {
+                let getdebug = 0;
+                if (getdebug == 1) {
+                    alert(data);
+                }
+            }
+        });
+
+        if (document.getElementById("label-region-file-compression") !== null) {
+            document.getElementById("label-region-file-compression").innerHTML = htmlEntities("region-file-compression=" + document.getElementById("form-region-file-compression").value);
+        }
+
+    });
 
     $("#form-max-build-height").change(function () {
         let errores = 0;

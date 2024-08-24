@@ -814,8 +814,8 @@ if (isset($_SESSION['CONFIGUSER']['psystemconftemaweb'])) {
                                                     <p class="">Valor Defecto: default<br>Requiere Versión: 1.15 o superior</p>
                                                     <select id="form-level-type" class="form-control w-100">
                                                         <?php
-                                                        $lostextos = array('Standard', 'Plano', 'Biomas Largos', 'Amplificado', 'Un bioma (Requiere 1.15 o superior)','Standard (Version 1.19 o superior)','Plano (Version 1.19 o superior)','Biomas Largos (Version 1.19 o superior)','Amplificado (Version 1.19 o superior)','Un bioma (Version 1.19 o superior)');
-                                                        $losvalues = array('default', 'flat', 'largebiomes', 'amplified', 'buffet','minecraft\:normal','minecraft\:flat','minecraft\:large_biomes','minecraft\:amplified','minecraft\:single_biome_surface');
+                                                        $lostextos = array('Standard', 'Plano', 'Biomas Largos', 'Amplificado', 'Un bioma (Requiere 1.15 o superior)', 'Standard (Version 1.19 o superior)', 'Plano (Version 1.19 o superior)', 'Biomas Largos (Version 1.19 o superior)', 'Amplificado (Version 1.19 o superior)', 'Un bioma (Version 1.19 o superior)');
+                                                        $losvalues = array('default', 'flat', 'largebiomes', 'amplified', 'buffet', 'minecraft\:normal', 'minecraft\:flat', 'minecraft\:large_biomes', 'minecraft\:amplified', 'minecraft\:single_biome_surface');
 
                                                         $obtener = leerlineas('level-type');
 
@@ -864,6 +864,53 @@ if (isset($_SESSION['CONFIGUSER']['psystemconftemaweb'])) {
                                                 <div class="col-md-12">
                                                     <br>
                                                     <p id="label-generator-settings" class="lead text-center text-white mt-2 bg-primary">generator-settings</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Separacion Fin -->
+                                    <hr>
+                                    <!-- Separacion Inicio -->
+                                    <div class="">
+                                        <div class="container">
+                                            <div class="row">
+                                                <div class="col-md-8">
+                                                    <h3 class=""><strong>Algoritmo Compresión Archivos-Región</strong></h3>
+                                                    <p class=""><br>-deflate: La opción por defecto, se utiliza el antiguo algoritmo.
+                                                        <br><br>-lz4: Este algoritmo requiere menos tiempo de CPU para comprimir/descomprimir, pero usa más espacio en el disco.
+                                                        <br><br>-none: Este algoritmo requiere más espacio en el disco y requiere más tiempo de lectura/escritura, apenas hace uso de la CPU.
+                                                        <br><br>Atención: Cambiar el algoritmo no comprimirá de nuevo todos los chunks automáticamente, solo los nuevos chunks que se generen o chucks actualizados usarán el nuevo algoritmo, pero los antiguos se mantendrán en el antiguo formato.
+                                                    </p>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <p class="">Valor Defecto: deflate<br>Requiere Versión: 1.20.5 o superior</p>
+                                                    <select id="form-region-file-compression" class="form-control w-100">
+                                                        <?php
+                                                        $lostextos = array('deflate', 'lz4', 'none');
+                                                        $losvalues = array('deflate', 'lz4', 'none');
+
+                                                        $obtener = leerlineas('region-file-compression');
+
+                                                        if ($obtener == "") {
+                                                            echo '<option selected hidden>No hay ninguna opción seleccionada</option>';
+                                                        }
+
+                                                        for ($i = 0; $i < count($lostextos); $i++) {
+
+                                                            if ($obtener == $losvalues[$i]) {
+                                                                echo '<option value="' . $losvalues[$i] . '" selected>' . $lostextos[$i] . '</option>';
+                                                            } else {
+                                                                echo '<option value="' . $losvalues[$i] . '">' . $lostextos[$i] . '</option>';
+                                                            }
+                                                        }
+                                                        ?>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <br>
+                                                    <p id="label-region-file-compression" class="lead text-center text-white mt-2 bg-primary">region-file-compression</p>
                                                 </div>
                                             </div>
                                         </div>
