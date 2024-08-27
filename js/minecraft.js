@@ -360,6 +360,12 @@ $(function () {
         }
     }
 
+    if (document.getElementById("label-accepts-transfers") !== null) {
+        if (document.getElementById("form-accepts-transfers") !== null) {
+            document.getElementById("label-accepts-transfers").innerHTML = htmlEntities("accepts-transfers=" + document.getElementById("form-accepts-transfers").value);
+        }
+    }
+
     if (document.getElementById("label-previews-chat") !== null) {
         if (document.getElementById("form-previews-chat") !== null) {
             document.getElementById("label-previews-chat").innerHTML = htmlEntities("previews-chat=" + document.getElementById("form-previews-chat").value);
@@ -1870,6 +1876,30 @@ $(function () {
 
         if (document.getElementById("label-use-native-transport") !== null) {
             document.getElementById("label-use-native-transport").innerHTML = htmlEntities("use-native-transport=" + document.getElementById("form-use-native-transport").value);
+        }
+
+    });
+
+    $("#form-accepts-transfers").change(function () {
+        let envioaction = "accepts-transfers";
+        let enviovalor = document.getElementById("form-accepts-transfers").value;
+        $.ajax({
+            type: "POST",
+            url: "function/guardarproperties.php",
+            data: {
+                action: envioaction,
+                valor: enviovalor
+            },
+            success: function (data) {
+                let getdebug = 0;
+                if (getdebug == 1) {
+                    alert(data);
+                }
+            }
+        });
+
+        if (document.getElementById("label-accepts-transfers") !== null) {
+            document.getElementById("label-accepts-transfers").innerHTML = htmlEntities("accepts-transfers=" + document.getElementById("form-accepts-transfers").value);
         }
 
     });
