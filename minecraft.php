@@ -140,9 +140,9 @@ if (isset($_SESSION['CONFIGUSER']['psystemconftemaweb'])) {
                                         <div class="container">
                                             <div class="row">
                                                 <div class="col-md-12">
-                                                    <h2 class=""><strong>Configuración Minecraft</strong></h2>
+                                                    <h1 class=""><strong>Configuración Minecraft</strong></h1>
                                                     <hr>
-                                                    <p class="lead">Nota: Los cambios en la configuración no se aplican hasta que se reinicia el servidor de Minecraft.</p>
+                                                    <p class="lead">Nota: Cualquier cambio en la configuración requerirá el reinicio del servidor de Minecraft para su aplicación.</p>
                                                     <br>
                                                     <?php
                                                     $reccarpmine = CONFIGDIRECTORIO;
@@ -606,7 +606,7 @@ if (isset($_SESSION['CONFIGUSER']['psystemconftemaweb'])) {
                                             <div class="row">
                                                 <div class="col-md-8">
                                                     <h3 class=""><strong>Jugador AFK</strong></h3>
-                                                    <p class="lead">Si el jugador no se mueve en el tiempo asignado (minutos), el servidor lo expulsara.</p>
+                                                    <p class="lead">Si el jugador no se mueve en el tiempo asignado (minutos), el servidor lo expulsará.</p>
                                                 </div>
                                                 <div class="col-md-4">
                                                     <p class="">Valor Defecto: 0 (Desactivado)<br>Valor Min: 0 - Valor Max: 2147483647</p>
@@ -722,8 +722,8 @@ if (isset($_SESSION['CONFIGUSER']['psystemconftemaweb'])) {
                                         <div class="container">
                                             <div class="row">
                                                 <div class="col-md-8">
-                                                    <h3 class=""><strong>Dialogo Paquete de recursos</strong></h3>
-                                                    <p class="lead">Añade un dialogo personalizado que se mostrara al solicitar el paquete de recursos cuando está activado (Opcional).</p>
+                                                    <h3 class=""><strong>Diálogo Paquete de recursos</strong></h3>
+                                                    <p class="lead">Añade un diálogo personalizado que se mostrara al solicitar el paquete de recursos cuando está activado (Opcional).</p>
                                                     <p class="lead">Ejemplo: {"text":"Linea1\nLinea2"}</p>
                                                 </div>
                                                 <div class="col-md-4">
@@ -736,6 +736,30 @@ if (isset($_SESSION['CONFIGUSER']['psystemconftemaweb'])) {
                                                 <div class="col-md-12">
                                                     <br>
                                                     <p id="label-resource-pack-prompt" class="lead text-center text-white mt-2 bg-primary">resource-pack-prompt</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Separacion Fin -->
+                                    <hr>
+                                     <!-- Separacion Inicio -->
+                                    <div class="">
+                                        <div class="container">
+                                            <div class="row">
+                                                <div class="col-md-8">
+                                                    <h3 class=""><strong>Link Reporte de Bugs</strong></h3>
+                                                    <p class="lead">Asignar URL para reportar bugs del servidor.</p>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <p class="">Valor Defecto: Vacío<br>Requiere Versión: 1.21 o superior</p>
+                                                    <input id="form-bug-report-link" type="text" class="form-control" spellcheck="false" autocapitalize="none" value="<?php echo htmlentities(leerlineas('bug-report-link')); ?>">
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <br>
+                                                    <p id="label-bug-report-link" class="lead text-center text-white mt-2 bg-primary">bug-report-link</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -2057,8 +2081,8 @@ if (isset($_SESSION['CONFIGUSER']['psystemconftemaweb'])) {
                                         <div class="container">
                                             <div class="row">
                                                 <div class="col-md-8">
-                                                    <h3 class=""><strong>Limite Actualizaciones Consecutivas Proximas</strong></h3>
-                                                    <p class="lead">Limitar la cantidad de actualizaciones consecutivas proximas antes de omitir las adicionales.<br>Los valores negativos eliminan el límite.</p>
+                                                    <h3 class=""><strong>Limite Actualizaciones Consecutivas Próximas</strong></h3>
+                                                    <p class="lead">Limitar la cantidad de actualizaciones consecutivas próximas antes de omitir las adicionales.<br>Los valores negativos eliminan el límite.</p>
                                                 </div>
                                                 <div class="col-md-4">
                                                     <p class="">Valor Defecto: 1000000<br>Valor Min: 1 - Valor Max: 2147483647<br>Valor eliminar límite: -1<br>Requiere Versión: 1.19 o superior</p>

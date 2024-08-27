@@ -186,6 +186,12 @@ $(function () {
         }
     }
 
+    if (document.getElementById("label-bug-report-link") !== null) {
+        if (document.getElementById("form-bug-report-link") !== null) {
+            document.getElementById("label-bug-report-link").innerHTML = htmlEntities("bug-report-link=" + document.getElementById("form-bug-report-link").value);
+        }
+    }
+
     if (document.getElementById("label-level-name") !== null) {
         if (document.getElementById("form-level-name") !== null) {
             document.getElementById("label-level-name").innerHTML = htmlEntities("level-name=" + document.getElementById("form-level-name").value);
@@ -922,6 +928,75 @@ $(function () {
 
             if (document.getElementById("label-resource-pack-prompt") !== null) {
                 document.getElementById("label-resource-pack-prompt").innerHTML = "resource-pack-prompt=" + htmlEntities(enviovalor);
+            }
+
+        });
+    }
+
+    $("#form-bug-report-link").keyup(function () {
+        let envioaction = "bug-report-link";
+        let enviovalor = document.getElementById("form-bug-report-link").value;
+        $.ajax({
+            type: "POST",
+            url: "function/guardarproperties.php",
+            data: {
+                action: envioaction,
+                valor: enviovalor
+            },
+            success: function (data) {
+                let getdebug = 0;
+                if (getdebug == 1) {
+                    alert(data);
+                }
+            }
+        });
+
+        if (document.getElementById("label-bug-report-link") !== null) {
+            document.getElementById("label-bug-report-link").innerHTML = htmlEntities("bug-report-link=" + document.getElementById("form-bug-report-link").value);
+        }
+
+    });
+
+    if (document.getElementById("form-bug-report-link") !== null) {
+        document.getElementById("form-bug-report-link").addEventListener('paste', function (event) {
+            let envioaction = "bug-report-link";
+
+            let enviovalor = "";
+            let eltext = "";
+            let textini = "";
+            let textfinal = "";
+            let enviar = "";
+
+            let text = document.getElementById("form-bug-report-link");
+
+            let startPosition = text.selectionStart;
+            let endPosition = text.selectionEnd;
+            let longitud = text.leng;
+
+            eltext = document.getElementById("form-bug-report-link").value;
+            textini = eltext.substring(0, startPosition);
+            textfinal = eltext.substring(endPosition, longitud);
+
+            enviar = textini + event.clipboardData.getData('text') + textfinal;
+            enviovalor = enviar;
+
+            $.ajax({
+                type: "POST",
+                url: "function/guardarproperties.php",
+                data: {
+                    action: envioaction,
+                    valor: enviovalor
+                },
+                success: function (data) {
+                    let getdebug = 0;
+                    if (getdebug == 1) {
+                        alert(data);
+                    }
+                }
+            });
+
+            if (document.getElementById("label-bug-report-link") !== null) {
+                document.getElementById("label-bug-report-link").innerHTML = "bug-report-link=" + htmlEntities(enviovalor);
             }
 
         });
