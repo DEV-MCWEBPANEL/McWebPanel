@@ -143,6 +143,9 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
                     fwrite($file, "resource-pack-sha1=" . PHP_EOL);
                     fwrite($file, "spawn-protection=16" . PHP_EOL);
                     fwrite($file, "max-world-size=29999984" . PHP_EOL);
+                    fwrite($file, "accepts-transfers=false" . PHP_EOL);
+                    fwrite($file, "bug-report-link=" . PHP_EOL);
+                    fwrite($file, "region-file-compression=deflate" . PHP_EOL);
                     fclose($file);
 
                     //PERMISO SERVER.PROPERTIES
