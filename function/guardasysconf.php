@@ -864,7 +864,7 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
 
               //COMPROBAR SI EL TOTAL DE HILOS ES SUPERIOR AL DEL SERVIDOR
               if ($elerror == 0) {
-                $getallcores = shell_exec('nproc --all');
+                $getallcores = shell_exec('grep -c processor /proc/cpuinfo');
                 if ($getallcores != "") {
                   $getallcores = trim($getallcores);
 

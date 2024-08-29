@@ -768,7 +768,7 @@ if (isset($_SESSION['CONFIGUSER']['psystemconftemaweb'])) {
                                                                 </div>
 
                                                                 <?php
-                                                                $getallcores = shell_exec('nproc --all');
+                                                                $getallcores = shell_exec('grep -c processor /proc/cpuinfo');
                                                                 if ($getallcores != "") {
                                                                     $getallcores = trim($getallcores);
 

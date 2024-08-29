@@ -153,10 +153,15 @@ $(function () {
 
     $("#formconf").submit(function () {
         return false;
-
     });
 
-    document.getElementById("guardaserver").disabled = true;
+    if (document.getElementById('guardaserver') !== null) {
+        document.getElementById("guardaserver").disabled = true;
+    }
+
+    if (document.getElementById('backuphilos') !== null) {
+        document.getElementById('backuphilos').disabled = true;
+    }
 
     if (document.getElementById('elnomserv') !== null) {
         $("#elnomserv").keyup(function () {
