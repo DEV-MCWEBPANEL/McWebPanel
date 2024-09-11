@@ -31,6 +31,14 @@ $RUTAPRINCIPAL = $_SERVER['PHP_SELF'];
 $RUTAPRINCIPAL = substr($RUTAPRINCIPAL, 0, -14);
 $RUTACONFIG = $RUTAPRINCIPAL . "/config/confopciones.php";
 
+if (!defined('CONFIGZONAHORARIA')) {
+    $reczonahoraria = "UTC";
+} else {
+    $reczonahoraria = CONFIGZONAHORARIA;
+}
+
+date_default_timezone_set($reczonahoraria);
+
 $retorno = "";
 $logfechayhora = "[" . date("d/m/Y") . "] [" . date("H:i:s") . "]";
 
