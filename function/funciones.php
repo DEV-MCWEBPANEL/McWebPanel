@@ -22,6 +22,14 @@ require_once "../template/session.php";
 require_once "../template/errorreport.php";
 require_once "../config/confopciones.php";
 
+if (!defined('CONFIGZONAHORARIA')) {
+	$reczonahoraria = "UTC";
+} else {
+	$reczonahoraria = CONFIGZONAHORARIA;
+}
+
+date_default_timezone_set($reczonahoraria);
+
 function test_input($data)
 {
 	if (isset($data)) {

@@ -1011,6 +1011,35 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
           }
         }
 
+        //CONFIG ZONA HORARIA
+        if ($_SESSION['CONFIGUSER']['rango'] == 1 || array_key_exists('psystemconfzonahoraria', $_SESSION['CONFIGUSER']) && $_SESSION['CONFIGUSER']['psystemconfzonahoraria'] == 1) {
+          if (isset($_POST["zona_horaria"])) {
+            $elzonahoraria = test_input($_POST["zona_horaria"]);
+
+            //COMPROBAR SI LA ZONA HORARIA INTRODUCIDA EXISTE
+            $listado_zonas_horarias = timezone_identifiers_list();
+            $zonaencontrada = 0;
+
+            foreach ($listado_zonas_horarias as $lazona) {
+              if ($elzonahoraria == $lazona) {
+                $zonaencontrada = 1;
+              }
+            }
+
+            if ($zonaencontrada == 0) {
+              $retorno = "zonanoenlista";
+              $elerror = 1;
+            }
+
+          } else {
+            if (!defined('CONFIGZONAHORARIA')) {
+              $elzonahoraria = "UTC";
+            } else {
+              $elzonahoraria = CONFIGZONAHORARIA;
+            }
+          }
+        }
+
         //OPCIONES QUE NO SE CAMBIAN DESDE GUARDARSYSCONF
         $lakey = CONFIGSESSIONKEY;
         $eldirectorio = CONFIGDIRECTORIO;
@@ -1108,6 +1137,7 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
           fwrite($file, 'define("CONFIGBACKUPCOMPRESS", "' . $elbackupcompress . '");' . PHP_EOL);
           fwrite($file, 'define("CONFIGBACKUPHILOS", "' . $elbackuphilos . '");' . PHP_EOL);
           fwrite($file, 'define("CONFIGBACKUROTATE", "' . $elbackuprotate . '");' . PHP_EOL);
+          fwrite($file, 'define("CONFIGZONAHORARIA", "' . $elzonahoraria . '");' . PHP_EOL);
           fwrite($file, "?>" . PHP_EOL);
           fclose($file);
 

@@ -194,6 +194,13 @@ if (isset($_SESSION['CONFIGUSER']['psystemconftemaweb'])) {
                                                         $recbackuprotate = intval(CONFIGBACKUROTATE);
                                                     }
 
+                                                    if (!defined('CONFIGZONAHORARIA')) {
+                                                        $reczonahoraria = "UTC";
+                                                    } else {
+                                                        $reczonahoraria = CONFIGZONAHORARIA;
+                                                    }
+
+                                                    date_default_timezone_set($reczonahoraria);
 
                                                     $elnombredirectorio = $reccarpmine;
                                                     $rutaarchivo = getcwd();
@@ -498,6 +505,57 @@ if (isset($_SESSION['CONFIGUSER']['psystemconftemaweb'])) {
                                                             }
                                                             ?>
                                                         </div>
+                                                        <?php
+                                                        //SECCION ZONA HORARIA
+                                                        if ($_SESSION['CONFIGUSER']['rango'] == 1 || array_key_exists('psystemconfzonahoraria', $_SESSION['CONFIGUSER']) && $_SESSION['CONFIGUSER']['psystemconfzonahoraria'] == 1) {
+                                                        ?>
+                                                            <hr>
+                                                            <div class="row">
+                                                                <div class="col-md-12">
+                                                                    <label class="negrita">Configuración Zona Horaria</label>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="row">
+                                                                <div class="col-md-3">
+                                                                    <label class="negrita" for="zona_horaria">Selecciona Zona Horaria:</label>
+                                                                    <?php
+                                                                    $zonas_horarias = timezone_identifiers_list();
+                                                                    echo '<select class="form-control" id="zona_horaria" name="zona_horaria" required="required">';
+                                                                    foreach ($zonas_horarias as $zona) {
+                                                                        $offset = timezone_offset_get(new DateTimeZone($zona), new DateTime());
+                                                                        $utc = $offset / 3600; // Convertir a horas
+
+                                                                        if ($utc < 0) {
+                                                                            if ($reczonahoraria == $zona) {
+                                                                                echo '<option value="' . $zona . '" selected>"' . $zona . ' (UTC ' . $utc . ':00)</option>';
+                                                                            } else {
+                                                                                echo "<option value='$zona'>$zona (UTC $utc:00)</option>";
+                                                                            }
+                                                                        } else {
+                                                                            if ($reczonahoraria == $zona) {
+                                                                                echo '<option value="' . $zona . '" selected>' . $zona . ' (UTC +' . $utc . ':00)</option>';
+                                                                            } else {
+                                                                                echo "<option value='$zona'>$zona (UTC +$utc:00)</option>";
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                    echo '</select>';
+                                                                    ?>
+                                                                </div>
+
+                                                                <div class="col-md-5">
+                                                                    <?php
+                                                                    echo "<label class='negrita'>Zona Horaria Actual: " . date_default_timezone_get() . "</label><br>";
+                                                                    $lahora = date("H:i:s");
+                                                                    echo '<span class="form-control" id="horazonahorariaactual" name="horazonahorariaactual">Hora Actual: ' . $lahora . '</span>';
+                                                                    ?>
+                                                                </div>
+                                                            </div>
+                                                        <?php
+                                                        }
+                                                        ?>
+
                                                         <?php
                                                         //SECCION CONSOLA
                                                         if ($_SESSION['CONFIGUSER']['rango'] == 1 || array_key_exists('psystemconflinconsole', $_SESSION['CONFIGUSER']) && $_SESSION['CONFIGUSER']['psystemconflinconsole'] == 1 || array_key_exists('psystemconfbuffer', $_SESSION['CONFIGUSER']) && $_SESSION['CONFIGUSER']['psystemconfbuffer'] == 1 || array_key_exists('psystemconftypeconsole', $_SESSION['CONFIGUSER']) && $_SESSION['CONFIGUSER']['psystemconftypeconsole'] == 1) {

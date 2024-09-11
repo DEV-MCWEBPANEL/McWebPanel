@@ -141,6 +141,8 @@ $(function () {
                 document.getElementById("result").innerHTML = "<div class='alert alert-danger' role='alert'>Error: El campo rotación backups fuera de rango.</div>";
             } else if (data == "backuprotatevacio") {
                 document.getElementById("result").innerHTML = "<div class='alert alert-danger' role='alert'>Error: El campo rotación backups está vacío.</div>";
+            } else if (data == "zonanoenlista") {
+                document.getElementById("result").innerHTML = "<div class='alert alert-danger' role='alert'>Error: La zona horaria no existe o es incorrecta.</div>";
             } else if (data == "saveconf") {
                 document.getElementById("result").innerHTML = "<div class='alert alert-success' role='alert'>Configuración Guardada.</div>";
                 document.getElementById("guardaserver").disabled = true;
@@ -157,10 +159,6 @@ $(function () {
 
     if (document.getElementById('guardaserver') !== null) {
         document.getElementById("guardaserver").disabled = true;
-    }
-
-    if (document.getElementById('backuphilos') !== null) {
-        document.getElementById('backuphilos').disabled = true;
     }
 
     if (document.getElementById('elnomserv') !== null) {
@@ -221,6 +219,13 @@ $(function () {
         });
     }
 
+    if (document.getElementById('zona_horaria') !== null) {
+        $("#zona_horaria").change(function () {
+            document.getElementById("guardaserver").disabled = false;
+            document.getElementById("result").innerHTML = "";
+        });
+    }
+
     if (document.getElementById('basura0') !== null) {
         $("#basura0").change(function () {
             document.getElementById("guardaserver").disabled = false;
@@ -276,8 +281,6 @@ $(function () {
             if (document.getElementById('backupmulti').value == 1) {
                 document.getElementById('backuphilos').disabled = true;
                 document.getElementById('backuphilos').value = 1;
-            } else {
-                document.getElementById('backuphilos').disabled = false;
             }
 
             document.getElementById("guardaserver").disabled = false;
@@ -526,6 +529,22 @@ $(function () {
         });
     }
 
+    function obtenerhora() {
+
+        $.ajax({
+            url: 'function/gethora.php',
+            data: {
+                action: 'status'
+            },
+            type: 'POST',
+            success: function (lahora) {
+                if (document.getElementById('horazonahorariaactual') !== null) {
+                    document.getElementById("horazonahorariaactual").innerHTML = "<span id='horazonahorariaactual' name='horazonahorariaactual'>Hora Actual: " + lahora;
+                }
+            }
+        });
+    }
+
     function sessionTimer() {
 
         $.ajax({
@@ -545,5 +564,6 @@ $(function () {
     }
 
     setInterval(sessionTimer, 1000);
+    setInterval(obtenerhora, 1000);
 
 });
