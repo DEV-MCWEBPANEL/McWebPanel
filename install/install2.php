@@ -33,7 +33,6 @@ require_once "../template/errorreport.php";
 
 <!doctype html>
 <html lang="es">
-
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -90,7 +89,7 @@ require_once "../template/errorreport.php";
           <div class="mx-auto col-lg-6 col-10">
 
             <h4 class="mb-4"><u>Configurar Instalación Inicial</u></h4>
-            <p class="text-center">Completa los campos para terminar la instalación, los datos insertados podrán ser cambiados posteriormente desde System Config en el menú, recuerda no introducir datos personales ni contraseñas inseguras.</p>
+            <p class="text-center">Completa los campos para terminar la instalación, la configuración podrá ser modificada posteriormente desde el apartado System Config en el menú principal, recuerda no introducir datos personales ni contraseñas inseguras.</p>
             <hr>
             <form class="text-left" action="install3.php" method="POST" id="login-install2">
 
@@ -192,6 +191,30 @@ require_once "../template/errorreport.php";
                   </select>
                 </div>
               </div>
+
+              <div class="form-row">
+                <div class="form-group col-md-12">
+                  <label for="zonahoraria" class="">Zona Horaria:</label>
+                  <select id="zonahoraria" name="zonahoraria" class="form-control" required="required">
+                    <?php
+                    $zonas_horarias = timezone_identifiers_list();
+
+                    foreach ($zonas_horarias as $zona) {
+                      $offset = timezone_offset_get(new DateTimeZone($zona), new DateTime());
+                      $utc = $offset / 3600; // Convertir a horas
+
+                      if ($utc < 0) {
+                        echo "<option value='$zona'>$zona (UTC $utc:00)</option>";
+                      } else {
+                        echo "<option value='$zona'>$zona (UTC +$utc:00)</option>";
+                      }
+                    }
+                    echo '</select>';
+                    ?>
+                  </select>
+                </div>
+              </div>
+
               <p class="lead" id="errorsubmit"></p>
               <button type="submit" id="binstalar" class="btn btn-primary btn-block">Finalizar Instalación</button>
             </form>
@@ -209,5 +232,4 @@ require_once "../template/errorreport.php";
   ?>
 
 </body>
-
 </html>

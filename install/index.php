@@ -371,7 +371,7 @@ $estamodulo = "";
                             echo 'install2.php';
                           } ?>" method="POST" id="login-install">
               <hr>
-              <h4 class="mb-4 text-left"><u>Aceptar Licencia</u></h4>
+              <h4 class="mb-2 text-left"><u>Términos y condiciones de uso</u></h4>
               <div class="cartel-blackgris">
                 <p>McWebPanel is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.</p>
                 <p>McWebPanel is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.</p>

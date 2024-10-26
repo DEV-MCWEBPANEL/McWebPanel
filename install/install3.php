@@ -97,6 +97,7 @@ require_once "../template/errorreport.php";
         $elpuerto = "";
         $laram = "";
         $eltiposerver = "";
+        $elzonahoraria = "";
         $loserrores = 0;
         $lakey = "";
 
@@ -141,6 +142,7 @@ require_once "../template/errorreport.php";
         $laram = test_input($_POST["elram"]);
         $eltiposerver = test_input($_POST["eltipserv"]);
         $elmaxupload = test_input($_POST["maxupload"]);
+        $elzonahoraria = test_input($_POST["zonahoraria"]);
         $elpostmax = $elmaxupload + 1;
 
         //COMPROBAR NO ESTEN VACIOS
@@ -337,6 +339,7 @@ require_once "../template/errorreport.php";
         fwrite($file, 'define("CONFIGBACKUPCOMPRESS", "1");' . PHP_EOL);
         fwrite($file, 'define("CONFIGBACKUPHILOS", "1");' . PHP_EOL);
         fwrite($file, 'define("CONFIGBACKUROTATE", "0");' . PHP_EOL);
+        fwrite($file, 'define("CONFIGZONAHORARIA", "' . $elzonahoraria . '");' . PHP_EOL);
         fwrite($file, "?>" . PHP_EOL);
         fclose($file);
 
