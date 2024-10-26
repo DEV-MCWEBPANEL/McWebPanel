@@ -82,8 +82,18 @@ if (isset($_SESSION['IDENTIFICARSESSION'])) {
     echo '<div class="alert alert-danger" role="alert">Tu sesión no pertenece a este panel, elimina la sesión y vuelve a intentar</div>';
     exit;
   }
+
+  if (!defined('CONFIGZONAHORARIA')) {
+    $reczonahoraria = "UTC";
+  } else {
+    $reczonahoraria = CONFIGZONAHORARIA;
+  }
+
+  date_default_timezone_set($reczonahoraria);
+  
 }
 
 unset($dominio);
 unset($getconflakey);
 unset($vidasession);
+unset($reczonahoraria);
