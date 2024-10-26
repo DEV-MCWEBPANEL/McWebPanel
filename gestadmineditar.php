@@ -300,6 +300,22 @@ if (isset($_SESSION['CONFIGUSER']['psystemconftemaweb'])) {
 
                                                                                 <div class="form-group">
                                                                                     <div>
+                                                                                        <input id="psystemconfzonahoraria" name="psystemconfzonahoraria" type="checkbox" value="1" <?php
+
+                                                                                                                                                                                    if (array_key_exists('psystemconfzonahoraria', $_SESSION['EDITARSUPER'])) {
+                                                                                                                                                                                        if ($_SESSION['EDITARSUPER']['psystemconfzonahoraria'] == 1) {
+                                                                                                                                                                                            echo "checked";
+                                                                                                                                                                                        }
+                                                                                                                                                                                    }
+                                                                                                                                                                                    ?>>
+
+                                                                                        <label class="negrita mr-2" for="psystemconfzonahoraria">Zona Horaria</label>
+                                                                                    </div>
+                                                                                    <p>Permite cambiar la zona horaria del servidor.</p>
+                                                                                </div>
+
+                                                                                <div class="form-group">
+                                                                                    <div>
                                                                                         <input id="psystemconfavanzados" name="psystemconfavanzados" type="checkbox" value="1" <?php
 
                                                                                                                                                                                 if (array_key_exists('psystemconfavanzados', $_SESSION['EDITARSUPER'])) {

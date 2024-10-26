@@ -195,6 +195,14 @@ if (isset($_SESSION['CONFIGUSER']['psystemconftemaweb'])) {
 
                                                                             <div class="form-group">
                                                                                 <div>
+                                                                                    <input id="psystemconfzonahoraria" name="psystemconfzonahoraria" type="checkbox" value="1">
+                                                                                    <label class="negrita mr-2" for="psystemconfzonahoraria">Zona Horaria</label>
+                                                                                </div>
+                                                                                <p>Permite cambiar la zona horaria del servidor.</p>
+                                                                            </div>
+
+                                                                            <div class="form-group">
+                                                                                <div>
                                                                                     <input id="psystemconfavanzados" name="psystemconfavanzados" type="checkbox" value="1">
                                                                                     <label class="negrita mr-2" for="psystemconfavanzados">Parámetros Avanzados</label>
                                                                                 </div>

@@ -82,6 +82,7 @@ $(function () {
             psystemconftipo.checked = true;
             psystemconfsubida.checked = true;
             psystemconfnombre.checked = true;
+            psystemconfzonahoraria.checked = true;
             psystemconfavanzados.checked = true;
             psystemconfjavaselect.checked = true;
             psystemconffoldersize.checked = true;
@@ -102,6 +103,7 @@ $(function () {
             psystemconftipo.checked = false;
             psystemconfsubida.checked = false;
             psystemconfnombre.checked = false;
+            psystemconfzonahoraria.checked = false;
             psystemconfavanzados.checked = false;
             psystemconfjavaselect.checked = false;
             psystemconffoldersize.checked = false;

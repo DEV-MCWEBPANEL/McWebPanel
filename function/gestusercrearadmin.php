@@ -286,6 +286,11 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
                     $arrayobtenido[$elindice]['psystemconfnombre'] = 1;
                 }
 
+                //SYSTEM ZONA HORARIA
+                if (isset($_POST['psystemconfzonahoraria'])) {
+                    $arrayobtenido[$elindice]['psystemconfzonahoraria'] = 1;
+                }
+
                 //SYSTEM CONFIG PARAMETROS AVANZADOS
                 if (isset($_POST['psystemconfavanzados'])) {
                     $arrayobtenido[$elindice]['psystemconfavanzados'] = 1;
