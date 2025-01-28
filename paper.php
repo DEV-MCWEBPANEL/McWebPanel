@@ -91,12 +91,11 @@ if (isset($_SESSION['CONFIGUSER']['psystemconftemaweb'])) {
         $versiones = array();
 
         $url = "https://api.papermc.io/v2/projects";
-
         $context = stream_context_create(
             array(
                 "http" => array(
                     "timeout" => 10,
-                    "header" => "User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.102 Safari/537.36"
+                    "header" => "User-Agent: User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 Edg/132.0.0.0"
                 )
             )
         );
@@ -109,7 +108,6 @@ if (isset($_SESSION['CONFIGUSER']['psystemconftemaweb'])) {
 
             $versiones = json_decode($contenido, true);
             $versiones = $versiones['projects'];
-            $versiones = array_reverse($versiones);
         }
 
     ?>
@@ -142,7 +140,7 @@ if (isset($_SESSION['CONFIGUSER']['psystemconftemaweb'])) {
                                                 <div class="container">
                                                     <div class="row">
                                                         <div class="col-md-6">
-                                                        <label for="selectproyecto">Selecciona Proyecto PaperMc:</label>
+                                                        <label for="selectproyecto">Selecciona Proyecto PaperMC:</label>
                                                             <select id="selectproyecto" name="selectproyecto" class="form-control" required="required">
                                                                 <?php
 
@@ -159,7 +157,7 @@ if (isset($_SESSION['CONFIGUSER']['psystemconftemaweb'])) {
                                                             </select>
                                                             <br>
 
-                                                            <label for="serselectver">Selecciona Versión:</label>
+                                                            <label for="serselectver">Selecciona la versión:</label>
                                                             <select id="serselectver" name="serselectver" class="form-control" required="required"></select>
                                                             <br>
                                                             <?php
@@ -171,7 +169,7 @@ if (isset($_SESSION['CONFIGUSER']['psystemconftemaweb'])) {
 
                                                             if ($elerror == 0) {
                                                             ?>
-                                                                <label for="buildversion">Selecciona Build:</label>
+                                                                <label for="buildversion">Selecciona la build:</label>
                                                                 <select id="buildversion" name="buildversion" class="form-control" required="required"></select>
                                                                 <br>
                                                                 <button class="btn btn-primary btn-block mt-2" id="descargar" name="descargar" type="button">Descargar Servidor</button>
