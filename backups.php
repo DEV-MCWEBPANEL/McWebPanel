@@ -2,7 +2,7 @@
 
 /*
 This file is part of McWebPanel.
-Copyright (C) 2020-2024 DEV-MCWEBPANEL
+Copyright (C) 2020-2025 DEV-MCWEBPANEL
 
     McWebPanel is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
