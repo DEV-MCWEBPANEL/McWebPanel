@@ -90,7 +90,7 @@ if (isset($_SESSION['CONFIGUSER']['psystemconftemaweb'])) {
         $retorno = "";
         $versiones = array();
 
-        $url = "https://papermc.io/api/v2/projects/paper";
+        $url = "https://api.papermc.io/v2/projects";
 
         $context = stream_context_create(
             array(
@@ -108,7 +108,7 @@ if (isset($_SESSION['CONFIGUSER']['psystemconftemaweb'])) {
         } else {
 
             $versiones = json_decode($contenido, true);
-            $versiones = $versiones['versions'];
+            $versiones = $versiones['projects'];
             $versiones = array_reverse($versiones);
         }
 
@@ -136,27 +136,31 @@ if (isset($_SESSION['CONFIGUSER']['psystemconftemaweb'])) {
                                 <div class="card-body">
                                     <div class="py-1">
                                         <div class="container">
-                                            <h1 class="mb-5">Descargar Servidor Paper</h1>
+                                            <h1 class="mb-5">Descargar Servidor PaperMc</h1>
 
                                             <div class="py-2">
                                                 <div class="container">
                                                     <div class="row">
                                                         <div class="col-md-6">
-                                                            <label for="serselectver">Selecciona Versión Paper:</label>
-                                                            <select id="serselectver" name="serselectver" class="form-control" required="required">
+                                                        <label for="selectproyecto">Selecciona Proyecto PaperMc:</label>
+                                                            <select id="selectproyecto" name="selectproyecto" class="form-control" required="required">
                                                                 <?php
 
                                                                 if ($elerror == 0) {
-                                                                    echo '<option selected disabled hidden>No hay ningúna versión seleccionada</option>';
+                                                                    echo '<option selected disabled hidden>No hay ningún proyecto seleccionado</option>';
 
                                                                     for ($i = 0; $i < count($versiones); $i++) {
-                                                                        echo '<option value="' . $versiones[$i] . '">Paper '  . $versiones[$i] . '</option>';
+                                                                        echo '<option value="' . $versiones[$i] . '">Proyecto '  . $versiones[$i] . '</option>';
                                                                     }
                                                                 } else {
-                                                                    echo '<option selected disabled hidden>Error obtener listado</option>';
+                                                                    echo '<option selected disabled hidden>Error al obtener listado proyectos</option>';
                                                                 }
                                                                 ?>
                                                             </select>
+                                                            <br>
+
+                                                            <label for="serselectver">Selecciona Versión:</label>
+                                                            <select id="serselectver" name="serselectver" class="form-control" required="required"></select>
                                                             <br>
                                                             <?php
 
@@ -170,7 +174,7 @@ if (isset($_SESSION['CONFIGUSER']['psystemconftemaweb'])) {
                                                                 <label for="buildversion">Selecciona Build:</label>
                                                                 <select id="buildversion" name="buildversion" class="form-control" required="required"></select>
                                                                 <br>
-                                                                <button class="btn btn-primary btn-block mt-2" id="descargar" name="descargar" type="button">Descargar Servidor Paper</button>
+                                                                <button class="btn btn-primary btn-block mt-2" id="descargar" name="descargar" type="button">Descargar Servidor</button>
                                                             <?php
                                                             }
                                                             ?>

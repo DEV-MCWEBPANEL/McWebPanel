@@ -21,8 +21,51 @@ $(function () {
     document.getElementById("gifloading").style.visibility = "hidden";
     document.getElementById("descargar").disabled = true;
 
+    $("#selectproyecto").on('change', function () {
+        let tipoproyecto = this.value;
+
+        document.getElementById("gifloading").style.visibility = "visible";
+        document.getElementById("textoretorno").innerHTML = "";
+        document.getElementById("descargar").disabled = true;
+
+        document.getElementById("serselectver").innerHTML = "";
+        document.getElementById("buildversion").innerHTML = "";
+
+        $.ajax({
+            url: 'function/descargarpaper.php',
+            data: {
+                action: 'getversion',
+                elproyecto: tipoproyecto
+            },
+            type: 'POST',
+            dataType: 'json',
+            success: function (data) {
+
+                document.getElementById("serselectver").innerHTML = "";
+                document.getElementById("gifloading").style.visibility = "hidden";
+
+                if (data.retorno == "okbuild") {
+
+                    $('#serselectver').append('<option selected disabled hidden>No hay ninguna version seleccionada</option>');
+                    for (const element of data.lasbuild) {
+                        let textbuild = element;
+                        $('#serselectver').append(new Option(textbuild, textbuild, false, false));
+                    }
+
+                } else if (data.retorno == "nopostaction") {
+                    document.getElementById("textoretorno").innerHTML = "<div class='alert alert-danger' role='alert'>Error: No se envió valor action.</div>";
+                } else if (data.retorno == "nopostproyect") {
+                    document.getElementById("textoretorno").innerHTML = "<div class='alert alert-danger' role='alert'>Error: No se envió valor proyecto.</div>";
+                } else if (data.retorno == "errrorgetversions") {
+                    document.getElementById("textoretorno").innerHTML = "<div class='alert alert-danger' role='alert'>Error: Error al obtener versiones del proyecto.</div>";
+                }
+            }
+        });
+    });
+
     $("#serselectver").on('change', function () {
-        let verpaper = this.value;
+        let tipoproyecto = document.getElementById("selectproyecto").value;
+        let tipoversion = this.value;
 
         document.getElementById("gifloading").style.visibility = "visible";
         document.getElementById("textoretorno").innerHTML = "";
@@ -32,7 +75,8 @@ $(function () {
             url: 'function/descargarpaper.php',
             data: {
                 action: 'getbuild',
-                laversion: verpaper
+                elproyecto: tipoproyecto,
+                elversion: tipoversion
             },
             type: 'POST',
             dataType: 'json',
@@ -51,14 +95,12 @@ $(function () {
 
                 } else if (data.retorno == "nopostaction") {
                     document.getElementById("textoretorno").innerHTML = "<div class='alert alert-danger' role='alert'>Error: No se envió valor action.</div>";
+                } else if (data.retorno == "nopostproyect") {
+                    document.getElementById("textoretorno").innerHTML = "<div class='alert alert-danger' role='alert'>Error: No se envió valor proyecto.</div>";
                 } else if (data.retorno == "nopostver") {
-                    document.getElementById("textoretorno").innerHTML = "<div class='alert alert-danger' role='alert'>Error: No se envió versión paper.</div>";
-                } else if (data.retorno == "errrorgetpaperversion") {
-                    document.getElementById("textoretorno").innerHTML = "<div class='alert alert-danger' role='alert'>Error: Error al obtener versiones de paper.</div>";
-                } else if (data.retorno == "noverfound") {
-                    document.getElementById("textoretorno").innerHTML = "<div class='alert alert-danger' role='alert'>Error: La versión no concuerda.</div>";
-                } else if (data.retorno == "errorgetbuilds") {
-                    document.getElementById("textoretorno").innerHTML = "<div class='alert alert-danger' role='alert'>Error: Error al obtener las builds de paper.</div>";
+                    document.getElementById("textoretorno").innerHTML = "<div class='alert alert-danger' role='alert'>Error: No se envió valor versión.</div>";
+                } else if (data.retorno == "errrorgetbuilds") {
+                    document.getElementById("textoretorno").innerHTML = "<div class='alert alert-danger' role='alert'>Error: Error al obtener builds del proyecto.</div>";
                 }
             }
         });
@@ -71,8 +113,9 @@ $(function () {
 
     if (document.getElementById('descargar') !== null) {
         $("#descargar").click(function () {
-            let desversion = document.getElementById("serselectver").value;
-            let desbuild = document.getElementById("buildversion").value;
+            let tipoproyecto = document.getElementById("selectproyecto").value;
+            let tipoversion = document.getElementById("serselectver").value;
+            let tipobuild = document.getElementById("buildversion").value;
 
             document.getElementById("gifloading").style.visibility = "visible";
 
@@ -80,37 +123,32 @@ $(function () {
                 url: 'function/descargarpaper.php',
                 data: {
                     action: 'descargar',
-                    laversion: desversion,
-                    labuild: desbuild
+                    elproyecto: tipoproyecto,
+                    elversion: tipoversion,
+                    elbuild: tipobuild
                 },
                 type: 'POST',
                 dataType: 'json',
                 success: function (data) {
 
                     document.getElementById("gifloading").style.visibility = "hidden";
-
+                    alert(data.retorno);
                     if (data.retorno == "ok") {
-                        document.getElementById("textoretorno").innerHTML = "<div class='alert alert-success' role='alert'>Servidor Paper descargado correctamente.</div>";
+                        document.getElementById("textoretorno").innerHTML = "<div class='alert alert-success' role='alert'>Servidor descargado correctamente.</div>";
                     } else if (data.retorno == "nopostaction") {
                         document.getElementById("textoretorno").innerHTML = "<div class='alert alert-danger' role='alert'>Error: No se envió valor action.</div>";
+                    } else if (data.retorno == "nopostproyect") {
+                        document.getElementById("textoretorno").innerHTML = "<div class='alert alert-danger' role='alert'>Error: No se envió valor proyecto.</div>";
                     } else if (data.retorno == "nopostver") {
-                        document.getElementById("textoretorno").innerHTML = "<div class='alert alert-danger' role='alert'>Error: No se envió versión paper.</div>";
+                        document.getElementById("textoretorno").innerHTML = "<div class='alert alert-danger' role='alert'>Error: No se envió valor versión.</div>";
                     } else if (data.retorno == "nopostbuild") {
-                        document.getElementById("textoretorno").innerHTML = "<div class='alert alert-danger' role='alert'>Error: No se envió la build paper.</div>";
+                        document.getElementById("textoretorno").innerHTML = "<div class='alert alert-danger' role='alert'>Error: No se envió valor build.</div>";
                     } else if (data.retorno == "nodirwrite") {
                         document.getElementById("textoretorno").innerHTML = "<div class='alert alert-danger' role='alert'>Error: La carpeta temp no tiene permisos de escritura.</div>";
                     } else if (data.retorno == "nominewrite") {
                         document.getElementById("textoretorno").innerHTML = "<div class='alert alert-danger' role='alert'>Error: La carpeta minecraft no tiene permisos de escritura.</div>";
-                    } else if (data.retorno == "errrorgetpaperversion") {
-                        document.getElementById("textoretorno").innerHTML = "<div class='alert alert-danger' role='alert'>Error: Error al obtener versiones de paper.</div>";
-                    } else if (data.retorno == "noverfound") {
-                        document.getElementById("textoretorno").innerHTML = "<div class='alert alert-danger' role='alert'>Error: La versión no concuerda.</div>";
-                    } else if (data.retorno == "errorgetbuilds") {
-                        document.getElementById("textoretorno").innerHTML = "<div class='alert alert-danger' role='alert'>Error: Error al obtener las builds de paper.</div>";
-                    } else if (data.retorno == "nobuildfound") {
-                        document.getElementById("textoretorno").innerHTML = "<div class='alert alert-danger' role='alert'>Error: La build no concuerda.</div>";
-                    } else if (data.retorno == "errorgetverinfo") {
-                        document.getElementById("textoretorno").innerHTML = "<div class='alert alert-danger' role='alert'>Error: Error al obtener información de la build de paper.</div>";
+                    } else if (data.retorno == "errorgetbuildinfo") {
+                        document.getElementById("textoretorno").innerHTML = "<div class='alert alert-danger' role='alert'>Error: Error al obtener información de la build.</div>";
                     } else if (data.retorno == "filenodownload") {
                         document.getElementById("textoretorno").innerHTML = "<div class='alert alert-danger' role='alert'>Error: Error: No se ha descargado el servidor paper.</div>";
                     } else if (data.retorno == "nogoodsha256") {
