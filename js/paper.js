@@ -132,7 +132,7 @@ $(function () {
                 success: function (data) {
 
                     document.getElementById("gifloading").style.visibility = "hidden";
-                    alert(data.retorno);
+
                     if (data.retorno == "ok") {
                         document.getElementById("textoretorno").innerHTML = "<div class='alert alert-success' role='alert'>Servidor descargado correctamente.</div>";
                     } else if (data.retorno == "nopostaction") {
