@@ -88,27 +88,6 @@ if (isset($_SESSION['CONFIGUSER']['psystemconftemaweb'])) {
         $elindexarray = 0;
         $elerror = 0;
         $retorno = "";
-        $versiones = array();
-
-        $url = "https://api.papermc.io/v2/projects";
-        $context = stream_context_create(
-            array(
-                "http" => array(
-                    "timeout" => 10,
-                    "header" => "User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 Edg/132.0.0.0"
-                )
-            )
-        );
-
-        $contenido = @file_get_contents($url, false, $context);
-
-        if ($contenido === FALSE) {
-            $elerror = 1;
-        } else {
-
-            $versiones = json_decode($contenido, true);
-            $versiones = $versiones['projects'];
-        }
 
     ?>
 
@@ -135,48 +114,21 @@ if (isset($_SESSION['CONFIGUSER']['psystemconftemaweb'])) {
                                     <div class="py-1">
                                         <div class="container">
                                             <h1 class="mb-5">Descargar Servidor PaperMc</h1>
-
                                             <div class="py-2">
                                                 <div class="container">
                                                     <div class="row">
                                                         <div class="col-md-6">
-                                                        <label for="selectproyecto">Selecciona Proyecto PaperMC:</label>
-                                                            <select id="selectproyecto" name="selectproyecto" class="form-control" required="required">
-                                                                <?php
-
-                                                                if ($elerror == 0) {
-                                                                    echo '<option selected disabled hidden>No hay ningún proyecto seleccionado</option>';
-
-                                                                    for ($i = 0; $i < count($versiones); $i++) {
-                                                                        echo '<option value="' . $versiones[$i] . '">Proyecto '  . $versiones[$i] . '</option>';
-                                                                    }
-                                                                } else {
-                                                                    echo '<option selected disabled hidden>Error al obtener listado proyectos</option>';
-                                                                }
-                                                                ?>
-                                                            </select>
+                                                            <label for="selectproyecto">Selecciona Proyecto PaperMC:</label>
+                                                            <select id="selectproyecto" name="selectproyecto" class="form-control" required="required"></select>
                                                             <br>
-
                                                             <label for="serselectver">Selecciona la versión:</label>
                                                             <select id="serselectver" name="serselectver" class="form-control" required="required"></select>
                                                             <br>
-                                                            <?php
-
-                                                            if ($elerror == 1) {
-                                                                $retorno = "No se pudo obtener las versiones Paper del json";
-                                                                echo '<p>Error: ' . $retorno . '</p>';
-                                                            }
-
-                                                            if ($elerror == 0) {
-                                                            ?>
-                                                                <label for="buildversion">Selecciona la build:</label>
-                                                                <select id="buildversion" name="buildversion" class="form-control" required="required"></select>
-                                                                <br>
-                                                                <button class="btn btn-primary btn-block mt-2" id="descargar" name="descargar" type="button">Descargar Servidor</button>
-                                                            <?php
-                                                            }
-                                                            ?>
-
+                                                            <label for="buildversion">Selecciona la build:</label>
+                                                            <select id="buildversion" name="buildversion" class="form-control" required="required"></select>
+                                                            <br>
+                                                            <button class="btn btn-primary btn-block mt-2" id="descargar" name="descargar" type="button">Descargar Servidor</button>
+                                                            <p class="text-right pr-4 mini-ver">Todas las descargas se obtienen del servidor PaperMC</p>
                                                         </div>
                                                         <div class="col-md-6">
                                                             <img class="" src="img/loading.gif" id="gifloading" alt="loading">

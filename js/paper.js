@@ -20,6 +20,45 @@ $(function () {
 
     document.getElementById("gifloading").style.visibility = "hidden";
     document.getElementById("descargar").disabled = true;
+    document.getElementById("textoretorno").innerHTML = "";
+
+    if (document.getElementById('selectproyecto') !== null) {
+
+        document.getElementById("gifloading").style.visibility = "visible";
+
+        $.ajax({
+            url: 'function/descargarpaper.php',
+            data: {
+                action: 'getproyect',
+                elproyecto: 'vacio'
+            },
+            type: 'POST',
+            dataType: 'json',
+            success: function (data) {
+
+                document.getElementById("gifloading").style.visibility = "hidden";
+
+                if (data.retorno == "okbuild") {
+
+                    $('#selectproyecto').append('<option selected disabled hidden>Despliega y selecciona un proyecto.</option>');
+                    for (const element of data.lasbuild) {
+                        let textbuild = element;
+                        $('#selectproyecto').append(new Option(textbuild, textbuild, false, false));
+                    }
+
+                } else if (data.retorno == "nopostaction") {
+                    document.getElementById("textoretorno").innerHTML = "<div class='alert alert-danger' role='alert'>Error: No se envió valor action.</div>";
+                } else if (data.retorno == "nopostproyect") {
+                    document.getElementById("textoretorno").innerHTML = "<div class='alert alert-danger' role='alert'>Error: No se envió valor proyecto.</div>";
+                } else if (data.retorno == "errrorgetprojects") {
+                    document.getElementById("textoretorno").innerHTML = "<div class='alert alert-danger' role='alert'>Error: Error al obtener versiones del proyecto.</div>";
+                }
+
+                document.getElementById("gifloading").style.visibility = "hidden";
+            }
+        });
+
+    }
 
     $("#selectproyecto").on('change', function () {
         let tipoproyecto = this.value;
@@ -46,7 +85,7 @@ $(function () {
 
                 if (data.retorno == "okbuild") {
 
-                    $('#serselectver').append('<option selected disabled hidden>No hay ninguna version seleccionada</option>');
+                    $('#serselectver').append('<option selected disabled hidden>Despliega y selecciona una versión.</option>');
                     for (const element of data.lasbuild) {
                         let textbuild = element;
                         $('#serselectver').append(new Option(textbuild, textbuild, false, false));
@@ -57,7 +96,7 @@ $(function () {
                 } else if (data.retorno == "nopostproyect") {
                     document.getElementById("textoretorno").innerHTML = "<div class='alert alert-danger' role='alert'>Error: No se envió valor proyecto.</div>";
                 } else if (data.retorno == "errrorgetversions") {
-                    document.getElementById("textoretorno").innerHTML = "<div class='alert alert-danger' role='alert'>Error: Error al obtener versiones del proyecto.</div>";
+                    document.getElementById("textoretorno").innerHTML = "<div class='alert alert-danger' role='alert'>Error al obtener versiones del proyecto.</div>";
                 }
             }
         });
@@ -87,7 +126,7 @@ $(function () {
 
                 if (data.retorno == "okbuild") {
 
-                    $('#buildversion').append('<option selected disabled hidden>No hay ninguna build seleccionada</option>');
+                    $('#buildversion').append('<option selected disabled hidden>Despliega y selecciona una build.</option>');
                     for (const element of data.lasbuild) {
                         let textbuild = element;
                         $('#buildversion').append(new Option(textbuild, textbuild, false, false));
@@ -100,7 +139,7 @@ $(function () {
                 } else if (data.retorno == "nopostver") {
                     document.getElementById("textoretorno").innerHTML = "<div class='alert alert-danger' role='alert'>Error: No se envió valor versión.</div>";
                 } else if (data.retorno == "errrorgetbuilds") {
-                    document.getElementById("textoretorno").innerHTML = "<div class='alert alert-danger' role='alert'>Error: Error al obtener builds del proyecto.</div>";
+                    document.getElementById("textoretorno").innerHTML = "<div class='alert alert-danger' role='alert'>Error al obtener builds del proyecto.</div>";
                 }
             }
         });
@@ -148,9 +187,9 @@ $(function () {
                     } else if (data.retorno == "nominewrite") {
                         document.getElementById("textoretorno").innerHTML = "<div class='alert alert-danger' role='alert'>Error: La carpeta minecraft no tiene permisos de escritura.</div>";
                     } else if (data.retorno == "errorgetbuildinfo") {
-                        document.getElementById("textoretorno").innerHTML = "<div class='alert alert-danger' role='alert'>Error: Error al obtener información de la build.</div>";
+                        document.getElementById("textoretorno").innerHTML = "<div class='alert alert-danger' role='alert'>Error al obtener información de la build.</div>";
                     } else if (data.retorno == "filenodownload") {
-                        document.getElementById("textoretorno").innerHTML = "<div class='alert alert-danger' role='alert'>Error: Error: No se ha descargado el servidor paper.</div>";
+                        document.getElementById("textoretorno").innerHTML = "<div class='alert alert-danger' role='alert'>Error: No se ha descargado el servidor paper.</div>";
                     } else if (data.retorno == "nogoodsha256") {
                         document.getElementById("textoretorno").innerHTML = "<div class='alert alert-danger' role='alert'>Error: Verificación SHA256 errónea, descarga incorrecta.<br>Vuelve a intentarlo.</div>";
                     } else if (data.retorno == "renamerror") {

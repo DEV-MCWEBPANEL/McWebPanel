@@ -71,7 +71,34 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
             }
 
             if ($elerror == 0) {
-                if ($laaction == "getversion") {
+                if ($laaction == "getproyect") {
+
+                    //OBTENER PROJECTO
+                    $url = "https://api.papermc.io/v2/projects";
+                    $context = stream_context_create(
+                        array(
+                            "http" => array(
+                                "timeout" => 10,
+                                "header" => "User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 Edg/132.0.0.0"
+                            )
+                        )
+
+
+                    );
+
+                    $contenido = @file_get_contents($url, false, $context);
+
+                    if ($contenido === FALSE) {
+                        $elerror = 1;
+                        $retorno = "errrorgetprojects";
+                    } else {
+
+                        $versiones = json_decode($contenido, true);
+                        $versiones = $versiones['projects'];
+                        $versiones2 = $versiones;
+                        $retorno = "okbuild";
+                    }
+                } elseif ($laaction == "getversion") {
 
                     //OBTENER VERSIONES
                     $url = "https://api.papermc.io/v2/projects/" . $getproyecto;
@@ -79,7 +106,7 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
                         array(
                             "http" => array(
                                 "timeout" => 10,
-                                "header" => "User-Agent: User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 Edg/132.0.0.0"
+                                "header" => "User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 Edg/132.0.0.0"
                             )
                         )
                     );
@@ -112,7 +139,7 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
                             array(
                                 "http" => array(
                                     "timeout" => 10,
-                                    "header" => "User-Agent: User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 Edg/132.0.0.0"
+                                    "header" => "User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 Edg/132.0.0.0"
                                 )
                             )
                         );
@@ -170,7 +197,7 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
                             array(
                                 "http" => array(
                                     "timeout" => 10,
-                                    "header" => "User-Agent: User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 Edg/132.0.0.0"
+                                    "header" => "User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 Edg/132.0.0.0"
                                 )
                             )
                         );
