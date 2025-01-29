@@ -65,16 +65,16 @@ Instalar
 
 ```
 Descargar:
-wget https://github.com/DEV-MCWEBPANEL/McWebPanel/archive/refs/tags/v0.22.zip
+wget https://github.com/DEV-MCWEBPANEL/McWebPanel/archive/refs/tags/v0.23.zip
 
 Descomprimir:
-unzip v0.22.zip
+unzip v0.23.zip
 
 Eliminar index.html por defecto de apache:
 sudo rm /var/www/html/index.html
 
 Copiar a la carpeta Apache:
-sudo cp -r McWebPanel-0.22/. /var/www/html/
+sudo cp -r McWebPanel-0.23/. /var/www/html/
 
 Cambiar Usuario Archivos:
 sudo chown -R www-data:www-data /var/www/html/
