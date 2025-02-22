@@ -99,7 +99,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $getconfuser = $arrayobtenido[$i]['usuario'];
             $getconfpass = $arrayobtenido[$i]['hash'];
 
-            //SI EL USUARIO CONCUERTDA
+            //SI EL USUARIO CONCUERDA
             if ($elusuario == $getconfuser && $hashed == $getconfpass) {
                 $encontraruser = 1;
                 $indexuser = $i;
