@@ -361,46 +361,48 @@ $(function () {
         let descomprimirtarbuttons = document.getElementsByClassName('descomprimirtar');
         for (const element of descomprimirtarbuttons) {
             element.addEventListener("click", function () {
+                let eleccion = confirm("¡DESCOMPRIMIR TAR!\n\n¿Seguro que quieres descomprimir el archivo: " + this.value)
+                if (eleccion == true) {
+                    $.ajax({
+                        url: 'function/gestordescomprimirtar.php',
+                        data: {
+                            action: this.value
+                        },
+                        type: 'POST',
+                        dataType: 'json',
+                        success: function (data) {
+                            if (data.eserror == "nada") {
+                                alert("No se ha pasado ningún archivo a descomprimir");
+                            } else if (data.eserror == "notargz") {
+                                alert("El archivo no es .tag.gz");
+                            } else if (data.eserror == "notarbz2") {
+                                alert("El archivo no es .tag.bz2");
+                            } else if (data.eserror == "notar") {
+                                alert("El archivo no es .tar");
+                            } else if (data.eserror == "noexiste") {
+                                alert("El archivo tar a descomprimir no existe");
+                                location.reload();
+                            } else if (data.eserror == "carpyaexiste") {
+                                alert("No se puede descomprimir, la carpeta: " + data.carpeta + " ya existe");
+                            } else if (data.eserror == "no") {
+                                alert("Error al descomprimir");
+                            } else if (data.eserror == "ERRORGETSIZE") {
+                                alert("Error: No se puede obtener los GB de la carpeta minecraft");
+                            } else if (data.eserror == "OUTGIGAS") {
+                                alert("Error: Has superado los GB asignados a la carpeta minecraft");
+                            } else if (data.eserror == "notempexiste") {
+                                alert("Error: La carpeta temp no existe");
+                            } else if (data.eserror == "notempwritable") {
+                                alert("Error: La carpeta temp no tiene permisos de escritura.");
+                            } else if (data.eserror == "processenejecucion") {
+                                alert("Error: Existe un proceso en ejecución.");
+                            } else if (data.eserror == "novaltipe") {
+                                alert("Error: El tipo de archivo no es válido o es falso.");
+                            }
 
-                $.ajax({
-                    url: 'function/gestordescomprimirtar.php',
-                    data: {
-                        action: this.value
-                    },
-                    type: 'POST',
-                    dataType: 'json',
-                    success: function (data) {
-                        if (data.eserror == "nada") {
-                            alert("No se ha pasado ningún archivo a descomprimir");
-                        } else if (data.eserror == "notargz") {
-                            alert("El archivo no es .tag.gz");
-                        } else if (data.eserror == "notarbz2") {
-                            alert("El archivo no es .tag.bz2");
-                        } else if (data.eserror == "notar") {
-                            alert("El archivo no es .tar");
-                        } else if (data.eserror == "noexiste") {
-                            alert("El archivo tar a descomprimir no existe");
-                            location.reload();
-                        } else if (data.eserror == "carpyaexiste") {
-                            alert("No se puede descomprimir, la carpeta: " + data.carpeta + " ya existe");
-                        } else if (data.eserror == "no") {
-                            alert("Error al descomprimir");
-                        } else if (data.eserror == "ERRORGETSIZE") {
-                            alert("Error: No se puede obtener los GB de la carpeta minecraft");
-                        } else if (data.eserror == "OUTGIGAS") {
-                            alert("Error: Has superado los GB asignados a la carpeta minecraft");
-                        } else if (data.eserror == "notempexiste") {
-                            alert("Error: La carpeta temp no existe");
-                        } else if (data.eserror == "notempwritable") {
-                            alert("Error: La carpeta temp no tiene permisos de escritura.");
-                        } else if (data.eserror == "processenejecucion") {
-                            alert("Error: Existe un proceso en ejecución.");
-                        } else if (data.eserror == "novaltipe") {
-                            alert("Error: El tipo de archivo no es válido o es falso.");
                         }
-
-                    }
-                });
+                    });
+                }
             });
         }
     }
@@ -409,42 +411,44 @@ $(function () {
         let descomprimirzipbuttons = document.getElementsByClassName('descomprimirzip');
         for (const element of descomprimirzipbuttons) {
             element.addEventListener("click", function () {
+                let eleccion = confirm("¡DESCOMPRIMIR ZIP!\n\n¿Seguro que quieres descomprimir el archivo: " + this.value)
+                if (eleccion == true) {
+                    $.ajax({
+                        url: 'function/gestordescomprimirzip.php',
+                        data: {
+                            action: this.value
+                        },
+                        type: 'POST',
+                        dataType: 'json',
+                        success: function (data) {
+                            if (data.eserror == "nada") {
+                                alert("No se ha pasado ningún archivo a descomprimir");
+                            } else if (data.eserror == "noexiste") {
+                                alert("El archivo a descomprimir no existe");
+                                location.reload();
+                            } else if (data.eserror == "nozip") {
+                                alert("El archivo no es .zip");
+                            } else if (data.eserror == "carpyaexiste") {
+                                alert("No se puede descomprimir, la carpeta: " + data.carpeta + " ya existe");
+                            } else if (data.eserror == "ERRORGETSIZE") {
+                                alert("Error: No se puede obtener los GB de la carpeta minecraft");
+                            } else if (data.eserror == "OUTGIGAS") {
+                                alert("Error: Has superado los GB asignados a la carpeta minecraft");
+                            } else if (data.eserror == "fallo") {
+                                alert("Error al descomprimir");
+                            } else if (data.eserror == "notempexiste") {
+                                alert("Error: La carpeta temp no existe");
+                            } else if (data.eserror == "notempwritable") {
+                                alert("Error: La carpeta temp no tiene permisos de escritura.");
+                            } else if (data.eserror == "processenejecucion") {
+                                alert("Error: Existe un proceso en ejecución.");
+                            } else if (data.eserror == "novaltipe") {
+                                alert("Error: El tipo de archivo no es válido o es falso.");
+                            }
 
-                $.ajax({
-                    url: 'function/gestordescomprimirzip.php',
-                    data: {
-                        action: this.value
-                    },
-                    type: 'POST',
-                    dataType: 'json',
-                    success: function (data) {
-                        if (data.eserror == "nada") {
-                            alert("No se ha pasado ningún archivo a descomprimir");
-                        } else if (data.eserror == "noexiste") {
-                            alert("El archivo a descomprimir no existe");
-                            location.reload();
-                        } else if (data.eserror == "nozip") {
-                            alert("El archivo no es .zip");
-                        } else if (data.eserror == "carpyaexiste") {
-                            alert("No se puede descomprimir, la carpeta: " + data.carpeta + " ya existe");
-                        } else if (data.eserror == "ERRORGETSIZE") {
-                            alert("Error: No se puede obtener los GB de la carpeta minecraft");
-                        } else if (data.eserror == "OUTGIGAS") {
-                            alert("Error: Has superado los GB asignados a la carpeta minecraft");
-                        } else if (data.eserror == "fallo") {
-                            alert("Error al descomprimir");
-                        } else if (data.eserror == "notempexiste") {
-                            alert("Error: La carpeta temp no existe");
-                        } else if (data.eserror == "notempwritable") {
-                            alert("Error: La carpeta temp no tiene permisos de escritura.");
-                        } else if (data.eserror == "processenejecucion") {
-                            alert("Error: Existe un proceso en ejecución.");
-                        } else if (data.eserror == "novaltipe") {
-                            alert("Error: El tipo de archivo no es válido o es falso.");
                         }
-
-                    }
-                });
+                    });
+                }
             });
         }
     }
@@ -453,41 +457,43 @@ $(function () {
         let comprimircarpetazipbuttons = document.getElementsByClassName('comprimirzipfolder');
         for (const element of comprimircarpetazipbuttons) {
             element.addEventListener("click", function () {
+                let eleccion = confirm("¡COMPRIMIR CARPETA!\n\n¿Seguro que quieres comprimir la carpeta: " + this.value +" en ZIP?")
+                if (eleccion == true) {
+                    $.ajax({
+                        url: 'function/gestorcomprimircarpetazip.php',
+                        data: {
+                            action: this.value
+                        },
+                        type: 'POST',
+                        dataType: 'json',
+                        success: function (data) {
 
-                $.ajax({
-                    url: 'function/gestorcomprimircarpetazip.php',
-                    data: {
-                        action: this.value
-                    },
-                    type: 'POST',
-                    dataType: 'json',
-                    success: function (data) {
+                            if (data.eserror == "nada") {
+                                alert("No se ha pasado ningún archivo a descomprimir");
+                            } else if (data.eserror == "noexiste") {
+                                alert("La carpeta a comprimir no existe");
+                                location.reload();
+                            } else if (data.eserror == "carpyaexiste") {
+                                alert("No se puede comprimir, la carpeta: " + data.carpeta + " ya existe");
+                            } else if (data.eserror == "fallo") {
+                                alert("Error al comprimir");
+                            } else if (data.eserror == "nopermenter") {
+                                alert("No tienes permiso de ejecucion/enter en la carpeta");
+                            } else if (data.eserror == "ERRORGETSIZE") {
+                                alert("Error: No se puede obtener los GB de la carpeta minecraft");
+                            } else if (data.eserror == "OUTGIGAS") {
+                                alert("Error: Has superado los GB asignados a la carpeta minecraft");
+                            } else if (data.eserror == "notempexiste") {
+                                alert("Error: La carpeta temp no existe");
+                            } else if (data.eserror == "notempwritable") {
+                                alert("Error: La carpeta temp no tiene permisos de escritura.");
+                            } else if (data.eserror == "processenejecucion") {
+                                alert("Error: Existe un proceso en ejecución.");
+                            }
 
-                        if (data.eserror == "nada") {
-                            alert("No se ha pasado ningún archivo a descomprimir");
-                        } else if (data.eserror == "noexiste") {
-                            alert("La carpeta a comprimir no existe");
-                            location.reload();
-                        } else if (data.eserror == "carpyaexiste") {
-                            alert("No se puede comprimir, la carpeta: " + data.carpeta + " ya existe");
-                        } else if (data.eserror == "fallo") {
-                            alert("Error al comprimir");
-                        } else if (data.eserror == "nopermenter") {
-                            alert("No tienes permiso de ejecucion/enter en la carpeta");
-                        } else if (data.eserror == "ERRORGETSIZE") {
-                            alert("Error: No se puede obtener los GB de la carpeta minecraft");
-                        } else if (data.eserror == "OUTGIGAS") {
-                            alert("Error: Has superado los GB asignados a la carpeta minecraft");
-                        } else if (data.eserror == "notempexiste") {
-                            alert("Error: La carpeta temp no existe");
-                        } else if (data.eserror == "notempwritable") {
-                            alert("Error: La carpeta temp no tiene permisos de escritura.");
-                        } else if (data.eserror == "processenejecucion") {
-                            alert("Error: Existe un proceso en ejecución.");
                         }
-
-                    }
-                });
+                    });
+                }
             });
         }
     }
