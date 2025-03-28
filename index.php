@@ -187,10 +187,6 @@ require_once "template/header.php";
       $yainstall = 1;
     }
 
-
-    //if ($yainstall == 0 && $elerror == 0) {
-    //}
-
     if ($elerror == 1) {
       echo '<div class="alert alert-danger" role="alert">' . $showerrors . '</div>';
       exit;
@@ -246,7 +242,7 @@ require_once "template/header.php";
       exit;
     } elseif ($sumaconfig == 0 && $sumainstall == 1) {
       $laruta = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
-      header("location:" . $laruta . '/install/index.php');
+      header("Location: {$laruta}/install/index.php");
       exit;
     } elseif ($sumaconfig == 2 && $sumainstall == 0) {
       //instalacion correcta
