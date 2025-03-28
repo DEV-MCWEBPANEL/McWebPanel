@@ -597,16 +597,35 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
                 //CONVIERTES A INT
                 $elforseupgrade = (int) $elforseupgrade;
 
-                //COMPRUEBAS SI NO ES 0 Y 1
-                if ($elforseupgrade !== 0 && $elforseupgrade !== 1) {
-                  $elforseupgrade = CONFIGOPTIONFORCEUPGRADE;
+                //COMPRUEBAS SI ES 1
+                if ($elforseupgrade == 1) {
+                  $elforseupgrade = 1;
+                } else {
+                  $elforseupgrade = 0;
                 }
               }
+            } else {
+              $elforseupgrade = 0;
             }
 
             //ERASE CACHE
             if (isset($_POST['operasecache'])) {
               $elerasecache = test_input($_POST["operasecache"]);
+
+              //MIRA SI NO ES NUMERICO
+              if (!is_numeric($elerasecache)) {
+                $elerasecache = CONFIGOPTIONERASECACHE;
+              } else {
+                //CONVIERTES A INT
+                $elerasecache = (int) $elerasecache;
+
+                //COMPRUEBAS SI ES 1
+                if ($elerasecache == 1) {
+                  $elerasecache = 1;
+                } else {
+                  $elerasecache = 0;
+                }
+              }
             } else {
               $elerasecache = 0;
             }
