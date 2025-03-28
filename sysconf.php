@@ -200,6 +200,18 @@ if (isset($_SESSION['CONFIGUSER']['psystemconftemaweb'])) {
                                                         $reczonahoraria = CONFIGZONAHORARIA;
                                                     }
 
+                                                    if (!defined('CONFIGOPTIONRECREATEREGIONFILES')) {
+                                                        $recrecreateregionfiles = 0;
+                                                    } else {
+                                                        $recrecreateregionfiles = CONFIGOPTIONRECREATEREGIONFILES;
+                                                    }
+
+                                                    if (!defined('CONFIGOPTIONRENDERDEBUGLABELS')) {
+                                                        $recrenderdebuglabels = 0;
+                                                    } else {
+                                                        $recrenderdebuglabels = CONFIGOPTIONRENDERDEBUGLABELS;
+                                                    }
+
                                                     date_default_timezone_set($reczonahoraria);
 
                                                     $elnombredirectorio = $reccarpmine;
@@ -906,9 +918,9 @@ if (isset($_SESSION['CONFIGUSER']['psystemconftemaweb'])) {
                                                         ?>
                                                             <hr>
                                                             <div class="form-group">
-                                                                <label class="negrita">Parametros Avanzados:</label>
                                                                 <div class="form-row">
                                                                     <div class="form-group col-md-6">
+                                                                        <p class="negrita">Parametros Avanzados:</p>
                                                                         <p>Garbage collector - Recolector de basura</p>
                                                                         <div>
                                                                             <input type="radio" id="basura0" name="recbasura" value="0" <?php if ($recgarbagecolector == "0") {
@@ -934,25 +946,40 @@ if (isset($_SESSION['CONFIGUSER']['psystemconftemaweb'])) {
                                                                     </div>
 
                                                                     <div class="form-group col-md-6">
-                                                                        <br>
-                                                                        <label>Conversion Mapa ¡PRECAUCIÓN!</label>
+                                                                        <p class="negrita">¡PRECAUCIÓN!, opciones irreversibles con comportamientos inesperados, realiza un backup completo antes de utilizarlas.</p>
                                                                         <div>
                                                                             <input id="opforceupgrade" name="opforceupgrade" type="checkbox" value="1" <?php if ($recforseupgrade == "1") {
                                                                                                                                                             echo "checked";
                                                                                                                                                         } ?>>
-                                                                            <label for="opforceupgrade">Usar --forceUpgrade (Requiere Versión: 1.13 o superior)</label>
+                                                                            <label for="opforceupgrade">Usar --forceUpgrade (Requiere MC Versión: 1.13 o superior)</label>
+                                                                            <p class="mini-text10">-Fuerza la actualización del mapa principal a la nueva versión.</p>
                                                                         </div>
 
                                                                         <div>
                                                                             <input id="operasecache" name="operasecache" type="checkbox" value="1" <?php if ($recerasecache == "1") {
                                                                                                                                                         echo "checked";
                                                                                                                                                     } ?>>
-                                                                            <label for="operasecache">Usar --eraseCache (Requiere Versión: 1.14 o superior)</label>
+                                                                            <label for="operasecache">Usar --eraseCache (Requiere MC Versión: 1.14 o superior)</label>
+                                                                            <p class="mini-text10">-Elimina la caché de iluminación de todos los chunks.</p>
+                                                                        </div>
+
+                                                                        <div>
+                                                                            <input id="oprecreateregionfiles" name="oprecreateregionfiles" type="checkbox" value="1" <?php if ($recrecreateregionfiles == "1") {
+                                                                                                                                                                            echo "checked";
+                                                                                                                                                                        } ?>>
+                                                                            <label for="oprecreateregionfiles">Usar --recreateRegionFiles (Requiere MC Versión: 1.20.5 o superior)</label>
+                                                                            <p class="mini-text10">-Sobrescribe todos los mapas cargados y crea una versión nueva desfragmentada de ellos, también se aplicará la compresión configurada en "region-file-compression" de server.properties.</p>
+                                                                        </div>
+
+                                                                        <div>
+                                                                            <input id="oprenderdebuglabels" name="oprenderdebuglabels" type="checkbox" value="1" <?php if ($recrenderdebuglabels == "1") {
+                                                                                                                                                                        echo "checked";
+                                                                                                                                                                    } ?>>
+                                                                            <label for="oprenderdebuglabels">Usar --renderDebugLabels (Requiere MC Versión: 1.21.5 o superior)</label>
+                                                                            <p class="mini-text10">-Agrega etiquetas de depuración a objetos OpenGL importantes, haciendo la depuración de renderizado más fácil para los desarrolladores.</p>
                                                                         </div>
                                                                     </div>
-
                                                                 </div>
-
                                                             </div>
                                                         <?php
                                                         }
