@@ -575,21 +575,25 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
           }
         }
 
-        //RECOLECTOR DE BASURA
+        //PARAMETROS AVANZADOS
         if ($elerror == 0) {
           if ($_SESSION['CONFIGUSER']['rango'] == 1 || array_key_exists('psystemconfavanzados', $_SESSION['CONFIGUSER']) && $_SESSION['CONFIGUSER']['psystemconfavanzados'] == 1) {
+            
+            //RECOLECTOR DE BASURA
             if (isset($_POST['recbasura'])) {
               $elgarbagecolector = test_input($_POST["recbasura"]);
             } else {
               $elgarbagecolector = CONFIGOPTIONGARBAGE;
             }
 
+            //FORCE UPGRADE
             if (isset($_POST['opforceupgrade'])) {
               $elforseupgrade = test_input($_POST["opforceupgrade"]);
             } else {
               $elforseupgrade = 0;
             }
 
+            //ERASE CACHE
             if (isset($_POST['operasecache'])) {
               $elerasecache = test_input($_POST["operasecache"]);
             } else {
@@ -1037,6 +1041,13 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
             } else {
               $elzonahoraria = CONFIGZONAHORARIA;
             }
+          }
+        }else{
+          //SI ES UN USUARIO SIN PERMISO
+          if (!defined('CONFIGZONAHORARIA')) {
+            $elzonahoraria = "UTC";
+          } else {
+            $elzonahoraria = CONFIGZONAHORARIA;
           }
         }
 
