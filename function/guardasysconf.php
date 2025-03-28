@@ -589,8 +589,19 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
             //FORCE UPGRADE
             if (isset($_POST['opforceupgrade'])) {
               $elforseupgrade = test_input($_POST["opforceupgrade"]);
-            } else {
-              $elforseupgrade = 0;
+
+              //MIRA SI NO ES NUMERICO
+              if (!is_numeric($elforseupgrade)) {
+                $elforseupgrade = CONFIGOPTIONFORCEUPGRADE;
+              } else {
+                //CONVIERTES A INT
+                $elforseupgrade = (int) $elforseupgrade;
+
+                //COMPRUEBAS SI NO ES 0 Y 1
+                if ($elforseupgrade !== 0 && $elforseupgrade !== 1) {
+                  $elforseupgrade = CONFIGOPTIONFORCEUPGRADE;
+                }
+              }
             }
 
             //ERASE CACHE
