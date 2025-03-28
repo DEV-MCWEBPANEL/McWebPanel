@@ -49,7 +49,7 @@ if (isset($_SESSION['CONFIGUSER']['psystemconftemaweb'])) {
     if (!isset($_SESSION['VALIDADO']) || !isset($_SESSION['KEYSECRETA'])) {
         $_SESSION['VALIDADO'] = "NO";
         $_SESSION['KEYSECRETA'] = "0";
-        header("location:index.php");
+        header("Location:index.php");
         exit;
     }
 
@@ -59,7 +59,7 @@ if (isset($_SESSION['CONFIGUSER']['psystemconftemaweb'])) {
         $receulaminecraft = CONFIGEULAMINECRAFT;
 
         if($receulaminecraft == 1){
-            header("location:status.php");
+            header("Location:status.php");
             exit;
         }
 
@@ -130,7 +130,7 @@ if (isset($_SESSION['CONFIGUSER']['psystemconftemaweb'])) {
 
 
     } else {
-        header("location:index.php");
+        header("Location:index.php");
     }
     ?>
 

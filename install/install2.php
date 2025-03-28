@@ -227,7 +227,7 @@ require_once "../template/errorreport.php";
   <?php
     //FIN DEL IF DEL POST
   } else {
-    header("location:index.php");
+    header("Location:index.php");
   }
   ?>
 

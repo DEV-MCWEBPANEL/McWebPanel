@@ -423,10 +423,10 @@ require_once "../template/errorreport.php";
         exec($elcomando);
 
         //REDIRECCIONAR AL LOGIN
-        header("location:../index.php");
+        header("Location:../index.php");
     } else {
         //REDIRECCIONAR INICIO INSTALACION
-        header("location:index.php");
+        header("Location:index.php");
     }
 
     ?>

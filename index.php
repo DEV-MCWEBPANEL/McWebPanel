@@ -254,7 +254,7 @@ require_once "template/header.php";
       }
 
       if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
-        header("location:status.php");
+        header("Location:status.php");
         exit;
       }
 

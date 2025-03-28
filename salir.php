@@ -25,7 +25,7 @@ require_once "template/errorreport.php";
 if (!isset($_SESSION['VALIDADO']) || !isset($_SESSION['KEYSECRETA'])) {
     $_SESSION['VALIDADO'] = "NO";
     $_SESSION['KEYSECRETA'] = "0";
-    header("location:index.php");
+    header("Location:index.php");
     exit;
 }
 
@@ -38,10 +38,10 @@ $_SESSION = array();
 // Finalmente, destruir la sesión.
 session_destroy();
 
-header("location:index.php");
+header("Location:index.php");
 exit;
 }else {
-    header("location:index.php");
+    header("Location:index.php");
     exit;
 }
 ?>

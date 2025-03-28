@@ -58,7 +58,7 @@ if (isset($_SESSION['CONFIGUSER']['psystemconftemaweb'])) {
     if (!isset($_SESSION['VALIDADO']) || !isset($_SESSION['KEYSECRETA'])) {
         $_SESSION['VALIDADO'] = "NO";
         $_SESSION['KEYSECRETA'] = "0";
-        header("location:index.php");
+        header("Location:index.php");
         exit;
     }
 
@@ -68,18 +68,18 @@ if (isset($_SESSION['CONFIGUSER']['psystemconftemaweb'])) {
     }
 
     if ($expulsar != 1) {
-        header("location:index.php");
+        header("Location:index.php");
         exit;
     }
 
     //CARGAR SESSION
     if (!isset($_SESSION['EDITARFILE'])) {
-        header("location:gestorarchivos.php");
+        header("Location:gestorarchivos.php");
         exit;
     }
 
     if ($_SESSION['EDITARFILE'] == "") {
-        header("location:gestorarchivos.php");
+        header("Location:gestorarchivos.php");
         exit;
     }
 
@@ -87,7 +87,7 @@ if (isset($_SESSION['CONFIGUSER']['psystemconftemaweb'])) {
     clearstatcache();
     if (!file_exists($_SESSION['EDITARFILE'])) {
         $_SESSION['EDITARFILE'] == "";
-        header("location:gestorarchivos.php");
+        header("Location:gestorarchivos.php");
         exit;
     }
 
@@ -95,7 +95,7 @@ if (isset($_SESSION['CONFIGUSER']['psystemconftemaweb'])) {
     clearstatcache();
     if (!is_writable($_SESSION['EDITARFILE'])) {
         $_SESSION['EDITARFILE'] == "";
-        header("location:gestorarchivos.php");
+        header("Location:gestorarchivos.php");
         exit;
     }
 
@@ -200,7 +200,7 @@ if (isset($_SESSION['CONFIGUSER']['psystemconftemaweb'])) {
     <?php
         //FINAL VALIDAR SESSION
     } else {
-        header("location:index.php");
+        header("Location:index.php");
     }
     ?>
 

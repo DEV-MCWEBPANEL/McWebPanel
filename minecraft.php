@@ -60,7 +60,7 @@ if (isset($_SESSION['CONFIGUSER']['psystemconftemaweb'])) {
     if (!isset($_SESSION['VALIDADO']) || !isset($_SESSION['KEYSECRETA'])) {
         $_SESSION['VALIDADO'] = "NO";
         $_SESSION['KEYSECRETA'] = "0";
-        header("location:index.php");
+        header("Location:index.php");
         exit;
     }
 
@@ -70,7 +70,7 @@ if (isset($_SESSION['CONFIGUSER']['psystemconftemaweb'])) {
     }
 
     if ($expulsar != 1) {
-        header("location:index.php");
+        header("Location:index.php");
         exit;
     }
 
@@ -2338,7 +2338,7 @@ if (isset($_SESSION['CONFIGUSER']['psystemconftemaweb'])) {
     <?php
         //FINAL VALIDAR SESSION
     } else {
-        header("location:index.php");
+        header("Location:index.php");
     }
     ?>
 </body>
