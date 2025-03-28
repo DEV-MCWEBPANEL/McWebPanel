@@ -500,8 +500,6 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
                 $cominiciostart = "";
                 $larutash = "";
                 $inigc = "";
-                $iniforceupg = "";
-                $inieracecache = "";
 
                 $rutacarpetamine = dirname(getcwd()) . PHP_EOL;
                 $rutacarpetamine = trim($rutacarpetamine);
@@ -515,21 +513,24 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
                     unlink($larutascrrenlog);
                 }
 
+                //INICIO SCRIPT SH
                 $comandoserver .= "cd .. && cd " . $reccarpmine . " && umask 002 && screen -c '" . $rutascreenconf . "' -dmS " . $reccarpmine . " -L -Logfile 'logs/screen.log' " . $javaruta . " -Xms" . $recxmsram . "M -Xmx" . $recram . "M ";
 
                 //RECOLECTOR
-                if ($recgarbagecolector == "1") {
+                if ($recgarbagecolector == "0") {
+                    $inigc = "";
+                } elseif ($recgarbagecolector == "1") {
+                    $comandoserver .= "-XX:+UseConcMarkSweepGC" . " ";
                     $inigc = "-XX:+UseConcMarkSweepGC";
                 } elseif ($recgarbagecolector == "2") {
+                    $comandoserver .= "-XX:+UseG1GC" . " ";
                     $inigc = "-XX:+UseG1GC";
                 }
 
-                if ($inigc != "") {
-                    $comandoserver .= $inigc . " ";
-                }
+                //AÑADE FILE ENCODING
+                $comandoserver .= "-Dfile.encoding=UTF8" . " ";
 
-                $comandoserver .= "-Dfile.encoding=UTF8 ";
-
+                //AÑADE PARAMETROS INICIO
                 if ($recargmanualinicio != "") {
                     $comandoserver .= $recargmanualinicio . " ";
                 }
@@ -542,24 +543,18 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
 
                 //FORCEUPGRADE MAPA
                 if ($recforseupgrade == "1") {
-                    $iniforceupg = "--forceUpgrade";
-                }
-
-                if ($iniforceupg != "") {
-                    $comandoserver .= $iniforceupg . " ";
+                    $comandoserver .= "--forceUpgrade" . " ";
                 }
 
                 //ERASE CACHE MAPA
                 if ($recerasecache == "1") {
-                    $inieracecache = "--eraseCache";
+                    $comandoserver .= "--eraseCache" . " ";
                 }
 
-                if ($inieracecache != "") {
-                    $comandoserver .= $inieracecache . " ";
-                }
-
+                //AÑADE NOGUI
                 $comandoserver .= "nogui";
 
+                //AÑADE PARAMETROS FINAL
                 if ($recargmanualfinal != "") {
                     $comandoserver .= " " . $recargmanualfinal;
                 }
@@ -580,7 +575,6 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
 
                 $file = fopen($startsh, "w");
                 if ($rectiposerv == "forge new") {
-                    //#!/usr/bin/env sh
                     fwrite($file, "#!/usr/bin/env sh" . PHP_EOL);
                 } else {
                     fwrite($file, "#!/bin/sh" . PHP_EOL);
