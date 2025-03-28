@@ -597,10 +597,8 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
                 //CONVIERTES A INT
                 $elforseupgrade = (int) $elforseupgrade;
 
-                //COMPRUEBAS SI ES 1
-                if ($elforseupgrade == 1) {
-                  $elforseupgrade = 1;
-                } else {
+                //COMPRUEBAS SI NO ES 1
+                if ($elforseupgrade != 1) {
                   $elforseupgrade = 0;
                 }
               }
@@ -619,10 +617,8 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
                 //CONVIERTES A INT
                 $elerasecache = (int) $elerasecache;
 
-                //COMPRUEBAS SI ES 1
-                if ($elerasecache == 1) {
-                  $elerasecache = 1;
-                } else {
+                //COMPRUEBAS SI NO ES 1
+                if ($elerasecache != 1) {
                   $elerasecache = 0;
                 }
               }
