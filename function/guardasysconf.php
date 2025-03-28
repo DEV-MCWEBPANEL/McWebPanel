@@ -578,7 +578,7 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
         //PARAMETROS AVANZADOS
         if ($elerror == 0) {
           if ($_SESSION['CONFIGUSER']['rango'] == 1 || array_key_exists('psystemconfavanzados', $_SESSION['CONFIGUSER']) && $_SESSION['CONFIGUSER']['psystemconfavanzados'] == 1) {
-            
+
             //RECOLECTOR DE BASURA
             if (isset($_POST['recbasura'])) {
               $elgarbagecolector = test_input($_POST["recbasura"]);
@@ -600,9 +600,10 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
               $elerasecache = 0;
             }
           } else {
+            //SI ES UN USUARIO SIN PERMISO
             $elgarbagecolector = CONFIGOPTIONGARBAGE;
-            $elforseupgrade = 0;
-            $elerasecache = 0;
+            $elforseupgrade = CONFIGOPTIONFORCEUPGRADE;
+            $elerasecache = CONFIGOPTIONERASECACHE;
           }
         }
 
@@ -1034,7 +1035,6 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
               $retorno = "zonanoenlista";
               $elerror = 1;
             }
-
           } else {
             if (!defined('CONFIGZONAHORARIA')) {
               $elzonahoraria = "UTC";
@@ -1042,7 +1042,7 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
               $elzonahoraria = CONFIGZONAHORARIA;
             }
           }
-        }else{
+        } else {
           //SI ES UN USUARIO SIN PERMISO
           if (!defined('CONFIGZONAHORARIA')) {
             $elzonahoraria = "UTC";
