@@ -96,6 +96,18 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
                 $recxmsram = CONFIGXMSRAM;
             }
 
+            if (!defined('CONFIGOPTIONRECREATEREGIONFILES')) {
+                $recrecreateregionfiles = 0;
+            } else {
+                $recrecreateregionfiles = CONFIGOPTIONRECREATEREGIONFILES;
+            }
+
+            if (!defined('CONFIGOPTIONRENDERDEBUGLABELS')) {
+                $recrenderdebuglabels = 0;
+            } else {
+                $recrenderdebuglabels = CONFIGOPTIONRENDERDEBUGLABELS;
+            }
+
             $javaruta = "";
 
             $rutacarpetamine = "";
@@ -542,13 +554,23 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
                 }
 
                 //FORCEUPGRADE MAPA
-                if ($recforseupgrade == "1") {
+                if ($recforseupgrade == 1) {
                     $comandoserver .= "--forceUpgrade" . " ";
                 }
 
                 //ERASE CACHE MAPA
-                if ($recerasecache == "1") {
+                if ($recerasecache == 1) {
                     $comandoserver .= "--eraseCache" . " ";
+                }
+
+                //CREATE REGION FILES
+                if ($recrecreateregionfiles == 1) {
+                    $comandoserver .= "--recreateRegionFiles" . " ";
+                }
+
+                //RENDER DEBUG LABELS
+                if ($recrenderdebuglabels == 1) {
+                    $comandoserver .= "--renderDebugLabels" . " ";
                 }
 
                 //AÑADE NOGUI
