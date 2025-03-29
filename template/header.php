@@ -17,6 +17,7 @@ Copyright (C) 2020-2025 DEV-MCWEBPANEL
     along with McWebPanel.  If not, see <https://www.gnu.org/licenses/>.
 */
 header("Content-Security-Policy: default-src 'none'; style-src 'self'; img-src 'self'; script-src 'self'; form-action 'self'; base-uri 'none'; connect-src 'self'; frame-ancestors 'none'");
+header("Cross-Origin-Resource-Policy: same-origin");
 header('X-Content-Type-Options: nosniff'); 
 header('Strict-Transport-Security: max-age=63072000; includeSubDomains; preload');
 header("X-XSS-Protection: 1; mode=block");
