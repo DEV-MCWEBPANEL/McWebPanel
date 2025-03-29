@@ -118,18 +118,15 @@ if (isset($_SESSION['CONFIGUSER']['psystemconftemaweb'])) {
                                                     $recarchivojar = CONFIGARCHIVOJAR;
                                                     $receulaminecraft = CONFIGEULAMINECRAFT;
                                                     $recmaxupload = CONFIGMAXUPLOAD;
-
                                                     $recgarbagecolector = CONFIGOPTIONGARBAGE;
                                                     $recforseupgrade = CONFIGOPTIONFORCEUPGRADE;
                                                     $recerasecache = CONFIGOPTIONERASECACHE;
-
                                                     $recjavaselect = CONFIGJAVASELECT;
                                                     $recjavaname = CONFIGJAVANAME;
                                                     $recjavamanual = CONFIGJAVAMANUAL;
 
                                                     $recbackuplimitgb = intval(CONFIGFOLDERBACKUPSIZE);
                                                     $recminecraftlimitgb = intval(CONFIGFOLDERMINECRAFTSIZE);
-
                                                     $recnumerolineaconsola = intval(CONFIGLINEASCONSOLA);
 
                                                     if (!defined('CONFIGBUFFERLIMIT')) {
@@ -139,11 +136,8 @@ if (isset($_SESSION['CONFIGUSER']['psystemconftemaweb'])) {
                                                     }
 
                                                     $recshowsizefolder = CONFIGSHOWSIZEFOLDERS;
-
                                                     $recbootconf = CONFIGBOOTSYSTEM;
-
                                                     $recignoreramlimit = CONFIGIGNORERAMLIMIT;
-
                                                     $recmantenimiento = CONFIGMANTENIMIENTO;
 
                                                     if (!defined('CONFIGARGMANUALINI')) {
@@ -947,35 +941,36 @@ if (isset($_SESSION['CONFIGUSER']['psystemconftemaweb'])) {
 
                                                                     <div class="form-group col-md-6">
                                                                         <p class="negrita">¡PRECAUCIÓN!, opciones irreversibles con comportamientos inesperados, realiza un backup completo antes de utilizarlas.</p>
+                                                                        <hr>
                                                                         <div>
                                                                             <input id="opforceupgrade" name="opforceupgrade" type="checkbox" value="1" <?php if ($recforseupgrade == "1") {
                                                                                                                                                             echo "checked";
                                                                                                                                                         } ?>>
-                                                                            <label for="opforceupgrade">Usar --forceUpgrade (Requiere MC Versión: 1.13 o superior)</label>
-                                                                            <p class="mini-text10">-Fuerza la actualización del mapa principal a la nueva versión.</p>
+                                                                            <label for="opforceupgrade">Añadir --forceUpgrade (Requiere MC Versión: 1.13 o superior)</label>
+                                                                            <p class="mini-text10">-Fuerza la actualización completa del mapa principal a la nueva versión.</p>
                                                                         </div>
-
+                                                                        <hr>
                                                                         <div>
                                                                             <input id="operasecache" name="operasecache" type="checkbox" value="1" <?php if ($recerasecache == "1") {
                                                                                                                                                         echo "checked";
                                                                                                                                                     } ?>>
-                                                                            <label for="operasecache">Usar --eraseCache (Requiere MC Versión: 1.14 o superior)</label>
+                                                                            <label for="operasecache">Añadir --eraseCache (Requiere MC Versión: 1.14 o superior)</label>
                                                                             <p class="mini-text10">-Elimina la caché de iluminación de todos los chunks.</p>
                                                                         </div>
-
+                                                                        <hr>
                                                                         <div>
                                                                             <input id="oprecreateregionfiles" name="oprecreateregionfiles" type="checkbox" value="1" <?php if ($recrecreateregionfiles == "1") {
                                                                                                                                                                             echo "checked";
                                                                                                                                                                         } ?>>
-                                                                            <label for="oprecreateregionfiles">Usar --recreateRegionFiles (Requiere MC Versión: 1.20.5 o superior)</label>
+                                                                            <label for="oprecreateregionfiles">Añadir --recreateRegionFiles (Requiere MC Versión: 1.20.5 o superior)</label>
                                                                             <p class="mini-text10">-Sobrescribe todos los mapas cargados y crea una versión nueva desfragmentada de ellos, también se aplicará la compresión configurada en "region-file-compression" de server.properties.</p>
                                                                         </div>
-
+                                                                        <hr>
                                                                         <div>
                                                                             <input id="oprenderdebuglabels" name="oprenderdebuglabels" type="checkbox" value="1" <?php if ($recrenderdebuglabels == "1") {
                                                                                                                                                                         echo "checked";
                                                                                                                                                                     } ?>>
-                                                                            <label for="oprenderdebuglabels">Usar --renderDebugLabels (Requiere MC Versión: 1.21.5 o superior)</label>
+                                                                            <label for="oprenderdebuglabels">Añadir --renderDebugLabels (Requiere MC Versión: 1.21.5 o superior)</label>
                                                                             <p class="mini-text10">-Agrega etiquetas de depuración a objetos OpenGL importantes, haciendo la depuración de renderizado más fácil para los desarrolladores.</p>
                                                                         </div>
                                                                     </div>

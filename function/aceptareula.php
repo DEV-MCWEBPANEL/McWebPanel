@@ -57,39 +57,28 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
         $elgarbagecolector = CONFIGOPTIONGARBAGE;
         $elforseupgrade = CONFIGOPTIONFORCEUPGRADE;
         $elerasecache = CONFIGOPTIONERASECACHE;
-
         $eljavaselect = CONFIGJAVASELECT;
         $eljavaname = CONFIGJAVANAME;
         $eljavamanual = CONFIGJAVAMANUAL;
-
         $ellimitbackfoldersize = CONFIGFOLDERBACKUPSIZE;
         $ellimitminefoldersize = CONFIGFOLDERMINECRAFTSIZE;
-
         $elnumerolineaconsola = CONFIGLINEASCONSOLA;
         $elbufferlimit = CONFIGBUFFERLIMIT;
-
         $elmostrarsizecarpeta = CONFIGSHOWSIZEFOLDERS;
-
         $elbootconfig = CONFIGBOOTSYSTEM;
-
         $elignorarlimitram = CONFIGIGNORERAMLIMIT;
-
         $elmantenimiento = CONFIGMANTENIMIENTO;
-
         $elargmanualinicio = CONFIGARGMANUALINI;
         $elargmanualfinal = CONFIGARGMANUALFINAL;
-
         $eltypeconsola = CONFIGCONSOLETYPE;
-
         $elxmsram = CONFIGXMSRAM;
-        
         $elbackupmulti = CONFIGBACKUPMULTI;
         $elbackupcompress = CONFIGBACKUPCOMPRESS;
         $elbackuphilos = CONFIGBACKUPHILOS;
-
         $elbackuprotate = CONFIGBACKUROTATE;
-
         $elzonahoraria = CONFIGZONAHORARIA;
+        $elrecreateregionfiles = CONFIGOPTIONRECREATEREGIONFILES;
+        $elrenderdebuglabels = CONFIGOPTIONRENDERDEBUGLABELS;
 
         //OBTENER RUTA DONDE TIENE QUE ESTAR LA CARPETA CONFIG
         $dirconfig = "";
@@ -142,6 +131,8 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
                 fwrite($file, 'define("CONFIGBACKUPHILOS", "' . $elbackuphilos . '");' . PHP_EOL);
                 fwrite($file, 'define("CONFIGBACKUROTATE", "' . $elbackuprotate . '");' . PHP_EOL);
                 fwrite($file, 'define("CONFIGZONAHORARIA", "' . $elzonahoraria . '");' . PHP_EOL);
+                fwrite($file, 'define("CONFIGOPTIONRECREATEREGIONFILES", "' . $elrecreateregionfiles . '");' . PHP_EOL);
+                fwrite($file, 'define("CONFIGOPTIONRENDERDEBUGLABELS", "' . $elrenderdebuglabels . '");' . PHP_EOL);
                 fwrite($file, "?>" . PHP_EOL);
                 fclose($file);
 

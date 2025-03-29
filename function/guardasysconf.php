@@ -586,7 +586,7 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
               $elgarbagecolector = CONFIGOPTIONGARBAGE;
             }
 
-            //FORCE UPGRADE
+            //OPCIÓN FORCE UPGRADE
             if (isset($_POST['opforceupgrade'])) {
               $elforseupgrade = test_input($_POST["opforceupgrade"]);
 
@@ -606,7 +606,7 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
               $elforseupgrade = 0;
             }
 
-            //ERASE CACHE
+            //OPCIÓN ERASE CACHE
             if (isset($_POST['operasecache'])) {
               $elerasecache = test_input($_POST["operasecache"]);
 
@@ -625,11 +625,73 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
             } else {
               $elerasecache = 0;
             }
+
+            //OPCIÓN CREATE REGION FILES
+            if (isset($_POST['oprecreateregionfiles'])) {
+              $elrecreateregionfiles = test_input($_POST["oprecreateregionfiles"]);
+
+              //MIRA SI NO ES NUMERICO
+              if (!is_numeric($elrecreateregionfiles)) {
+
+                if (!defined('CONFIGOPTIONRECREATEREGIONFILES')) {
+                  $elrecreateregionfiles = 0;
+                } else {
+                  $elrecreateregionfiles = CONFIGOPTIONRECREATEREGIONFILES;
+                }
+              } else {
+                //CONVIERTES A INT
+                $elrecreateregionfiles = (int) $elrecreateregionfiles;
+
+                //COMPRUEBAS SI NO ES 1
+                if ($elrecreateregionfiles != 1) {
+                  $elrecreateregionfiles = 0;
+                }
+              }
+            } else {
+              $elrecreateregionfiles = 0;
+            }
+
+            //OPCIÓN RENDER DEBUG LABELS
+            if (isset($_POST['oprenderdebuglabels'])) {
+              $elrenderdebuglabels = test_input($_POST["oprenderdebuglabels"]);
+
+              //MIRA SI NO ES NUMERICO
+              if (!is_numeric($elrenderdebuglabels)) {
+
+                if (!defined('CONFIGOPTIONRENDERDEBUGLABELS')) {
+                  $elrenderdebuglabels = 0;
+                } else {
+                  $elrenderdebuglabels = CONFIGOPTIONRENDERDEBUGLABELS;
+                }
+              } else {
+                //CONVIERTES A INT
+                $elrenderdebuglabels = (int) $elrenderdebuglabels;
+
+                //COMPRUEBAS SI NO ES 1
+                if ($elrenderdebuglabels != 1) {
+                  $elrenderdebuglabels = 0;
+                }
+              }
+            } else {
+              $elrenderdebuglabels = 0;
+            }
           } else {
             //SI ES UN USUARIO SIN PERMISO
             $elgarbagecolector = CONFIGOPTIONGARBAGE;
             $elforseupgrade = CONFIGOPTIONFORCEUPGRADE;
             $elerasecache = CONFIGOPTIONERASECACHE;
+
+            if (!defined('CONFIGOPTIONRECREATEREGIONFILES')) {
+              $elrecreateregionfiles = 0;
+            } else {
+              $elrecreateregionfiles = CONFIGOPTIONRECREATEREGIONFILES;
+            }
+
+            if (!defined('CONFIGOPTIONRENDERDEBUGLABELS')) {
+              $elrenderdebuglabels = 0;
+            } else {
+              $elrenderdebuglabels = CONFIGOPTIONRENDERDEBUGLABELS;
+            }
           }
         }
 
@@ -1175,6 +1237,8 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
           fwrite($file, 'define("CONFIGBACKUPHILOS", "' . $elbackuphilos . '");' . PHP_EOL);
           fwrite($file, 'define("CONFIGBACKUROTATE", "' . $elbackuprotate . '");' . PHP_EOL);
           fwrite($file, 'define("CONFIGZONAHORARIA", "' . $elzonahoraria . '");' . PHP_EOL);
+          fwrite($file, 'define("CONFIGOPTIONRECREATEREGIONFILES", "' . $elrecreateregionfiles . '");' . PHP_EOL);
+          fwrite($file, 'define("CONFIGOPTIONRENDERDEBUGLABELS", "' . $elrenderdebuglabels . '");' . PHP_EOL);
           fwrite($file, "?>" . PHP_EOL);
           fclose($file);
 

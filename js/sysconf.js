@@ -254,8 +254,15 @@ $(function () {
         });
     }
 
-    if (document.getElementById('operasecache') !== null) {
-        $("#operasecache").change(function () {
+    if (document.getElementById('oprecreateregionfiles') !== null) {
+        $("#oprecreateregionfiles").change(function () {
+            document.getElementById("guardaserver").disabled = false;
+            document.getElementById("result").innerHTML = "";
+        });
+    }
+
+    if (document.getElementById('oprenderdebuglabels') !== null) {
+        $("#oprenderdebuglabels").change(function () {
             document.getElementById("guardaserver").disabled = false;
             document.getElementById("result").innerHTML = "";
         });
