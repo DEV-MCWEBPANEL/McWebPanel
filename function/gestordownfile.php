@@ -123,9 +123,9 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
                             exit;
                         }
                     } else {
-                        echo ('<!doctype html><html lang="es"><head><title>Descargas</title><link rel="stylesheet" href="../css/bootstrap.min.css"></head><body>');
+                        echo '<!doctype html><html lang="es"><head><title>Descargas</title><link rel="stylesheet" href="../css/bootstrap.min.css"></head><body>';
                         echo '<div class="alert alert-danger" role="alert">Error: El archivo no tiene permisos de lectura.</div>';
-                        echo ('</body></html>');
+                        echo '</body></html>';
                     }
                 } else {
                     exit;
