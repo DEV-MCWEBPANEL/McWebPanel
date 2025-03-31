@@ -216,7 +216,6 @@ Copyright (C) 2020-2025 DEV-MCWEBPANEL
 
     <!-- Linea Final -->
     <hr class="sidebar-divider d-none d-md-block">
-
     <p class="text-light text-right pr-4 mini-ver">McWebAdmin<br>Ver <?php echo VERSIONPANEL . " " . VERSIONTIPO ?></p>
 
 </ul>

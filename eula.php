@@ -69,7 +69,7 @@ if (isset($_SESSION['CONFIGUSER']['psystemconftemaweb'])) {
             <div class="container">
                 <div class="row">
                     <div class="col-md-12">
-                        <h1 class="text-center" >Mojang EULA</h1>
+                        <h1 class="text-center">Mojang EULA</h1>
                     </div>
                     <div class="col-md-12 border terms-text">
                         <p>Updated: 25 septiembre 2017 09:02</p>
