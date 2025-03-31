@@ -101,43 +101,8 @@ if (isset($_SESSION['CONFIGUSER']['psystemconftemaweb'])) {
 
         $contenido = @file_get_contents($url, false, $context);
 
-        if ($contenido === FALSE) {
-            $versiones[] = "1.17.1";
-            $versiones[] = "1.17";
-            $versiones[] = "1.16.5";
-            $versiones[] = "1.16.4";
-            $versiones[] = "1.16.3";
-            $versiones[] = "1.16.2";
-            $versiones[] = "1.16.1";
-            $versiones[] = "1.15.2";
-            $versiones[] = "1.15.1";
-            $versiones[] = "1.15";
-            $versiones[] = "1.14.4";
-            $versiones[] = "1.14.3";
-            $versiones[] = "1.14.2";
-            $versiones[] = "1.14.1";
-            $versiones[] = "1.14";
-            $versiones[] = "1.13.2";
-            $versiones[] = "1.13.1";
-            $versiones[] = "1.13";
-            $versiones[] = "1.12.2";
-            $versiones[] = "1.12.1";
-            $versiones[] = "1.12";
-            $versiones[] = "1.11.2";
-            $versiones[] = "1.11.1";
-            $versiones[] = "1.11";
-            $versiones[] = "1.10.2";
-            $versiones[] = "1.10";
-            $versiones[] = "1.9.4";
-            $versiones[] = "1.9.2";
-            $versiones[] = "1.9";
-            $versiones[] = "1.8.8";
-            $versiones[] = "1.8.7";
-            $versiones[] = "1.8.6";
-            $versiones[] = "1.8.5";
-            $versiones[] = "1.8.4";
-            $versiones[] = "1.8.3";
-            $versiones[] = "1.8";
+        if ($contenido === false) {
+            $versiones[] = "-> Error al obtener listado de servidores.";
         } else {
 
             $contenido = htmlentities($contenido);
@@ -160,7 +125,7 @@ if (isset($_SESSION['CONFIGUSER']['psystemconftemaweb'])) {
                             $linea = trim($elarray[$i]);
                             $linea = substr($linea, 0, -30);
                             $linea = substr($linea, 15);
-                            $versiones[] = test_input(trim($linea));
+                            $versiones[] = test_input($linea);
                             $totver++;
                         }
                     }
@@ -170,7 +135,7 @@ if (isset($_SESSION['CONFIGUSER']['psystemconftemaweb'])) {
             if ($totver > 0) {
                 $versiones = array_reverse($versiones);
             } else {
-                $versiones[] = "ERROR";
+                $versiones[] = "-> Error al obtener listado de servidores.";
             }
         }
 
@@ -199,7 +164,7 @@ if (isset($_SESSION['CONFIGUSER']['psystemconftemaweb'])) {
                                     <div class="py-1">
                                         <div class="container">
                                             <h1 class="mb-5">Compilar Spigot</h1>
-                                            
+
                                             <?php
                                             //COMPRUEBA SI JAVA ESTA INSTALADO
                                             $checkjavainst = shell_exec('command -v java >/dev/null && echo "yes" || echo "no"');
@@ -232,7 +197,6 @@ if (isset($_SESSION['CONFIGUSER']['psystemconftemaweb'])) {
 
                                                             $javaruta = "";
 
-
                                                             if ($recjavaselect == "0") {
                                                                 $javaruta = "java";
                                                                 //COMPROBAR SI JAVA DEFAULT EXISTE
@@ -263,7 +227,7 @@ if (isset($_SESSION['CONFIGUSER']['psystemconftemaweb'])) {
 
                                                             if ($elerror == 0) {
                                                                 if ($totver == 0) {
-                                                                    $retorno = "No se pudo obtener las versiones de la pagina de Spigot<br>Carcaga lista versiones interna";
+                                                                    $retorno = "No se pudo obtener las versiones de la página de Spigot";
                                                                     echo '<p>Error: ' . $retorno . '</p>';
                                                                 }
                                                             }
