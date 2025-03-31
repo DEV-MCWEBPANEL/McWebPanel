@@ -68,9 +68,9 @@ Copyright (C) 2020-2025 DEV-MCWEBPANEL
     //MOSTRAR O OCULTAR EL TEXTO DE LA SECCION CONFIGURACION
     if ($_SESSION['CONFIGUSER']['rango'] == 1 || $_SESSION['CONFIGUSER']['rango'] == 2 || array_key_exists('pconfmine', $_SESSION['CONFIGUSER']) && $_SESSION['CONFIGUSER']['pconfmine'] == 1 || array_key_exists('pprogtareas', $_SESSION['CONFIGUSER']) && $_SESSION['CONFIGUSER']['pprogtareas'] == 1) {
         //<!-- Linea -->
-        echo ('<hr class="sidebar-divider">');
+        echo '<hr class="sidebar-divider">';
         //<!-- Encabezado -->
-        echo ('<div class="sidebar-heading text-light">Configuración</div>');
+        echo '<div class="sidebar-heading text-light">Configuración</div>';
     }
     ?>
 
@@ -109,9 +109,9 @@ Copyright (C) 2020-2025 DEV-MCWEBPANEL
     //MOSTRAR O OCULTAR EL TEXTO DE LA SECCION SISTEMA
     if ($_SESSION['CONFIGUSER']['rango'] == 1 || $_SESSION['CONFIGUSER']['rango'] == 2 || array_key_exists('psystemconf', $_SESSION['CONFIGUSER']) && $_SESSION['CONFIGUSER']['psystemconf'] == 1 || array_key_exists('ppagedownserver', $_SESSION['CONFIGUSER']) && $_SESSION['CONFIGUSER']['ppagedownserver'] == 1 || array_key_exists('psubirservidor', $_SESSION['CONFIGUSER']) && $_SESSION['CONFIGUSER']['psubirservidor'] == 1 || array_key_exists('pbackups', $_SESSION['CONFIGUSER']) && $_SESSION['CONFIGUSER']['pbackups'] == 1 || array_key_exists('pgestorarchivos', $_SESSION['CONFIGUSER']) && $_SESSION['CONFIGUSER']['pgestorarchivos'] == 1) {
         //<!-- Linea -->
-        echo ('<hr class="sidebar-divider">');
+        echo '<hr class="sidebar-divider">';
         //<!-- Encabezado -->
-        echo ('<div class="sidebar-heading text-light">Sistema</div>');
+        echo '<div class="sidebar-heading text-light">Sistema</div>';
     }
     ?>
 
