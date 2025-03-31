@@ -285,10 +285,8 @@ require_once "../template/errorreport.php";
         $rutaescribir = $dirconfig;
         $rutaescribir .= "/confuser.json";
 
-        $hashed = hash("sha3-512", $elpassword);
-
         $arrayadmin[0]['usuario'] = $elusuario;
-        $arrayadmin[0]['hash'] = $hashed;
+        $arrayadmin[0]['hash'] = hash("sha3-512", $elpassword);
         $arrayadmin[0]['rango'] = 1;
         $arrayadmin[0]['estado'] = "activado";
         $arrayadmin[0]['psystemconftemaweb'] = 1;
