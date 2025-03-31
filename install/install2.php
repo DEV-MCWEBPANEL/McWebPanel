@@ -33,6 +33,7 @@ require_once "../template/errorreport.php";
 
 <!doctype html>
 <html lang="es">
+
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -57,6 +58,16 @@ require_once "../template/errorreport.php";
 
 <body>
   <?php
+  function test_input($data)
+  {
+    if (isset($data)) {
+      $data = trim($data);
+      $data = stripslashes($data);
+      $data = htmlspecialchars($data);
+      return $data;
+    }
+  }
+
   // No se aceptan metodos que no sean post
   if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
@@ -65,7 +76,7 @@ require_once "../template/errorreport.php";
       echo "No has aceptado la licencia";
       exit();
     } else {
-      $licencia = $_POST["confirmlicencia"];
+      $licencia = test_input($_POST["confirmlicencia"]);
       if ($licencia != 1) {
         echo "No has aceptado la licencia";
         exit();
@@ -232,4 +243,5 @@ require_once "../template/errorreport.php";
   ?>
 
 </body>
+
 </html>
