@@ -486,9 +486,9 @@ if (isset($_SESSION['CONFIGUSER']['psystemconftemaweb'])) {
                                                                         <br>
                                                                         <button class="btn btn-lg btn-primary btn-block" id="btcrearusuario" name="btcrearusuario" type="submit"><?php
                                                                                                                                                                                     if ($_SESSION['EDITARSUPER']['rango'] == 1) {
-                                                                                                                                                                                        echo ('Editar Superusuario');
+                                                                                                                                                                                        echo "Editar Superusuario";
                                                                                                                                                                                     } elseif ($_SESSION['EDITARSUPER']['rango'] == 2) {
-                                                                                                                                                                                        echo ('Editar Administrador');
+                                                                                                                                                                                        echo "Editar Administrador";
                                                                                                                                                                                     }
                                                                                                                                                                                     ?></button>
                                                                         <button class="btn btn-lg btn-secondary btn-block" id="btcancelar" name="btcancelar" type="button">Cancelar</button>
