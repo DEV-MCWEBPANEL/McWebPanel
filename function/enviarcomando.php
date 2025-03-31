@@ -34,9 +34,11 @@ function test_input($data)
 
 function test_input2($data)
 {
-  $data = stripslashes($data);
-  $data = htmlspecialchars($data);
-  return $data;
+  if (isset($data)) {
+    $data = stripslashes($data);
+    $data = htmlspecialchars($data);
+    return $data;
+  }
 }
 
 //COMPROBAR SI SESSION EXISTE SINO CREARLA CON NO
