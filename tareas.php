@@ -149,9 +149,9 @@ if (isset($_SESSION['CONFIGUSER']['psystemconftemaweb'])) {
 
                                                                 //SI NO HAY ARCHIVOS MOSTRAR INFORMACION
                                                                 if ($contadorarchivos == 0) {
-                                                                    echo ('<tr>');
-                                                                    echo ('<th scope="row">No hay ninguna tarea programada.</th><td></td><td></td><td></td><td></td>');
-                                                                    echo ('</tr>');
+                                                                    echo '<tr>';
+                                                                    echo '<th scope="row">No hay ninguna tarea programada.</th><td></td><td></td><td></td><td></td>';
+                                                                    echo '</tr>';
                                                                 } else {
 
                                                                     //OBTENER ARRAY TAREAS
@@ -160,12 +160,12 @@ if (isset($_SESSION['CONFIGUSER']['psystemconftemaweb'])) {
 
                                                                     //RECORRER ARRAY Y AÑADIR LAS PROPIEDADES Y LOS BOTONES
                                                                     for ($i = 0; $i < count($arrayobtenido); $i++) {
-                                                                        echo ('<tr class="menu-hover" id="' . $arrayobtenido[$i]["id"] . '">');
-                                                                        echo ('<th scope="row">' . $arrayobtenido[$i]["nombre"] . '</th>');
-                                                                        echo ('<td>' . devolver_accion($arrayobtenido[$i]["accion"]) . '</td>');
-                                                                        echo ('<td>' . $arrayobtenido[$i]["comando"] . '</td>');
-                                                                        echo ('<td>' . $arrayobtenido[$i]["estado"] . '</td>');
-                                                                        echo ('<td>');
+                                                                        echo '<tr class="menu-hover" id="' . $arrayobtenido[$i]["id"] . '">';
+                                                                        echo '<th scope="row">' . $arrayobtenido[$i]["nombre"] . '</th>';
+                                                                        echo '<td>' . devolver_accion($arrayobtenido[$i]["accion"]) . '</td>';
+                                                                        echo '<td>' . $arrayobtenido[$i]["comando"] . '</td>';
+                                                                        echo '<td>' . $arrayobtenido[$i]["estado"] . '</td>';
+                                                                        echo '<td>';
 
                                                                         if ($_SESSION['CONFIGUSER']['rango'] == 1 || $_SESSION['CONFIGUSER']['rango'] == 2 || array_key_exists('pprogtareaseditar', $_SESSION['CONFIGUSER']) && $_SESSION['CONFIGUSER']['pprogtareaseditar'] == 1) {
                                                                 ?>
