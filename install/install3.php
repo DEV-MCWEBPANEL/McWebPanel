@@ -47,7 +47,7 @@ require_once "../template/errorreport.php";
     <link rel="stylesheet" href="../css/bootstrap.min.css">
 
     <!-- Script AJAX -->
-    <script src="../js/jquery.min.js"></script>
+    <script src="../js/jquery.min.js" integrity="sha384-1H217gwSVyLSIfaLxHbE7dRb3v4mYCKbpQvzx0cegeju1MVsGrX5xXxAvs/HgeFs" crossorigin="anonymous"></script>
 
     <!-- Favicons -->
     <link rel="apple-touch-icon" href="../img/icons/apple-icon-180x180.png" sizes="180x180">
@@ -415,8 +415,7 @@ require_once "../template/errorreport.php";
         fclose($file);
 
         //ELIMINAR INSTALL
-        $elcomando = "rm -r ";
-        $elcomando .= $dirinstall;
+        $elcomando = "rm -r " . $dirinstall;
         exec($elcomando);
 
         //REDIRECCIONAR AL LOGIN
