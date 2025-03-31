@@ -337,6 +337,8 @@ require_once "../template/errorreport.php";
         fwrite($file, 'define("CONFIGBACKUPHILOS", "1");' . PHP_EOL);
         fwrite($file, 'define("CONFIGBACKUROTATE", "0");' . PHP_EOL);
         fwrite($file, 'define("CONFIGZONAHORARIA", "' . $elzonahoraria . '");' . PHP_EOL);
+        fwrite($file, 'define("CONFIGOPTIONRECREATEREGIONFILES", "0");' . PHP_EOL);
+        fwrite($file, 'define("CONFIGOPTIONRENDERDEBUGLABELS", , "0");' . PHP_EOL);
         fwrite($file, "?>" . PHP_EOL);
         fclose($file);
 
