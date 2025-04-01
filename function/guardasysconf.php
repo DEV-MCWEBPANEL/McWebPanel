@@ -482,7 +482,7 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
               $elmostrarsizecarpeta = "";
             }
           } else {
-            $elmostrarsizecarpeta = CONFIGLINEASCONSOLA;
+            $elmostrarsizecarpeta = CONFIGSHOWSIZEFOLDERS;
           }
         }
 
@@ -500,7 +500,7 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
               $elignorarlimitram = "";
             }
           } else {
-            $elignorarlimitram = CONFIGLINEASCONSOLA;
+            $elignorarlimitram = CONFIGIGNORERAMLIMIT;
           }
         }
 
