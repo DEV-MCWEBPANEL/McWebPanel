@@ -22,6 +22,10 @@ $(function () {
         document.getElementById("compilar").disabled = true;
     }
 
+    if (document.getElementById('borrarcache') !== null) {
+        document.getElementById("borrarcache").disabled = true;
+    }
+
     if (document.getElementById('killcompilar') !== null) {
         document.getElementById("killcompilar").disabled = true;
     }
@@ -71,6 +75,22 @@ $(function () {
                 }
             });
         });
+    }
+
+    if (document.getElementById('borrarcache') !== null) {
+        $("#borrarcache").click(function () {
+            $.ajax({
+                url: 'function/compilarspigot.php',
+                data: {
+                    action: 'borrarcache'
+                },
+                type: 'POST',
+                success: function (data) {
+
+                }
+            });
+        });
+ 
     }
 
     if (document.getElementById('killcompilar') !== null) {
@@ -123,6 +143,10 @@ $(function () {
                         document.getElementById("compilar").disabled = true;
                     }
 
+                    if (document.getElementById('borrarcache') !== null) {
+                        document.getElementById("borrarcache").disabled = true;
+                    }
+
                     if (document.getElementById('killcompilar') !== null) {
                         document.getElementById("killcompilar").disabled = false;
                     }
@@ -134,6 +158,10 @@ $(function () {
 
                     if (document.getElementById('compilar') !== null) {
                         document.getElementById("compilar").disabled = false;
+                    }
+
+                    if (document.getElementById('borrarcache') !== null) {
+                        document.getElementById("borrarcache").disabled = false;
                     }
 
                     if (document.getElementById('killcompilar') !== null) {

@@ -58,6 +58,7 @@ function obtenersizecarpeta($dir)
       $totalSize += $file->getSize();
     }
   } catch (Throwable $t) {
+    //VACIO
   }
   return $totalSize;
 }
@@ -204,7 +205,7 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
 
               $contenido = @file_get_contents($url, false, $context);
 
-              if ($contenido === FALSE) {
+              if ($contenido === false) {
                 $elerror = 1;
                 $retorno = "timeout";
               } else {
@@ -229,7 +230,7 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
                         $linea = trim($elarray[$i]);
                         $linea = substr($linea, 0, -30);
                         $linea = substr($linea, 15);
-                        $versiones[] = test_input(trim($linea));
+                        $versiones[] = test_input($linea);
                       }
                     }
                   }
@@ -419,6 +420,22 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
                   $retorno = "OFF";
                 }
               }
+            }
+          } elseif ($laaction == "borrarcache") {
+
+            //SABER SI ESTA EN EJECUCION
+            $elcomando = "";
+            $nombresession = str_replace("/", "", $carpcompilar);
+            $elcomando = "screen -ls | gawk '/\." . $nombresession . "\t/ {print strtonum($1)'}";
+            $elpid = shell_exec($elcomando);
+
+            if ($elpid == "") {
+              //BORRA CONTENIDO CARPETA Y ARCHIVOS OCULTOS EXCEPTO .HTACCESS
+              $borracache = "find " . $carpcompilar . " -mindepth 1 ! -name '.htaccess' -exec rm -rf {} +";
+              exec($borracache);
+              $retorno = "OK";
+            } else {
+              $retorno = "ON";
             }
           }
         }

@@ -236,6 +236,7 @@ if (isset($_SESSION['CONFIGUSER']['psystemconftemaweb'])) {
                                                             ?>
                                                                 <p>Se compilara usando JAVA: <?php echo exec($javaruta . " -version 2>&1 | head -n 1 | gawk '{ print $1 $3 }'"); ?></p>
                                                                 <button class="btn btn-primary btn-block mt-2" id="compilar" name="compilar" type="button">Compilar</button>
+                                                                <button class="btn btn-warning btn-block mt-2" id="borrarcache" name="borrarcache" type="button">Borrar cache</button>
                                                                 <button class="btn btn-danger btn-block mt-2" id="killcompilar" name="killcompilar" type="button">Matar Compilar</button>
                                                             <?php
                                                             } else {
