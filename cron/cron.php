@@ -32,6 +32,9 @@ $RUTAPRINCIPAL = $_SERVER['PHP_SELF'];
 $RUTAPRINCIPAL = substr($RUTAPRINCIPAL, 0, -14);
 $RUTACONFIG = $RUTAPRINCIPAL . "/config/confopciones.php";
 
+//CARGAR CONFIGURACION PANEL
+require_once $RUTACONFIG;
+
 if (!defined('CONFIGZONAHORARIA')) {
     $reczonahoraria = "UTC";
 } else {
@@ -101,10 +104,6 @@ if ($elerror == 0) {
 }
 
 if ($elerror == 0) {
-
-    //CARGAR CONFIGURACION PANEL
-    require_once $RUTACONFIG;
-
     clearstatcache();
     if (file_exists($elarchivo)) {
 
