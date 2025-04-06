@@ -17,7 +17,7 @@ Copyright (C) 2020-2025 DEV-MCWEBPANEL
     along with McWebPanel.  If not, see <https://www.gnu.org/licenses/>.
 */
 ?>
-<ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+<ul class="navbar-nav bg-menucolor sidebar sidebar-dark accordion" id="accordionSidebar">
 
     <!-- Sidebar - Brand -->
     <a class="sidebar-brand d-flex align-items-center justify-content-center" href="status.php">
