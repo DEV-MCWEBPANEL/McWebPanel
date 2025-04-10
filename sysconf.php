@@ -628,17 +628,17 @@ if (isset($_SESSION['CONFIGUSER']['psystemconftemaweb'])) {
                                                         ?>
                                                             <div class="form-group">
                                                                 <div class="form-row">
-                                                                    <div class="form-group col-md-8">
+                                                                    <div class="form-group col-md-12">
                                                                         <label class="negrita">Selector de JAVA:</label>
-                                                                        <div class="col-md-6">
+                                                                        <div class="col-md-12">
                                                                             <input type="radio" id="configjavaselect0" name="configjavaselect" value="0" <?php if ($recjavaselect == "0") {
                                                                                                                                                                 echo "checked";
                                                                                                                                                             } ?>>
                                                                             <label for="configjavaselect0">Usar JAVA defecto sistema</label>
-                                                                            <p><?php echo exec("java -version 2>&1 | head -n 1 | gawk '{ print $1 $3 }'"); ?></p>
+                                                                            <p><?php echo exec("java -version 2>&1 | head -n 1"); ?></p>
                                                                         </div>
 
-                                                                        <div class="col-md-6">
+                                                                        <div class="col-md-12">
                                                                             <input type="radio" id="configjavaselect1" name="configjavaselect" value="1" <?php if ($recjavaselect == "1") {
                                                                                                                                                                 echo "checked";
                                                                                                                                                             } ?>>
@@ -671,9 +671,9 @@ if (isset($_SESSION['CONFIGUSER']['psystemconftemaweb'])) {
                                                                                             for ($i = 0; $i < count($javalist); $i++) {
 
                                                                                                 if ($javaruta[$i] . "/bin/java" == $recjavaname) {
-                                                                                                    echo '<option value="' . $javaruta[$i] . '" selected>' . $javalist[$i] . '</option>';
+                                                                                                    echo '<option value="' . $javaruta[$i] . '" selected>' . $javalist[$i] . ' --> ' . $javaruta[$i] . '</option>';
                                                                                                 } else {
-                                                                                                    echo '<option value="' . $javaruta[$i] . '">' . $javalist[$i] . '</option>';
+                                                                                                    echo '<option value="' . $javaruta[$i] . '">' . $javalist[$i] . ' --> ' . $javaruta[$i] . '</option>';
                                                                                                 }
                                                                                             }
                                                                                         } else {
@@ -694,7 +694,7 @@ if (isset($_SESSION['CONFIGUSER']['psystemconftemaweb'])) {
                                                                         if ($_SESSION['CONFIGUSER']['rango'] == 1) {
                                                                         ?>
                                                                             <br>
-                                                                            <div class="col-md-8">
+                                                                            <div class="col-md-12">
                                                                                 <input type="radio" id="configjavaselect2" name="configjavaselect" value="2" <?php if ($recjavaselect == "2") {
                                                                                                                                                                     echo "checked";
                                                                                                                                                                 } ?>>
@@ -707,7 +707,7 @@ if (isset($_SESSION['CONFIGUSER']['psystemconftemaweb'])) {
                                                                         if ($_SESSION['CONFIGUSER']['rango'] == 2 && $recjavaselect == "2") {
                                                                         ?>
                                                                             <br>
-                                                                            <div class="col-md-8">
+                                                                            <div class="col-md-12">
                                                                                 <input type="radio" id="configjavaselect2" name="configjavaselect" value="" <?php if ($recjavaselect == "2") {
                                                                                                                                                                 echo "checked";
                                                                                                                                                             } ?>>
