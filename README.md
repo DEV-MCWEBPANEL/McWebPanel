@@ -19,14 +19,14 @@ Estos son los requisitos para que McWebPanel funcione
 
 ```
 Sistemas Operativos:
-Debian 10.x | 11.x
+Debian 12.x
 Ubuntu Server 22.04 LTS | 24.04 LTS
 
 Servidor Web:
 Apache2 / Nginx
 
 Versiones PHP compatibles:
-PHP 8.0 | PHP 8.1 | PHP 8.3
+PHP 8.0 | PHP 8.1 | PHP 8.2 | PHP 8.3
 
 OpenJDK             (Maquina Virtual Java)
 screen              (GNU Screen)
