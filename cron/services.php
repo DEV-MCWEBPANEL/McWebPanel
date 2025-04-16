@@ -300,8 +300,8 @@ if ($elerror == 0) {
 
             //COMPROBAR PUERTO EN USO
             if ($elerror == 0) {
-              $comandopuerto = "netstat -tulpn 2>/dev/null | grep :" . $recpuerto;
-              $obtener = exec($comandopuerto);
+              $comandopuerto = "ss -tuln | grep :". $recpuerto;
+              $obtener = shell_exec($comandopuerto);
               if ($obtener != "") {
                 $retorno = "Error Tarea Iniciar Servidor, puerto ya en uso.";
                 $elerror = 1;
