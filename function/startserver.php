@@ -306,8 +306,8 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
 
             //COMPROBAR PUERTO EN USO
             if ($elerror == 0) {
-                $comandopuerto = "netstat -tulpn 2>/dev/null | grep :" . $recpuerto;
-                $obtener = exec($comandopuerto);
+                $comandopuerto = "ss -tuln | grep :". $recpuerto;
+                $obtener = shell_exec($comandopuerto);
                 if ($obtener != "") {
                     $elerror = 1;
                     $retorno = "puertoenuso";
