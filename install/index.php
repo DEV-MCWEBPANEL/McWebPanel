@@ -110,11 +110,27 @@ $estamodulo = "";
 
                   </tr>
                   <tr>
+                    <td class="text-center">Iproute2</td>
+                    <td></td>
+
+                    <?php
+                    //REQUISITO Iproute2
+                    $comreq = shell_exec('command -v ss >/dev/null && echo "yes" || echo "no"');
+                    $comreq = trim($comreq);
+                    if ($comreq == "no") {
+                      $losrequisitos = 1;
+                      echo '<td class="text-danger">Instalado - NO</td>';
+                    } elseif ($comreq == "yes") {
+                      echo '<td class="text-success">Instalado - SI</td>';
+                    }
+                    ?>
+
+                  </tr>
+                  <tr>
                     <td class="text-center">Máquina Virtual Java</td>
                     <td></td>
 
                     <?php
-
                     //REQUISITO JAVA
                     $comreq = shell_exec('command -v java >/dev/null && echo "yes" || echo "no"');
                     $comreq = trim($comreq);
@@ -124,7 +140,6 @@ $estamodulo = "";
                     } elseif ($comreq == "yes") {
                       echo '<td class="text-success">Instalado - SI</td>';
                     }
-
                     ?>
 
                   </tr>
@@ -133,7 +148,6 @@ $estamodulo = "";
                     <td></td>
 
                     <?php
-
                     //REQUISITO SCREEN
                     $comreq = shell_exec('command -v screen >/dev/null && echo "yes" || echo "no"');
                     $comreq = trim($comreq);
@@ -143,7 +157,6 @@ $estamodulo = "";
                     } elseif ($comreq == "yes") {
                       echo '<td class="text-success">Instalado - SI</td>';
                     }
-
                     ?>
 
                   </tr>
@@ -152,7 +165,6 @@ $estamodulo = "";
                     <td></td>
 
                     <?php
-
                     //REQUISITO GNU GAWK
                     $comreq = shell_exec('command -v gawk >/dev/null && echo "yes" || echo "no"');
                     $comreq = trim($comreq);
@@ -162,7 +174,6 @@ $estamodulo = "";
                     } elseif ($comreq == "yes") {
                       echo '<td class="text-success">Instalado - SI</td>';
                     }
-
                     ?>
 
                   </tr>
@@ -172,7 +183,6 @@ $estamodulo = "";
                     <td></td>
 
                     <?php
-
                     //REQUISITO GNU WGET
                     $comreq = shell_exec('command -v wget >/dev/null && echo "yes" || echo "no"');
                     $comreq = trim($comreq);
@@ -182,7 +192,6 @@ $estamodulo = "";
                     } elseif ($comreq == "yes") {
                       echo '<td class="text-success">Instalado - SI</td>';
                     }
-
                     ?>
 
                   </tr>
@@ -192,7 +201,6 @@ $estamodulo = "";
                     <td></td>
 
                     <?php
-
                     //REQUISITO GNU TAR
                     $comreq = shell_exec('command -v tar >/dev/null && echo "yes" || echo "no"');
                     $comreq = trim($comreq);
@@ -202,7 +210,6 @@ $estamodulo = "";
                     } elseif ($comreq == "yes") {
                       echo '<td class="text-success">Instalado - SI</td>';
                     }
-
                     ?>
 
                   </tr>
@@ -212,7 +219,6 @@ $estamodulo = "";
                     <td></td>
 
                     <?php
-
                     //REQUISITO GNU GZIP
                     $comreq = shell_exec('command -v gzip >/dev/null && echo "yes" || echo "no"');
                     $comreq = trim($comreq);
@@ -222,7 +228,6 @@ $estamodulo = "";
                     } elseif ($comreq == "yes") {
                       echo '<td class="text-success">Instalado - SI</td>';
                     }
-
                     ?>
 
                   </tr>
@@ -232,7 +237,6 @@ $estamodulo = "";
                     <td></td>
 
                     <?php
-
                     //REQUISITO JSON
                     if (!extension_loaded('json')) {
                       $losrequisitos = 1;
@@ -240,7 +244,6 @@ $estamodulo = "";
                     } else {
                       echo '<td class="text-success">Instalado - SI</td>';
                     }
-
                     ?>
                   </tr>
 
@@ -249,7 +252,6 @@ $estamodulo = "";
                     <td></td>
 
                     <?php
-
                     //PHP CLI
                     $comreq = shell_exec('command -v php -v >/dev/null && echo "yes" || echo "no"');
                     $comreq = trim($comreq);
@@ -259,7 +261,6 @@ $estamodulo = "";
                     } elseif ($comreq == "yes") {
                       echo '<td class="text-success">Instalado - SI</td>';
                     }
-
                     ?>
 
                   </tr>
@@ -269,7 +270,6 @@ $estamodulo = "";
                     <td></td>
 
                     <?php
-
                     //REQUISITO GNU ZIP
                     $comreq = shell_exec('command -v zip >/dev/null && echo "yes" || echo "no"');
                     $comreq = trim($comreq);
@@ -279,7 +279,6 @@ $estamodulo = "";
                     } elseif ($comreq == "yes") {
                       echo '<td class="text-success">Instalado - SI</td>';
                     }
-
                     ?>
 
                   </tr>
@@ -289,7 +288,6 @@ $estamodulo = "";
                     <td></td>
 
                     <?php
-
                     //REQUISITO GNU UNZIP
                     $comreq = shell_exec('command -v unzip >/dev/null && echo "yes" || echo "no"');
                     $comreq = trim($comreq);
@@ -299,7 +297,6 @@ $estamodulo = "";
                     } elseif ($comreq == "yes") {
                       echo '<td class="text-success">Instalado - SI</td>';
                     }
-
                     ?>
 
                   </tr>
@@ -309,7 +306,6 @@ $estamodulo = "";
                     <td></td>
 
                     <?php
-
                     //REQUISITO GIT
                     $comreq = shell_exec('command -v git >/dev/null && echo "yes" || echo "no"');
                     $comreq = trim($comreq);
@@ -319,7 +315,6 @@ $estamodulo = "";
                     } elseif ($comreq == "yes") {
                       echo '<td class="text-success">Instalado - SI</td>';
                     }
-
                     ?>
 
                   </tr>
@@ -329,7 +324,6 @@ $estamodulo = "";
                     <td></td>
 
                     <?php
-
                     //REQUISITO PIGZ
                     $comreq = shell_exec('command -v pigz >/dev/null && echo "yes" || echo "no"');
                     $comreq = trim($comreq);
@@ -338,7 +332,6 @@ $estamodulo = "";
                     } elseif ($comreq == "yes") {
                       echo '<td class="text-success">Instalado - SI</td>';
                     }
-
                     ?>
 
                   </tr>
@@ -348,7 +341,6 @@ $estamodulo = "";
                     <td></td>
 
                     <?php
-
                     //PERMISOS CARPETA INSTALL
                     $permisos = getcwd() . PHP_EOL;
                     $permisos = trim($permisos);
