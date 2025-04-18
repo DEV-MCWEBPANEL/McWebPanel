@@ -69,13 +69,17 @@ $(function () {
                 } else if (data == "noscreenconf") {
                     document.getElementById("textoretorno").innerHTML = "<div class='alert alert-danger' role='alert'>Error: El archivo /config/screen.conf no existe.</div>";
                 } else if (data == "nolibforge") {
-                    document.getElementById("textoretorno").innerHTML = "<div class='alert alert-danger' role='alert'>Error: Faltan las librerias necesarias para iniciar el servidor de Forge.</div>";
+                    document.getElementById("textoretorno").innerHTML = "<div class='alert alert-danger' role='alert'>Error: Faltan las librerias necesarias para iniciar el servidor de Forge/NeoForge.</div>";
                 } else if (data == "noforgenew") {
-                    document.getElementById("textoretorno").innerHTML = "<div class='alert alert-danger' role='alert'>Error: No se encontro la carpeta /libraries/net/minecraftforge/forge/ del nuevo forge.</div>";
-                } else if (data == "forgenewtoomany") {
+                    document.getElementById("textoretorno").innerHTML = "<div class='alert alert-danger' role='alert'>Error: No se encontro la carpeta /libraries/net/minecraftforge/forge/</div>";
+                } else if (data == "noforgenew") {
+                    document.getElementById("textoretorno").innerHTML = "<div class='alert alert-danger' role='alert'>Error: No se encontro la carpeta /libraries/net/neoforged/neoforge/</div>";
+                }else if (data == "forgenewtoomany") {
                     document.getElementById("textoretorno").innerHTML = "<div class='alert alert-danger' role='alert'>Error: Se ha encontrado más de una versión en /libraries/net/minecraftforge/forge/ revisa la carpeta y deja solamente la versión a utilizar.</div>";
+                }else if (data == "neoforgetoomany") {
+                    document.getElementById("textoretorno").innerHTML = "<div class='alert alert-danger' role='alert'>Error: Se ha encontrado más de una versión en /libraries/net/neoforged/neoforge/ revisa la carpeta y deja solamente la versión a utilizar.</div>";
                 } else if (data == "noforgenewargfile") {
-                    document.getElementById("textoretorno").innerHTML = "<div class='alert alert-danger' role='alert'>Error: No se ha encontrado el archivo unix_args.txt con las librerías para poder iniciar forge.</div>";
+                    document.getElementById("textoretorno").innerHTML = "<div class='alert alert-danger' role='alert'>Error: No se ha encontrado el archivo unix_args.txt con las librerías para poder iniciar forge/neoforge.</div>";
                 } else if (data == "noforgenewfound") {
                     document.getElementById("textoretorno").innerHTML = "<div class='alert alert-danger' role='alert'>Error: No se ha podido obtener correctamente la versión de forge.</div>";
                 }

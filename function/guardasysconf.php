@@ -298,7 +298,7 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
           if ($_SESSION['CONFIGUSER']['rango'] == 1 || array_key_exists('psystemconftipo', $_SESSION['CONFIGUSER']) && $_SESSION['CONFIGUSER']['psystemconftipo'] == 1) {
             if (isset($_POST["eltipserv"])) {
               $eltiposerver = test_input($_POST["eltipserv"]);
-              $opcionesserver = array('vanilla', 'spigot', 'paper', 'forge old', 'forge new', 'magma', 'otros');
+              $opcionesserver = array('vanilla', 'spigot', 'paper', 'forge old', 'forge new', 'NeoForge', 'magma', 'otros');
 
               if ($elerror == 0) {
                 //COMPROBAR SI EL TIPO SERVER ES CORRECTO

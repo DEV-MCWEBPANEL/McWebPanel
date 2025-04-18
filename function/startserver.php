@@ -174,7 +174,7 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
 
             //VERIFICAR SI EXISTE LA CARPETA LIBRARIES
             if ($elerror == 0) {
-                if ($rectiposerv == "forge old" || $rectiposerv == "forge new") {
+                if ($rectiposerv == "forge old" || $rectiposerv == "forge new" || $rectiposerv == "NeoForge") {
                     $libforge = $rutaminecraffijo . "/libraries";
                     clearstatcache();
                     if (!file_exists($libforge)) {
@@ -196,19 +196,35 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
                 }
             }
 
-            //VERIFICAR SI HAY MAS DE UN FORGE NEW PUESTO
-            if ($elerror == 0 && $rectiposerv == "forge new") {
-                $carpbuscar = scandir($forgescan);
-                $contforge = count($carpbuscar);
+            //VERIFICAR SI EXISTE CARPETA NEOFORGE
+            if ($elerror == 0 && $rectiposerv == "NeoForge") {
+                $forgescan = $rutaminecraffijo;
+                $forgescan .= "/libraries/net/neoforged/neoforge/";
 
-                if ($contforge >= 4) {
-                    $retorno = "forgenewtoomany";
+                clearstatcache();
+                if (!file_exists($forgescan)) {
+                    $retorno = "noneoforge";
                     $elerror = 1;
                 }
             }
 
-            //VERIFICAR SI FORGE NEW EXISTE ARCHIVO CONFIG
-            if ($elerror == 0 && $rectiposerv == "forge new") {
+            //VERIFICAR SI HAY MAS DE UN FORGE NEW/NEOFORGE PUESTO
+            if ($elerror == 0 && $rectiposerv == "forge new" || $rectiposerv == "NeoForge") {
+                $carpbuscar = scandir($forgescan);
+                $contforge = count($carpbuscar);
+
+                if ($contforge >= 4) {
+                    if ($rectiposerv == "forge new") {
+                        $retorno = "forgenewtoomany";
+                    } elseif ($rectiposerv == "NeoForge") {
+                        $retorno = "neoforgetoomany";
+                    }
+                    $elerror = 1;
+                }
+            }
+
+            //VERIFICAR SI FORGE NEW O NEOFORGE EXISTE ARCHIVO CONFIG
+            if ($elerror == 0 && $rectiposerv == "forge new" || $rectiposerv == "NeoForge") {
 
                 if (isset($carpbuscar[2])) {
                     $vercapforge = $carpbuscar[2];
@@ -264,7 +280,7 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
             //VERIFICAR SI HAY NOMBRE.JAR
             if ($elerror == 0) {
                 if ($recarchivojar == "") {
-                    if ($rectiposerv != "forge new") {
+                    if (!in_array($rectiposerv, ["forge new", "NeoForge"])) {
                         $elerror = 1;
                         $retorno = "noconfjar";
                     }
@@ -284,7 +300,7 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
 
             //COMPROBAR SI ES REALMENTE ARCHIVO JAVA
             if ($elerror == 0) {
-                if ($rectiposerv != "forge new") {
+                if (!in_array($rectiposerv, ["forge new", "NeoForge"])) {
                     $tipovalido = 0;
                     $eltipoapplication = mime_content_type($rutajar);
 
@@ -306,7 +322,7 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
 
             //COMPROBAR PUERTO EN USO
             if ($elerror == 0) {
-                $comandopuerto = "ss -tuln | grep :". $recpuerto;
+                $comandopuerto = "ss -tuln | grep :" . $recpuerto;
                 $obtener = shell_exec($comandopuerto);
                 if ($obtener != "") {
                     $elerror = 1;
@@ -549,6 +565,8 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
 
                 if ($rectiposerv == "forge new") {
                     $comandoserver .= '-Dusing.konata.flags=' . $reccarpmine . " " . '@libraries/net/minecraftforge/forge/' . $vercapforge . '/unix_args.txt "$@"' . " ";
+                } elseif ($rectiposerv == "NeoForge") {
+                    $comandoserver .= '-Dusing.konata.flags=' . $reccarpmine . " " . '@libraries/net/neoforged/neoforge/' . $vercapforge . '/unix_args.txt "$@"' . " ";
                 } else {
                     $comandoserver .= "-jar '" . $rutacarpetamine . "' ";
                 }
@@ -596,7 +614,7 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
                 $startsh .= "/" . $reccarpmine . ".sh";
 
                 $file = fopen($startsh, "w");
-                if ($rectiposerv == "forge new") {
+                if (in_array($rectiposerv, ["forge new", "NeoForge"])) {
                     fwrite($file, "#!/usr/bin/env sh" . PHP_EOL);
                 } else {
                     fwrite($file, "#!/bin/sh" . PHP_EOL);
