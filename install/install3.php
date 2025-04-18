@@ -202,18 +202,6 @@ require_once "../template/errorreport.php";
             exec($permcomando);
         }
 
-        //GENERAR TAREA CRONTAB
-        $rutacron = $rutaraiz;
-        $rutacronstat = $rutaraiz;
-        $rutacron .= "/cron/cron.php";
-        $rutacronstat .= "/cron/cronstat.log";
-        $comandocron = 'crontab -l | grep -v -F "' . $rutacron . '"> mycron';
-        exec($comandocron);
-        $comandocron = 'echo "* * * * * php ' . $rutacron . ' >> ' . $rutacronstat . ' 2>&1" >> mycron';
-        exec($comandocron);
-        exec('crontab mycron');
-        exec('rm mycron');
-
         //GUARDAR FICHERO .htaccess EN RAIZ
         $rutaescribir = $rutaraiz;
         $rutaescribir .= "/.htaccess";
@@ -413,6 +401,18 @@ require_once "../template/errorreport.php";
         fwrite($file, "bug-report-link=" . PHP_EOL);
         fwrite($file, "region-file-compression=deflate" . PHP_EOL);
         fclose($file);
+
+        //GENERAR TAREA CRONTAB
+        $rutacron = $rutaraiz;
+        $rutacronstat = $rutaraiz;
+        $rutacron .= "/cron/cron.php";
+        $rutacronstat .= "/cron/cronstat.log";
+        $comandocron = 'crontab -l | grep -v -F "' . $rutacron . '"> mycron';
+        exec($comandocron);
+        $comandocron = 'echo "* * * * * php ' . $rutacron . ' >> ' . $rutacronstat . ' 2>&1" >> mycron';
+        exec($comandocron);
+        exec('crontab mycron');
+        exec('rm mycron');
 
         //ELIMINAR INSTALL
         $elcomando = "rm -r " . $dirinstall;
