@@ -28,13 +28,33 @@ header('Cache-Control: private, no-cache, must-revalidate');
 header('Pragma: no-cache');
 header('Expires: 0');
 
+$retorno = "";
+$elerror = 0;
+$logfechayhora = "";
+$intentos = 0;
+
 $RUTAPRINCIPAL = $_SERVER['PHP_SELF'];
 $RUTAPRINCIPAL = substr($RUTAPRINCIPAL, 0, -14);
 $RUTACONFIG = $RUTAPRINCIPAL . "/config/confopciones.php";
 
 //CARGAR CONFIGURACION PANEL
-require_once $RUTACONFIG;
+for ($fi = 0; $fi < 3; $fi++) {
+    clearstatcache();
+    if (file_exists($RUTACONFIG)) {
+        require_once $RUTACONFIG;
+        break;
+    } else {
+        sleep(2);
+        $intentos =  $intentos + 1;
+    }
+}
 
+if ($intentos == 3) {
+    $retorno = "Error no se ha podido cargar el archivo confopciones.php";
+    $elerror = 1;
+}
+
+//CARGAR ZONA HORARIA
 if (!defined('CONFIGZONAHORARIA')) {
     $reczonahoraria = "UTC";
 } else {
@@ -43,10 +63,10 @@ if (!defined('CONFIGZONAHORARIA')) {
 
 date_default_timezone_set($reczonahoraria);
 
-$retorno = "";
+//OBTENER FECHA Y HORA ACTUAL
 $logfechayhora = "[" . date("d/m/Y") . "] [" . date("H:i:s") . "]";
 
-$elerror = 0;
+//OBTENER DIA Y AHORA ACTUAL POR SEPARADO
 $time = date("G:i");
 $mesactual = date('n');
 $semanactual = date('N');
@@ -371,7 +391,7 @@ if ($elerror == 0) {
 
                                                                 //COMPROBAR PUERTO EN USO
                                                                 if ($elerror == 0) {
-                                                                    $comandopuerto = "ss -tuln | grep :". $recpuerto;
+                                                                    $comandopuerto = "ss -tuln | grep :" . $recpuerto;
                                                                     $obtener = shell_exec($comandopuerto);
                                                                     if ($obtener != "") {
                                                                         $retorno = "Error Tarea Iniciar Servidor, puerto ya en uso.";
