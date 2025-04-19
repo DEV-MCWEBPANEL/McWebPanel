@@ -81,7 +81,7 @@ $(function () {
                 } else if (data == "noforgenewargfile") {
                     document.getElementById("textoretorno").innerHTML = "<div class='alert alert-danger' role='alert'>Error: No se ha encontrado el archivo unix_args.txt con las librerías para poder iniciar forge/neoforge.</div>";
                 } else if (data == "noforgenewfound") {
-                    document.getElementById("textoretorno").innerHTML = "<div class='alert alert-danger' role='alert'>Error: No se ha podido obtener correctamente la versión de forge.</div>";
+                    document.getElementById("textoretorno").innerHTML = "<div class='alert alert-danger' role='alert'>Error: No se ha podido obtener correctamente la versión de forge/neoforge.</div>";
                 }
             }
         });
