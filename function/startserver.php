@@ -109,7 +109,6 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
             }
 
             $javaruta = "";
-
             $rutacarpetamine = "";
 
             //VARIABLE RUTA SERVIDOR MINECRAFT
@@ -601,9 +600,7 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
 
                 //RESTART
                 $cominiciostart = "screen -c '" . $rutascreenconf . "' -dmS " . $reccarpmine . " -L -Logfile 'logs/screen.log' " . $javaruta . " -Xms" . $recxmsram . "M -Xmx" . $recram . "M " . $inigc . " -Dfile.encoding=UTF8 " . $recargmanualinicio . " -jar '" . $rutacarpetamine . "' nogui " . $recargmanualfinal;
-                if ($rectiposerv == "spigot") {
-                    guardareinicio($larutash, $cominiciostart, $larutascrrenlog);
-                } elseif ($rectiposerv == "paper") {
+                if ($rectiposerv == "spigot" || $rectiposerv == "paper") {
                     guardareinicio($larutash, $cominiciostart, $larutascrrenlog);
                 }
 
