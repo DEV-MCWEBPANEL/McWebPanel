@@ -177,7 +177,7 @@ if ($elerror == 0) {
             $javaruta = "";
             $rutacarpetamine = "";
 
-            //VERIFICAR CARPETA MINECRAFT
+            //VARIABLE RUTA SERVIDOR MINECRAFT
             $rutacarpetamine = $RUTAPRINCIPAL;
             $rutacarpetamine = trim($rutacarpetamine);
             $rutacarpetamine .= "/" . $reccarpmine;
