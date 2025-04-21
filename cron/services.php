@@ -18,14 +18,14 @@ Copyright (C) 2020-2025 DEV-MCWEBPANEL
     along with McWebPanel.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-$RUTAPRINCIPAL = $_SERVER['PHP_SELF'];
-$RUTAPRINCIPAL = substr($RUTAPRINCIPAL, 0, -18);
-$RUTACONFIG = $RUTAPRINCIPAL . "/config/confopciones.php";
-
 $retorno = "";
 $elerror = 0;
 $recbootconf = "";
 $getsistemd = "";
+
+$RUTAPRINCIPAL = $_SERVER['PHP_SELF'];
+$RUTAPRINCIPAL = substr($RUTAPRINCIPAL, 0, -18);
+$RUTACONFIG = $RUTAPRINCIPAL . "/config/confopciones.php";
 
 //OBTENER RUTA CONFIG
 $rutaarchivo = $RUTAPRINCIPAL;
@@ -144,6 +144,8 @@ if ($elerror == 0) {
             $recpuerto = CONFIGPUERTO;
 
             $recgarbagecolector = CONFIGOPTIONGARBAGE;
+            $recforseupgrade = CONFIGOPTIONFORCEUPGRADE;
+            $recerasecache = CONFIGOPTIONERASECACHE;
 
             $recjavaselect = CONFIGJAVASELECT;
             $recjavaname = CONFIGJAVANAME;
@@ -160,8 +162,19 @@ if ($elerror == 0) {
               $recxmsram = CONFIGXMSRAM;
             }
 
-            $javaruta = "";
+            if (!defined('CONFIGOPTIONRECREATEREGIONFILES')) {
+              $recrecreateregionfiles = 0;
+            } else {
+              $recrecreateregionfiles = CONFIGOPTIONRECREATEREGIONFILES;
+            }
 
+            if (!defined('CONFIGOPTIONRENDERDEBUGLABELS')) {
+              $recrenderdebuglabels = 0;
+            } else {
+              $recrenderdebuglabels = CONFIGOPTIONRENDERDEBUGLABELS;
+            }
+
+            $javaruta = "";
             $rutacarpetamine = "";
 
             //VERIFICAR CARPETA MINECRAFT
@@ -211,14 +224,71 @@ if ($elerror == 0) {
               }
             }
 
+            //VERIFICAR SI EXISTE LA CARPETA LIBRARIES
             if ($elerror == 0) {
-              if ($rectiposerv == "forge") {
-                $libforge = $rutacarpetamine . "/libraries";
+              if ($rectiposerv == "forge old" || $rectiposerv == "forge new" || $rectiposerv == "NeoForge") {
+                $libforge = $rutaminecraffijo . "/libraries";
                 clearstatcache();
                 if (!file_exists($libforge)) {
-                  $retorno = "Error Tarea Iniciar Servidor, faltan las librerias necesarias para iniciar el servidor de Forge.";
+                  $retorno = "Error Tarea Iniciar Servidor, faltan las librerias necesarias para iniciar el servidor de Forge/NeoForge.";
                   $elerror = 1;
                 }
+              }
+            }
+
+            //VERIFICAR SI EXISTE CARPETA FORGE NEW
+            if ($elerror == 0 && $rectiposerv == "forge new") {
+              $forgescan = $rutaminecraffijo;
+              $forgescan .= "/libraries/net/minecraftforge/forge/";
+
+              clearstatcache();
+              if (!file_exists($forgescan)) {
+                $retorno = "Error Tarea Iniciar Servidor, No se encontro la carpeta /libraries/net/minecraftforge/forge/";
+                $elerror = 1;
+              }
+            }
+
+            //VERIFICAR SI EXISTE CARPETA NEOFORGE
+            if ($elerror == 0 && $rectiposerv == "NeoForge") {
+              $forgescan = $rutaminecraffijo;
+              $forgescan .= "/libraries/net/neoforged/neoforge/";
+
+              clearstatcache();
+              if (!file_exists($forgescan)) {
+                $retorno = "Error Tarea Iniciar Servidor, No se encontro la carpeta /libraries/net/neoforged/neoforge/";
+                $elerror = 1;
+              }
+            }
+
+            //VERIFICAR SI HAY MAS DE UN FORGE NEW/NEOFORGE PUESTO
+            if ($elerror == 0 && $rectiposerv == "forge new" || $rectiposerv == "NeoForge") {
+              $carpbuscar = scandir($forgescan);
+              $contforge = count($carpbuscar);
+
+              if ($contforge >= 4) {
+                if ($rectiposerv == "forge new") {
+                  $retorno = "Error Tarea Iniciar Servidor, Se ha encontrado más de una versión en /libraries/net/minecraftforge/forge/ revisa la carpeta y deja solamente la versión a utilizar.";
+                } elseif ($rectiposerv == "NeoForge") {
+                  $retorno = "Error Tarea Iniciar Servidor, Se ha encontrado más de una versión en /libraries/net/neoforged/neoforge/ revisa la carpeta y deja solamente la versión a utilizar.";
+                }
+                $elerror = 1;
+              }
+            }
+
+            //VERIFICAR SI FORGE NEW O NEOFORGE EXISTE ARCHIVO CONFIG
+            if ($elerror == 0 && $rectiposerv == "forge new" || $rectiposerv == "NeoForge") {
+
+              if (isset($carpbuscar[2])) {
+                $vercapforge = $carpbuscar[2];
+                $forgeargsfile = $forgescan . $carpbuscar[2] . "/unix_args.txt";
+                clearstatcache();
+                if (!file_exists($forgeargsfile)) {
+                  $retorno = "Error Tarea Iniciar Servidor, No se ha encontrado el archivo unix_args.txt con las librerías para poder iniciar forge/neoforge.";
+                  $elerror = 1;
+                }
+              } else {
+                $retorno = "Error Tarea Iniciar Servidor, No se ha podido obtener correctamente la versión de forge/neoforge.";
+                $elerror = 1;
               }
             }
 
@@ -239,7 +309,7 @@ if ($elerror == 0) {
                 clearstatcache();
                 if (file_exists($rutaescribir)) {
                   clearstatcache();
-                  if (is_writable($rutaconfigproperties)) {
+                  if (is_writable($rutaescribir)) {
                     $file = fopen($rutaescribir, "w");
                     fwrite($file, "eula=true" . PHP_EOL);
                     fclose($file);
@@ -252,18 +322,20 @@ if ($elerror == 0) {
                   fwrite($file, "eula=true" . PHP_EOL);
                   fclose($file);
                 }
+
+                //PERMISO EULA.TXT
+                $elcommando = "cd " . $rutaminecraffijo . " && chmod 664 eula.txt";
+                exec($elcommando);
               }
             }
-
-            //PERMISO EULA.TXT
-            $elcommando = "cd " . $rutaminecraffijo . " && chmod 664 eula.txt";
-            exec($elcommando);
 
             //VERIFICAR SI HAY NOMBRE.JAR
             if ($elerror == 0) {
               if ($recarchivojar == "") {
-                $elerror = 1;
-                $retorno = "Error Tarea Iniciar Servidor, no hay seleccionado un servidor .jar";
+                if (!in_array($rectiposerv, ["forge new", "NeoForge"])) {
+                  $elerror = 1;
+                  $retorno = "Error Tarea Iniciar Servidor, no hay seleccionado un servidor .jar";
+                }
               }
             }
 
@@ -280,27 +352,29 @@ if ($elerror == 0) {
 
             //COMPROBAR SI ES REALMENTE ARCHIVO JAVA
             if ($elerror == 0) {
-              $tipovalido = 0;
-              $eltipoapplication = mime_content_type($rutajar);
+              if (!in_array($rectiposerv, ["forge new", "NeoForge"])) {
+                $tipovalido = 0;
+                $eltipoapplication = mime_content_type($rutajar);
 
-              switch ($eltipoapplication) {
-                case "application/java-archive":
-                  $tipovalido = 1;
-                  break;
-                case "application/zip":
-                  $tipovalido = 1;
-                  break;
-              }
+                switch ($eltipoapplication) {
+                  case "application/java-archive":
+                    $tipovalido = 1;
+                    break;
+                  case "application/zip":
+                    $tipovalido = 1;
+                    break;
+                }
 
-              if ($tipovalido == 0) {
-                $retorno = "Error Tarea Iniciar Servidor, el archivo no es válido.";
-                $elerror = 1;
+                if ($tipovalido == 0) {
+                  $retorno = "Error Tarea Iniciar Servidor, el archivo no es válido.";
+                  $elerror = 1;
+                }
               }
             }
 
             //COMPROBAR PUERTO EN USO
             if ($elerror == 0) {
-              $comandopuerto = "ss -tuln | grep :". $recpuerto;
+              $comandopuerto = "ss -tuln | grep :" . $recpuerto;
               $obtener = shell_exec($comandopuerto);
               if ($obtener != "") {
                 $retorno = "Error Tarea Iniciar Servidor, puerto ya en uso.";
@@ -313,37 +387,33 @@ if ($elerror == 0) {
               //COMPROBAR MEMORIA RAM
               if ($elerror == 0) {
                 $totalramsys = shell_exec("free -m | grep Mem | gawk '{ print $2 }'");
-                if ($totalramsys != "") {
+                $getramavaliable = shell_exec("free -m | grep Mem | gawk '{ print $7 }'");
+
+                if ($totalramsys != "" && $getramavaliable != "") {
                   $totalramsys = trim($totalramsys);
                   $totalramsys = intval($totalramsys);
 
-                  $getramavaliable = shell_exec("free -m | grep Mem | gawk '{ print $7 }'");
-                  if ($totalramsys != "") {
-                    $getramavaliable = trim($getramavaliable);
-                    $getramavaliable = intval($getramavaliable);
+                  $getramavaliable = trim($getramavaliable);
+                  $getramavaliable = intval($getramavaliable);
 
-                    //COMPRUEBA SI AL MENOS SE TIENE 1GB
-                    if ($totalramsys == 0) {
+                  //COMPRUEBA SI AL MENOS SE TIENE 1GB
+                  if ($totalramsys == 0) {
+                    $elerror = 1;
+                    $retorno = "Error Tarea Iniciar Servidor, Memoria Ram menor a 1 GB.";
+                  } elseif ($totalramsys >= 1) {
+
+                    //COMPRUEBA QUE LA RAM SELECCIONADA NO SEA MAYOR A LA DEL SISTEMA
+                    if ($recram > $totalramsys) {
                       $elerror = 1;
-                      $retorno = "Error Tarea Iniciar Servidor, Memoria Ram menor a 1 GB.";
-                    } elseif ($totalramsys >= 1) {
+                      $retorno = "Error Tarea Iniciar Servidor, la Ram seleccionada es superior a la del sistema.";
+                    }
 
-                      //COMPRUEBA QUE LA RAM SELECCIONADA NO SEA MAYOR A LA DEL SISTEMA
-                      if ($recram > $totalramsys) {
+                    //COMPROBAR SI HAY MEMORIA SUFICIENTE PARA INICIAR CON RAM DISPONIBLE
+                    if ($elerror == 0) {
+                      if ($recram > $getramavaliable) {
                         $elerror = 1;
-                        $retorno = "Error Tarea Iniciar Servidor, la Ram seleccionada es superior a la del sistema.";
+                        $retorno = "Error Tarea Iniciar Servidor, Memoria del sistema insuficiente para iniciar el servidor.";
                       }
-
-                      //COMPROBAR SI HAY MEMORIA SUFICIENTE PARA INICIAR CON RAM DISPONIBLE
-                      if ($elerror == 0) {
-                        if ($recram > $getramavaliable) {
-                          $elerror = 1;
-                          $retorno = "Error Tarea Iniciar Servidor, Memoria del sistema insuficiente para iniciar el servidor.";
-                        }
-                      }
-                    } else {
-                      $elerror = 1;
-                      $retorno = "Error Tarea Iniciar Servidor, No se pudo obtener la memoria disponible del servidor.";
                     }
                   }
                 } else {
@@ -372,7 +442,7 @@ if ($elerror == 0) {
               }
             }
 
-            //COMPROBAR SERVER.PROPERTIES
+            //AÑADIR PARAMETROS A SERVER.PROPERTIES
             if ($elerror == 0) {
               clearstatcache();
               if (file_exists($rutafinal)) {
@@ -505,7 +575,6 @@ if ($elerror == 0) {
 
             //INICIAR SERVIDOR
             if ($elerror == 0) {
-
               $comandoserver = "";
               $cominiciostart = "";
               $larutash = "";
@@ -523,38 +592,67 @@ if ($elerror == 0) {
                 unlink($larutascrrenlog);
               }
 
+              //INICIO SCRIPT SH
               $comandoserver .= "cd " . $RUTAPRINCIPAL . " && cd " . $reccarpmine . " && umask 002 && screen -c '" . $rutascreenconf . "' -dmS " . $reccarpmine . " -L -Logfile 'logs/screen.log' " . $javaruta . " -Xms" . $recxmsram . "M -Xmx" . $recram . "M ";
 
               //RECOLECTOR
-              if ($recgarbagecolector == "1") {
+              if ($recgarbagecolector == "0") {
+                $inigc = "";
+              } elseif ($recgarbagecolector == "1") {
+                $comandoserver .= "-XX:+UseConcMarkSweepGC" . " ";
                 $inigc = "-XX:+UseConcMarkSweepGC";
               } elseif ($recgarbagecolector == "2") {
+                $comandoserver .= "-XX:+UseG1GC" . " ";
                 $inigc = "-XX:+UseG1GC";
               }
 
-              if ($inigc != "") {
-                $comandoserver .= $inigc . " ";
-              }
-
+              //AÑADE FILE ENCODING
               $comandoserver .= "-Dfile.encoding=UTF8 ";
 
+              //AÑADE PARAMETROS INICIO
               if ($recargmanualinicio != "") {
                 $comandoserver .= $recargmanualinicio . " ";
               }
 
-              $comandoserver .= "-jar '" . $rutacarpetamine . "' ";
+              if ($rectiposerv == "forge new") {
+                $comandoserver .= '-Dusing.konata.flags=' . $reccarpmine . " " . '@libraries/net/minecraftforge/forge/' . $vercapforge . '/unix_args.txt "$@"' . " ";
+              } elseif ($rectiposerv == "NeoForge") {
+                $comandoserver .= '-Dusing.konata.flags=' . $reccarpmine . " " . '@libraries/net/neoforged/neoforge/' . $vercapforge . '/unix_args.txt "$@"' . " ";
+              } else {
+                $comandoserver .= "-jar '" . $rutacarpetamine . "' ";
+              }
 
+              //FORCEUPGRADE MAPA
+              if ($recforseupgrade == 1) {
+                $comandoserver .= "--forceUpgrade" . " ";
+              }
+
+              //ERASE CACHE MAPA
+              if ($recerasecache == 1) {
+                $comandoserver .= "--eraseCache" . " ";
+              }
+
+              //CREATE REGION FILES
+              if ($recrecreateregionfiles == 1) {
+                $comandoserver .= "--recreateRegionFiles" . " ";
+              }
+
+              //RENDER DEBUG LABELS
+              if ($recrenderdebuglabels == 1) {
+                $comandoserver .= "--renderDebugLabels" . " ";
+              }
+
+              //AÑADE NOGUI
               $comandoserver .= "nogui";
 
+              //AÑADE PARAMETROS FINAL
               if ($recargmanualfinal != "") {
                 $comandoserver .= " " . $recargmanualfinal;
               }
 
               //RESTART
               $cominiciostart = "screen -c '" . $rutascreenconf . "' -dmS " . $reccarpmine . " -L -Logfile 'logs/screen.log' " . $javaruta . " -Xms" . $recxmsram . "M -Xmx" . $recram . "M " . $inigc . " -Dfile.encoding=UTF8 " . $recargmanualinicio . " -jar '" . $rutacarpetamine . "' nogui " . $recargmanualfinal;
-              if ($rectiposerv == "spigot") {
-                guardareinicio($larutash, $cominiciostart, $larutascrrenlog);
-              } elseif ($rectiposerv == "paper") {
+              if ($rectiposerv == "spigot" || $rectiposerv == "paper") {
                 guardareinicio($larutash, $cominiciostart, $larutascrrenlog);
               }
 
@@ -564,14 +662,17 @@ if ($elerror == 0) {
               $startsh .= "/" . $reccarpmine . ".sh";
 
               $file = fopen($startsh, "w");
-              fwrite($file, "#!/bin/sh" . PHP_EOL);
+              if (in_array($rectiposerv, ["forge new", "NeoForge"])) {
+                fwrite($file, "#!/usr/bin/env sh" . PHP_EOL);
+              } else {
+                fwrite($file, "#!/bin/sh" . PHP_EOL);
+              }
               fwrite($file, $comandoserver . PHP_EOL);
               fclose($file);
 
               $comandoperm = "chmod 744 " . $startsh;
               exec($comandoperm);
               exec("sh " . $startsh . " &");
-
               $retorno = "Tarea Iniciar Servidor, ejecutado correctamente.";
             }
           } else {
