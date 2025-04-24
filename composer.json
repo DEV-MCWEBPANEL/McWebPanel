@@ -1,5 +1,13 @@
 {
+    "name": "McWebPanel",
+	"description": "McWebPanel es un panel de administración de Software Libre exclusivo para Servidores Minecraft, creado para PHP8 para ser utilizado en servidores Apache",
+	"license": "GNU General Public License v3.0",
+	"keywords":
+	[
+		"minecraft"
+	],
     "require": {
-        "xpaw/php-minecraft-query": "^4.0.1"
+        "php": ">=8.0",
+        "xpaw/php-minecraft-query": "^5.0.0"
     }
 }
