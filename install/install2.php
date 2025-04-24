@@ -194,6 +194,7 @@ require_once "../template/errorreport.php";
                     <option value="vanilla">Vanilla</option>
                     <option value="spigot">Spigot</option>
                     <option value="paper">Paper</option>
+                    <option value="purpur">Purpur</option>
                     <option value="forge old">Forge Old</option>
                     <option value="forge new">Forge New</option>
                     <option value="magma">Magma</option>
