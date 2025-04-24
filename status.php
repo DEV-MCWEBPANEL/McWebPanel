@@ -128,7 +128,7 @@ if (isset($_SESSION['CONFIGUSER']['psystemconftemaweb'])) {
 
                                                             if ($_SESSION['CONFIGUSER']['rango'] == 1 || $_SESSION['CONFIGUSER']['rango'] == 2 || array_key_exists('pstatusrestartserver', $_SESSION['CONFIGUSER']) && $_SESSION['CONFIGUSER']['pstatusrestartserver'] == 1) {
 
-                                                                if ($rectiposerv == "spigot" || $rectiposerv == "paper") {
+                                                                if ($rectiposerv == "spigot" || $rectiposerv == "paper" || $rectiposerv == "purpur") {
                                                                     echo '<button class="btn btn-warning btn-lg mx-1 mt-1" id="breiniciar" name="breiniciar" value="breiniciar" type="button">Reiniciar Servidor</button>';
                                                                 }
                                                             }
