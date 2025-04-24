@@ -189,10 +189,36 @@ if (isset($_SESSION['CONFIGUSER']['psystemconftemaweb'])) {
                                                                     <li>Creado y soportado por la comunidad.</li>
                                                                 </ul>
                                                             </div>
+                                                            <div class="col-md-12">
+                                                                <hr>
+                                                            </div>
                                                         <?php
                                                         }
                                                         ?>
                                                         <!-- PAPER Fin -->
+
+                                                        <!-- PURPUR Inicio -->
+                                                        <?php
+                                                        if ($_SESSION['CONFIGUSER']['rango'] == 1 || $_SESSION['CONFIGUSER']['rango'] == 2 || array_key_exists('ppagedownpurpur', $_SESSION['CONFIGUSER']) && $_SESSION['CONFIGUSER']['ppagedownpurpur'] == 1) {
+                                                            $contador++;
+                                                        ?>
+                                                            <div class="col-md-3">
+                                                                <a class="" href="purpur.php">
+                                                                    <span class="cartel border border-dark shadow-lg download-hover"><img src="img/menu/purpur.png" alt="purpuricon" width="32" height="32"> Servidor PurpurMC</span>
+                                                                </a>
+                                                            </div>
+                                                            <div class="col-md-9">
+                                                                <ul class="">
+                                                                    <li>Servidor PurpurMc es una versión modificada del servidor de Paper.</li>
+                                                                    <li>Soporta plugins diseñados para las APIs de Bukkit, Spigot y Paper.</li>
+                                                                    <li>Servidor de alto rendimiento</li>
+                                                                    <li>Capacidad de personalización del servidor a medida.</li>
+                                                                </ul>
+                                                            </div>
+                                                        <?php
+                                                        }
+                                                        ?>
+                                                        <!-- PURPUR Fin -->
                                                         <?php
                                                         if ($contador == 0) {
                                                         ?>
