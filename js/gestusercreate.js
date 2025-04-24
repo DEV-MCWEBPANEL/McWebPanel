@@ -142,6 +142,7 @@ $(function () {
             ppagedownvanilla.checked = true;
             pcompilarspigot.checked = true;
             ppagedownpaper.checked = true;
+            ppagedownpurpur.checked = true;
         });
     }
 
@@ -151,6 +152,7 @@ $(function () {
             ppagedownvanilla.checked = false;
             pcompilarspigot.checked = false;
             ppagedownpaper.checked = false;
+            ppagedownpurpur.checked = false;
         });
     }
 

@@ -358,6 +358,13 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
                                 $arrayobtenido[$i]['ppagedownpaper'] = 0;
                             }
 
+                            //DESCARGAR PURPUR
+                            if (isset($_POST['ppagedownpurpur'])) {
+                                $arrayobtenido[$i]['ppagedownpurpur'] = 1;
+                            } else {
+                                $arrayobtenido[$i]['ppagedownpurpur'] = 0;
+                            }
+
                             //SUBIR SERVIDOR
                             if (isset($_POST['psubirservidor'])) {
                                 $arrayobtenido[$i]['psubirservidor'] = 1;

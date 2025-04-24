@@ -323,6 +323,11 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
                     $arrayobtenido[$elindice]['ppagedownpaper'] = 1;
                 }
 
+                //DESCARGAR PURPUR
+                if (isset($_POST['ppagedownpurpur'])) {
+                    $arrayobtenido[$elindice]['ppagedownpurpur'] = 1;
+                }
+
                 //SUBIR SERVIDOR
                 if (isset($_POST['psubirservidor'])) {
                     $arrayobtenido[$elindice]['psubirservidor'] = 1;

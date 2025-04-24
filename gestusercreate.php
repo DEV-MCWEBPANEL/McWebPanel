@@ -344,6 +344,14 @@ if (isset($_SESSION['CONFIGUSER']['psystemconftemaweb'])) {
                                                                                 <p>Permite descargar el servidor Paper.</p>
                                                                             </div>
 
+                                                                            <div class="form-group">
+                                                                                <div>
+                                                                                    <input id="ppagedownpurpur" name="ppagedownpurpur" type="checkbox" value="1">
+                                                                                    <label class="negrita mr-2" for="ppagedownpurpur">Obtener Purpur</label>
+                                                                                </div>
+                                                                                <p>Permite descargar el servidor Purpur.</p>
+                                                                            </div>
+
                                                                         </div>
 
                                                                         <br>
