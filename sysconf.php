@@ -409,7 +409,7 @@ if (isset($_SESSION['CONFIGUSER']['psystemconftemaweb'])) {
                                                                     <label class="negrita" for="eltipserv">Tipo Servidor:</label>
                                                                     <select id="eltipserv" name="eltipserv" class="form-control" required="required">
                                                                         <?php
-                                                                        $opcionesserver = array('vanilla', 'spigot', 'paper', 'forge old', 'forge new', 'NeoForge', 'magma', 'otros');
+                                                                        $opcionesserver = array('vanilla', 'spigot', 'paper', 'purpur', 'forge old', 'forge new', 'NeoForge', 'magma', 'otros');
 
                                                                         for ($i = 0; $i < count($opcionesserver); $i++) {
 
