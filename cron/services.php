@@ -652,7 +652,7 @@ if ($elerror == 0) {
 
               //RESTART
               $cominiciostart = "screen -c '" . $rutascreenconf . "' -dmS " . $reccarpmine . " -L -Logfile 'logs/screen.log' " . $javaruta . " -Xms" . $recxmsram . "M -Xmx" . $recram . "M " . $inigc . " -Dfile.encoding=UTF8 " . $recargmanualinicio . " -jar '" . $rutacarpetamine . "' nogui " . $recargmanualfinal;
-              if ($rectiposerv == "spigot" || $rectiposerv == "paper") {
+              if ($rectiposerv == "spigot" || $rectiposerv == "paper" || $rectiposerv == "purpur") {
                 guardareinicio($larutash, $cominiciostart, $larutascrrenlog);
               }
 
