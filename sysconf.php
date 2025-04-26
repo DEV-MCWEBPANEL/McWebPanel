@@ -1026,7 +1026,7 @@ if (isset($_SESSION['CONFIGUSER']['psystemconftemaweb'])) {
                                                                         ?>
 
                                                                     </select>
-                                                                    <p class="">- Se cierra la sesión de todos los admins y usuarios activos.<br>- No permitirá iniciar sesión excepto el Superusuario. <br>- Se requiere su activación para actualizar el servidor.</p>
+                                                                    <p class="">- Se cierra la sesión de todos los admins y usuarios activos.<br>- No permitirá iniciar sesión excepto el Superusuario.</p>
                                                                 </div>
                                                             </div>
 
