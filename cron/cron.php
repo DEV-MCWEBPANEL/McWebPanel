@@ -779,26 +779,28 @@ if ($elerror == 0) {
                                                                 }
                                                             }
 
-                                                            function getfoldersize($dir)
+                                                            function obtenersizecarpeta($dir)
                                                             {
-                                                                $size = 0;
+                                                                $iterator = new RecursiveIteratorIterator(
+                                                                    new RecursiveDirectoryIterator($dir)
+                                                                );
 
-                                                                foreach (glob(rtrim($dir, '/') . '/*', GLOB_NOSORT) as $each) {
-                                                                    $size += is_file($each) ? filesize($each) : getfoldersize($each);
+                                                                $totalSize = 0;
+                                                                try {
+                                                                    foreach ($iterator as $file) {
+                                                                        $totalSize += $file->getSize();
+                                                                    }
+                                                                } catch (Throwable $t) {
+                                                                    //VACIO
                                                                 }
-
-                                                                return $size;
+                                                                return $totalSize;
                                                             }
 
                                                             $reccarpmine = CONFIGDIRECTORIO;
+                                                            $limitbackupgb = CONFIGFOLDERBACKUPSIZE;
                                                             $elerror = 0;
-
                                                             $archivo = "AUTO";
-
-                                                            $dirconfig = "";
-                                                            $dirconfig = $RUTAPRINCIPAL;
-                                                            $dirconfig = trim($dirconfig);
-                                                            $dirconfig .= "/backups";
+                                                            $rutacrearbackup = "";
 
                                                             //ASIGNAR CONSTANTES SI NO EXISTEN
                                                             if (!defined('CONFIGBACKUPMULTI')) {
@@ -819,11 +821,55 @@ if ($elerror == 0) {
                                                                 $recbackuphilos = CONFIGBACKUPHILOS;
                                                             }
 
+                                                            //OBTENER RUTA RAIZ
+                                                            $dirraiz = $RUTAPRINCIPAL;
+                                                            $dirraiz = trim($dirraiz);
+
+                                                            //OBTENER RUTA CARPETA BACKUP
+                                                            $dirbackups = "";
+                                                            $dirbackups = $RUTAPRINCIPAL;
+                                                            $dirbackups = trim($dirbackups);
+                                                            $dirbackups .= "/backups";
+
+                                                            //OBTENER RUTA CARPETA MINECRAFT
+                                                            $dirminecraft = "";
+                                                            $dirminecraft = $RUTAPRINCIPAL;
+                                                            $dirminecraft = trim($dirminecraft);
+                                                            $dirminecraft .= "/" . $reccarpmine;
+
+                                                            //OBTENER RUTA TEMP
+                                                            $dirtemp = "";
+                                                            $dirtemp = $RUTAPRINCIPAL;
+                                                            $dirtemp = trim($dirtemp);
+                                                            $dirtemp .= "/temp";
+
+                                                            //OBTENER RUTA SH TEMP
+                                                            $dirsh = "";
+                                                            $dirsh = $dirtemp;
+                                                            $dirsh .= "/backup.sh";
+
+                                                            //OBTENER IDENFIFICADOR SCREEN
+                                                            $nombrescreen = $RUTAPRINCIPAL . "/losbackups";
+                                                            $nombrescreen = str_replace("/", "", $nombrescreen);
+
+                                                            //VER SI HAY UN PROCESO YA EN RESTORE
+                                                            if ($elerror == 0) {
+                                                                $procesorestore = $RUTAPRINCIPAL . "/restaurar";
+                                                                $procesorestore = str_replace("/", "", $procesorestore);
+
+                                                                $elcomando = "screen -ls | gawk '/\." . $procesorestore . "\t/ {print strtonum($1)'}";
+                                                                $elpid = shell_exec($elcomando);
+
+                                                                if ($elpid != "") {
+                                                                    $retorno = "Error Tarea Backup, no se puede iniciar hay un restore en ejecución";
+                                                                    $elerror = 1;
+                                                                }
+                                                            }
+
                                                             //LIMITE ALMACENAMIENTO
                                                             if ($elerror == 0) {
                                                                 //OBTENER GIGAS CARPETA BACKUPS
-                                                                $getgigasbackup = getfoldersize($dirconfig);
-                                                                $getgigasbackup = trim($getgigasbackup);
+                                                                $getgigasbackup = converdatoscarpbackup(obtenersizecarpeta($dirbackups), 0, 2);
 
                                                                 if (!is_numeric($getgigasbackup)) {
                                                                     $retorno = "Error Tarea Backup, no se puede obtener los GB de la carpeta Backups.";
@@ -832,12 +878,6 @@ if ($elerror == 0) {
                                                             }
 
                                                             if ($elerror == 0) {
-                                                                //CONVERTIR DATOS
-                                                                $getgigasbackup = converdatoscarpbackup($getgigasbackup, 0, 2);
-
-                                                                //OBTENER GIGAS LIMITE BACKUPS
-                                                                $limitbackupgb = CONFIGFOLDERBACKUPSIZE;
-
                                                                 //MIRAR SI ES ILIMITADO
                                                                 if ($limitbackupgb >= 1) {
                                                                     if ($getgigasbackup > $limitbackupgb) {
@@ -847,194 +887,255 @@ if ($elerror == 0) {
                                                                 }
                                                             }
 
+                                                            //MIRAR SI CARPETA BACKUPS EXISTE
                                                             if ($elerror == 0) {
                                                                 clearstatcache();
-                                                                if (file_exists($dirconfig)) {
-                                                                    //COMPROBAR SI SE PUEDE ESCRIBIR
+                                                                if (!file_exists($dirbackups)) {
+                                                                    $retorno = "Error Tarea Backup, La carpeta backups no existe.";
+                                                                    $elerror = 1;
+                                                                }
+                                                            }
+
+                                                            //MIRAR SI CARPETA BACKUPS SE PUEDE ESCRIBIR
+                                                            if ($elerror == 0) {
+                                                                clearstatcache();
+                                                                if (!is_writable($dirbackups)) {
+                                                                    $retorno = "Error Tarea Backup, La carpeta backups no tiene permisos de escritura.";
+                                                                    $elerror = 1;
+                                                                }
+                                                            }
+
+                                                            //MIRAR SI LA CARPETA TEMP EXISTE
+                                                            if ($elerror == 0) {
+                                                                clearstatcache();
+                                                                if (!file_exists($dirtemp)) {
+                                                                    $retorno = "Error Tarea Backup, La carpeta temp no existe.";
+                                                                    $elerror = 1;
+                                                                }
+                                                            }
+
+                                                            //MIRAR SI CARPETA TEMP SE PUEDE ESCRIBIR
+                                                            if ($elerror == 0) {
+                                                                clearstatcache();
+                                                                if (!is_writable($dirtemp)) {
+                                                                    $retorno = "notempwritable";
+                                                                    $retorno = "Error Tarea Backup, La carpeta temp no tiene permisos de escritura.";
+                                                                    $elerror = 1;
+                                                                }
+                                                            }
+
+                                                            //MIRAR SI CARPETA MINECRAFT SE PUEDE LEER
+                                                            if ($elerror == 0) {
+                                                                clearstatcache();
+                                                                if (!is_readable($dirminecraft)) {
+                                                                    $retorno = "Error Tarea Backup, La carpeta del servidor minecraft no se puede leer.";
+                                                                    $elerror = 1;
+                                                                }
+                                                            }
+
+                                                            //MIRAR SI CARPETA MINECRAF SE PUEDE EJECUTAR
+                                                            if ($elerror == 0) {
+                                                                clearstatcache();
+                                                                if (!is_executable($dirminecraft)) {
+                                                                    $retorno = "Error Tarea Backup, La carpeta del servidor minecraft no tiene permisos de ejecución.";
+                                                                    $elerror = 1;
+                                                                }
+                                                            }
+
+                                                            if ($elerror == 0) {
+                                                                //BORRAR START.SH EN CASO QUE EXISTA
+                                                                $borrastart = $dirminecraft . "/start.sh";
+                                                                clearstatcache();
+                                                                if (file_exists($borrastart . "/start.sh")) {
+                                                                    unlink($borrastart);
+                                                                }
+
+                                                                $rutaexcluidos = trim($RUTAPRINCIPAL . "/config" . "/excludeback.json" . PHP_EOL);
+                                                                $tget = time();
+                                                                $t = date("Y-m-d-G-i-s");
+                                                                $rutacrearbackup = $dirtemp . "/" . $archivo . "-" . $t;
+                                                                $rutaacomprimir = "'" . $dirminecraft . "/' .";
+
+                                                                //SI ES MONONUCLEO Y NO ES LA MEJOR SE ASIGNA LA RAPIDA
+                                                                if ($recbackupmulti == 1) {
+                                                                    if ($recbackupcompress < 9) {
+                                                                        $lacompression = 1;
+                                                                    }
+                                                                }
+
+                                                                //COMPRUEBA SI PIGZ ESTA INSTALADO
+                                                                if ($recbackupmulti == 2) {
+                                                                    $comreq = shell_exec('command -v pigz >/dev/null && echo "yes" || echo "no"');
+                                                                    $comreq = trim($comreq);
+                                                                    if ($comreq == "no") {
+                                                                        $recbackupmulti = 1;
+                                                                    }
+                                                                }
+
+                                                                clearstatcache();
+                                                                if (file_exists($rutaexcluidos)) {
                                                                     clearstatcache();
-                                                                    if (is_writable($dirconfig)) {
-                                                                        $rutaarchivo = $RUTAPRINCIPAL;
-                                                                        $rutaarchivo = trim($rutaarchivo);
-                                                                        $rutaminelimpia = $rutaarchivo . "/" . $reccarpmine;
-                                                                        clearstatcache();
-                                                                        if (is_readable($rutaminelimpia)) {
-                                                                            $rutaarchivo = "'" . $rutaarchivo . "/" . $reccarpmine . "/'";
-                                                                            $dirconfig = $dirconfig . "/" . $archivo . "-";
-                                                                            $rutaexcluidos = trim($RUTAPRINCIPAL . "/config" . "/excludeback.json" . PHP_EOL);
+                                                                    if (is_readable($rutaexcluidos)) {
+                                                                        $elcomando = "tar --warning=no-file-changed ";
+                                                                        $buscaarray = file_get_contents($rutaexcluidos);
+                                                                        $buscaexcluidos = unserialize($buscaarray);
+                                                                        $contadorex = count($buscaexcluidos);
 
-                                                                            $tget = time();
-                                                                            $t = date("Y-m-d-G-i-s");
-                                                                            //SI ES MONONUCLEO Y NO ES LA MEJOR SE ASIGNA LA RAPIDA
-                                                                            if ($recbackupmulti == 1) {
-                                                                                if ($recbackupcompress < 9) {
-                                                                                    $lacompression = 1;
-                                                                                }
-                                                                            }
-
-                                                                            //COMPRUEBA SI PIGZ ESTA INSTALADO
-                                                                            if ($recbackupmulti == 2) {
-                                                                                $comreq = shell_exec('command -v pigz >/dev/null && echo "yes" || echo "no"');
-                                                                                $comreq = trim($comreq);
-                                                                                if ($comreq == "no") {
-                                                                                    $recbackupmulti = 1;
-                                                                                }
-                                                                            }
-
+                                                                        for ($ni = 0; $ni < $contadorex; $ni++) {
                                                                             clearstatcache();
-                                                                            if (file_exists($rutaexcluidos)) {
-                                                                                clearstatcache();
-                                                                                if (is_readable($rutaexcluidos)) {
-                                                                                    $elcomando = "tar --warning=no-file-changed ";
-                                                                                    $buscaarray = file_get_contents($rutaexcluidos);
-                                                                                    $buscaexcluidos = unserialize($buscaarray);
-                                                                                    $contadorex = count($buscaexcluidos);
+                                                                            if (file_exists($buscaexcluidos[$ni]['completa'])) {
+                                                                                $elcomando .= "--exclude='" . $buscaexcluidos[$ni]['excluido'] . "' ";
+                                                                            }
+                                                                        }
 
-                                                                                    for ($ni = 0; $ni < $contadorex; $ni++) {
+                                                                        if ($recbackupmulti == 1) {
+                                                                            $elcomando .= '--warning=no-file-changed --use-compress-program="gzip -' . $lacompression . '"';
+                                                                        } elseif ($recbackupmulti == 2) {
+                                                                            $elcomando .= '--warning=no-file-changed --use-compress-program="pigz -k -' . $recbackupcompress . ' -p' . $recbackuphilos . '"';
+                                                                        }
+
+                                                                        $elcomando .= " -cf '" . $rutacrearbackup . ".tar.gz' -C " . $rutaacomprimir;
+                                                                    } else {
+                                                                        if ($recbackupmulti == 1) {
+                                                                            $elcomando = 'tar --warning=no-file-changed --use-compress-program="gzip -' . $lacompression . '"';
+                                                                        } elseif ($recbackupmulti == 2) {
+                                                                            $elcomando = 'tar --warning=no-file-changed --use-compress-program="pigz -k -' . $recbackupcompress . ' -p' . $recbackuphilos . '"';
+                                                                        }
+                                                                    }
+                                                                } else {
+                                                                    if ($recbackupmulti == 1) {
+                                                                        $elcomando = 'tar --warning=no-file-changed --use-compress-program="gzip -' . $lacompression . '"';
+                                                                    } elseif ($recbackupmulti == 2) {
+                                                                        $elcomando = 'tar --warning=no-file-changed --use-compress-program="pigz -k -' . $recbackupcompress . ' -p' . $recbackuphilos . '"';
+                                                                    }
+
+                                                                    $elcomando .= " -cf '" . $rutacrearbackup . ".tar.gz' -C " . $rutaacomprimir;
+                                                                }
+                                                                $moverabackups = "mv '" . $archivo . "-" . $t . ".tar.gz' '" . $dirbackups . "/" . $archivo . "-" . $t . ".tar.gz'";
+                                                                $delsh = "rm backup.sh";
+
+                                                                $file = fopen($dirsh, "w");
+                                                                fwrite($file, "#!/bin/bash" . PHP_EOL);
+                                                                fwrite($file, $elcomando . PHP_EOL);
+                                                                fwrite($file, $moverabackups . PHP_EOL);
+                                                                fwrite($file, $delsh . PHP_EOL);
+                                                                fclose($file);
+
+                                                                //DAR PERMISOS AL SH
+                                                                $comando = "cd " . $dirtemp . " && chmod +x backup.sh";
+                                                                exec($comando);
+
+                                                                //INICIAR SCREEN
+                                                                $comando = "cd " . $dirtemp . " && umask 002 && screen -dmS " . $nombrescreen . " sh backup.sh";
+                                                                exec($comando, $out, $oky);
+
+                                                                if (!$oky) {
+                                                                    $retorno = "Tarea Crear Backup, ejecutado correctamente.";
+
+                                                                    //CARGAR ROTACIONES Y SINO EXISTE 0
+                                                                    if (!defined('CONFIGBACKUROTATE')) {
+                                                                        $elbackuprotate = 0;
+                                                                    } else {
+                                                                        $elbackuprotate = CONFIGBACKUROTATE;
+                                                                    }
+
+                                                                    //DECLARAR VARIABLES ROTATE
+                                                                    $rutarotate = trim($RUTAPRINCIPAL . "/config" . "/backuprotate.json" . PHP_EOL);
+                                                                    $rutawriteconfig = trim($RUTAPRINCIPAL . "/config" . PHP_EOL);
+
+                                                                    //GUARDAR LISTA BACKUP ROTATE
+                                                                    if ($elbackuprotate >= 1) {
+                                                                        if (is_writable($rutawriteconfig)) {
+                                                                            clearstatcache();
+                                                                            if (!file_exists($rutarotate)) {
+                                                                                $arraycreate[0]['archivo'] = "AUTO-" . $t . ".tar.gz";
+                                                                                $arraycreate[0]['fecha'] = $tget;
+                                                                                $serialized = serialize($arraycreate);
+                                                                                file_put_contents($rutarotate, $serialized);
+                                                                            } else {
+                                                                                clearstatcache();
+                                                                                if (is_writable($rutarotate)) {
+
+                                                                                    //INICIAR INDICE DE LOS ARRAYS PARA EVITAR ERRORES
+                                                                                    $rotateindice = 0;
+
+                                                                                    //LEER ARCHIVO
+                                                                                    $getarrayrotate = file_get_contents($rutarotate);
+                                                                                    $elarrayrotate = unserialize($getarrayrotate);
+                                                                                    $rotateindice = count($elarrayrotate);
+
+                                                                                    //BORRAR LOS REGISTROS EN LOS QUE NO EXISTA EL ARCHIVO DE BACKUP
+                                                                                    $arraylimpieza = array();
+                                                                                    $elauxiliar = 0;
+
+                                                                                    for ($elbucle = 0; $elbucle < $rotateindice; $elbucle++) {
+                                                                                        $rotatelimpieza = trim($RUTAPRINCIPAL . "/backups" . "/" . $elarrayrotate[$elbucle]['archivo']);
                                                                                         clearstatcache();
-                                                                                        if (file_exists($buscaexcluidos[$ni]['completa'])) {
-                                                                                            $elcomando .= "--exclude='" . $buscaexcluidos[$ni]['excluido'] . "' ";
+                                                                                        if (file_exists($rotatelimpieza)) {
+                                                                                            $arraylimpieza[$elauxiliar]['archivo'] = $elarrayrotate[$elbucle]['archivo'];
+                                                                                            $arraylimpieza[$elauxiliar]['fecha'] = $elarrayrotate[$elbucle]['fecha'];
+                                                                                            $elauxiliar = $elauxiliar + 1;
                                                                                         }
                                                                                     }
 
-                                                                                    if ($recbackupmulti == 1) {
-                                                                                        $elcomando .= '--warning=no-file-changed --use-compress-program="gzip -' . $lacompression . '"';
-                                                                                    } elseif ($recbackupmulti == 2) {
-                                                                                        $elcomando .= '--warning=no-file-changed --use-compress-program="pigz -k -' . $recbackupcompress . ' -p' . $recbackuphilos . '"';
-                                                                                    }
+                                                                                    $elarrayrotate = null;
+                                                                                    $elarrayrotate = $arraylimpieza;
+                                                                                    $rotateindice = count($elarrayrotate);
 
-                                                                                    $elcomando .= " -cf '" . $dirconfig . $t . ".tar.gz' -C " . $rutaarchivo . " .";
-                                                                                } else {
-                                                                                    if ($recbackupmulti == 1) {
-                                                                                        $elcomando = 'tar --warning=no-file-changed --use-compress-program="gzip -' . $lacompression . '"';
-                                                                                    } elseif ($recbackupmulti == 2) {
-                                                                                        $elcomando = 'tar --warning=no-file-changed --use-compress-program="pigz -k -' . $recbackupcompress . ' -p' . $recbackuphilos . '"';
-                                                                                    }
-                                                                                }
-                                                                            } else {
-                                                                                if ($recbackupmulti == 1) {
-                                                                                    $elcomando = 'tar --warning=no-file-changed --use-compress-program="gzip -' . $lacompression . '"';
-                                                                                } elseif ($recbackupmulti == 2) {
-                                                                                    $elcomando = 'tar --warning=no-file-changed --use-compress-program="pigz -k -' . $recbackupcompress . ' -p' . $recbackuphilos . '"';
-                                                                                }
+                                                                                    //MIRAR SI HAY QUE ROTAR LOS ARCHIVOS
+                                                                                    if ($rotateindice >= $elbackuprotate) {
 
-                                                                                $elcomando .= " -cf '" . $dirconfig . $t . ".tar.gz' -C " . $rutaarchivo . " .";
-                                                                            }
+                                                                                        //OBTENER TODAS LAS FECHA Y GUARDAR EN ARRAY AUXILIAR
+                                                                                        for ($elbucle = 0; $elbucle < $rotateindice; $elbucle++) {
+                                                                                            $arrayauxl[$elbucle] = $elarrayrotate[$elbucle]['fecha'];
+                                                                                        }
 
-                                                                            clearstatcache();
-                                                                            if (is_executable($rutaminelimpia)) {
-                                                                                exec($elcomando, $out, $oky);
+                                                                                        //OBTENER EL VALOR MAS PEQUEÑO DE FECHA
+                                                                                        sort($arrayauxl);
 
-                                                                                if (!$oky) {
-                                                                                    $retorno = "Tarea Crear Backup, ejecutado correctamente.";
+                                                                                        //CREAR ARRAY NUEVO SIN FECHA MAS ANTIGUA
+                                                                                        $arrayfinal = array();
+                                                                                        $elauxiliar = 0;
 
-                                                                                    //CARGAR ROTACIONES Y SINO EXISTE 0
-                                                                                    if (!defined('CONFIGBACKUROTATE')) {
-                                                                                        $elbackuprotate = 0;
-                                                                                    } else {
-                                                                                        $elbackuprotate = CONFIGBACKUROTATE;
-                                                                                    }
-
-                                                                                    //DECLARAR VARIABLES ROTATE
-                                                                                    $rutarotate = trim($RUTAPRINCIPAL . "/config" . "/backuprotate.json" . PHP_EOL);
-                                                                                    $rutawriteconfig = trim($RUTAPRINCIPAL . "/config" . PHP_EOL);
-
-                                                                                    //GUARDAR LISTA BACKUP ROTATE
-                                                                                    if ($elbackuprotate >= 1) {
-                                                                                        if (is_writable($rutawriteconfig)) {
-                                                                                            clearstatcache();
-                                                                                            if (!file_exists($rutarotate)) {
-                                                                                                $arraycreate[0]['archivo'] = "AUTO-" . $t . ".tar.gz";
-                                                                                                $arraycreate[0]['fecha'] = $tget;
-                                                                                                $serialized = serialize($arraycreate);
-                                                                                                file_put_contents($rutarotate, $serialized);
+                                                                                        for ($elbucle = 0; $elbucle < $rotateindice; $elbucle++) {
+                                                                                            if ($arrayauxl[0] != $elarrayrotate[$elbucle]['fecha']) {
+                                                                                                $arrayfinal[$elauxiliar]['archivo'] = $elarrayrotate[$elbucle]['archivo'];
+                                                                                                $arrayfinal[$elauxiliar]['fecha'] = $elarrayrotate[$elbucle]['fecha'];
+                                                                                                $elauxiliar = $elauxiliar + 1;
                                                                                             } else {
+                                                                                                //BORRAR ARCHIVO
+                                                                                                $rotatedelete = trim($RUTAPRINCIPAL . "/backups" . "/" . $elarrayrotate[$elbucle]['archivo']);
+
                                                                                                 clearstatcache();
-                                                                                                if (is_writable($rutarotate)) {
-
-                                                                                                    //INICIAR INDICE DE LOS ARRAYS PARA EVITAR ERRORES
-                                                                                                    $rotateindice = 0;
-
-                                                                                                    //LEER ARCHIVO
-                                                                                                    $getarrayrotate = file_get_contents($rutarotate);
-                                                                                                    $elarrayrotate = unserialize($getarrayrotate);
-                                                                                                    $rotateindice = count($elarrayrotate);
-
-                                                                                                    //BORRAR LOS REGISTROS EN LOS QUE NO EXISTA EL ARCHIVO DE BACKUP
-                                                                                                    $arraylimpieza = array();
-                                                                                                    $elauxiliar = 0;
-
-                                                                                                    for ($elbucle = 0; $elbucle < $rotateindice; $elbucle++) {
-                                                                                                        $rotatelimpieza = trim($RUTAPRINCIPAL . "/backups" . "/" . $elarrayrotate[$elbucle]['archivo']);
-                                                                                                        clearstatcache();
-                                                                                                        if (file_exists($rotatelimpieza)) {
-                                                                                                            $arraylimpieza[$elauxiliar]['archivo'] = $elarrayrotate[$elbucle]['archivo'];
-                                                                                                            $arraylimpieza[$elauxiliar]['fecha'] = $elarrayrotate[$elbucle]['fecha'];
-                                                                                                            $elauxiliar = $elauxiliar + 1;
-                                                                                                        }
+                                                                                                if (file_exists($rotatedelete)) {
+                                                                                                    clearstatcache();
+                                                                                                    if (is_writable($rotatedelete)) {
+                                                                                                        unlink($rotatedelete);
                                                                                                     }
-
-                                                                                                    $elarrayrotate = null;
-                                                                                                    $elarrayrotate = $arraylimpieza;
-                                                                                                    $rotateindice = count($elarrayrotate);
-
-                                                                                                    //MIRAR SI HAY QUE ROTAR LOS ARCHIVOS
-                                                                                                    if ($rotateindice >= $elbackuprotate) {
-
-                                                                                                        //OBTENER TODAS LAS FECHA Y GUARDAR EN ARRAY AUXILIAR
-                                                                                                        for ($elbucle = 0; $elbucle < $rotateindice; $elbucle++) {
-                                                                                                            $arrayauxl[$elbucle] = $elarrayrotate[$elbucle]['fecha'];
-                                                                                                        }
-
-                                                                                                        //OBTENER EL VALOR MAS PEQUEÑO DE FECHA
-                                                                                                        sort($arrayauxl);
-
-                                                                                                        //CREAR ARRAY NUEVO SIN FECHA MAS ANTIGUA
-                                                                                                        $arrayfinal = array();
-                                                                                                        $elauxiliar = 0;
-
-                                                                                                        for ($elbucle = 0; $elbucle < $rotateindice; $elbucle++) {
-                                                                                                            if ($arrayauxl[0] != $elarrayrotate[$elbucle]['fecha']) {
-                                                                                                                $arrayfinal[$elauxiliar]['archivo'] = $elarrayrotate[$elbucle]['archivo'];
-                                                                                                                $arrayfinal[$elauxiliar]['fecha'] = $elarrayrotate[$elbucle]['fecha'];
-                                                                                                                $elauxiliar = $elauxiliar + 1;
-                                                                                                            } else {
-                                                                                                                //BORRAR ARCHIVO
-                                                                                                                $rotatedelete = trim($RUTAPRINCIPAL . "/backups" . "/" . $elarrayrotate[$elbucle]['archivo']);
-
-                                                                                                                clearstatcache();
-                                                                                                                if (file_exists($rotatedelete)) {
-                                                                                                                    clearstatcache();
-                                                                                                                    if (is_writable($rotatedelete)) {
-                                                                                                                        unlink($rotatedelete);
-                                                                                                                    }
-                                                                                                                }
-                                                                                                            }
-                                                                                                        }
-
-                                                                                                        $elarrayrotate = null;
-                                                                                                        $elarrayrotate = $arrayfinal;
-                                                                                                        $rotateindice = count($elarrayrotate);
-                                                                                                    }
-
-                                                                                                    //GUARDAR FICHERO
-                                                                                                    $elarrayrotate[$rotateindice]['archivo'] = "AUTO-" . $t . ".tar.gz";
-                                                                                                    $elarrayrotate[$rotateindice]['fecha'] = $tget;
-                                                                                                    $serialized2 = serialize($elarrayrotate);
-                                                                                                    file_put_contents($rutarotate, $serialized2);
                                                                                                 }
                                                                                             }
                                                                                         }
+
+                                                                                        $elarrayrotate = null;
+                                                                                        $elarrayrotate = $arrayfinal;
+                                                                                        $rotateindice = count($elarrayrotate);
                                                                                     }
-                                                                                } else {
-                                                                                    $retorno = "Error Tarea Crear Backup, no se creo correctamente.";
-                                                                                    //AUNQUE NO SE CREA, A VECES SI CREA UN FICHERO VACIO
-                                                                                    $borrarerror = $dirconfig . $t . ".tar.gz";
-                                                                                    if (file_exists($borrarerror)) {
-                                                                                        unlink($borrarerror);
-                                                                                    }
+
+                                                                                    //GUARDAR FICHERO
+                                                                                    $elarrayrotate[$rotateindice]['archivo'] = "AUTO-" . $t . ".tar.gz";
+                                                                                    $elarrayrotate[$rotateindice]['fecha'] = $tget;
+                                                                                    $serialized2 = serialize($elarrayrotate);
+                                                                                    file_put_contents($rutarotate, $serialized2);
                                                                                 }
                                                                             }
                                                                         }
+                                                                    }
+                                                                } else {
+                                                                    $retorno = "Error Tarea Crear Backup, no se creo correctamente.";
+                                                                    //AUNQUE NO SE CREA, A VECES SI CREA UN FICHERO VACIO
+                                                                    $borrarerror = $dirtemp . "/" . "AUTO-" . $t . ".tar.gz";
+                                                                    if (file_exists($borrarerror)) {
+                                                                        unlink($borrarerror);
                                                                     }
                                                                 }
                                                             }
