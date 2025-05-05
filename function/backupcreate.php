@@ -81,6 +81,7 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
             $limitbackupgb = CONFIGFOLDERBACKUPSIZE;
             $elerror = 0;
             $test = 0;
+            $rutacrearbackup = "";
 
             $elarray = $_POST['action'];
             $archivo = $elarray[0];
@@ -269,7 +270,7 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
             }
 
             if ($elerror == 0) {
-
+                //BORRAR START.SH EN CASO QUE EXISTA
                 $borrastart = $dirminecraft . "/start.sh";
                 clearstatcache();
                 if (file_exists($borrastart . "/start.sh")) {
@@ -349,7 +350,7 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
 
                 //DAR PERMISOS AL SH
                 $comando = "cd " . $dirtemp . " && chmod +x backup.sh";
-                exec($comando, $out, $oky);
+                exec($comando);
 
                 //INICIAR SCREEN
                 $comando = "cd " . $dirtemp . " && umask 002 && screen -dmS " . $nombrescreen . " sh backup.sh";
