@@ -145,15 +145,21 @@ if (isset($_SESSION['CONFIGUSER']['psystemconftemaweb'])) {
                                                                     }
                                                                 }
 
-                                                                function getfoldersize($dir)
+                                                                function obtenersizecarpeta($dir)
                                                                 {
-                                                                    $size = 0;
+                                                                    $iterator = new RecursiveIteratorIterator(
+                                                                        new RecursiveDirectoryIterator($dir)
+                                                                    );
 
-                                                                    foreach (glob(rtrim($dir, '/') . '/*', GLOB_NOSORT) as $each) {
-                                                                        $size += is_file($each) ? filesize($each) : getfoldersize($each);
+                                                                    $totalSize = 0;
+                                                                    try {
+                                                                        foreach ($iterator as $file) {
+                                                                            $totalSize += $file->getSize();
+                                                                        }
+                                                                    } catch (Throwable $t) {
+                                                                        //VACIO
                                                                     }
-
-                                                                    return $size;
+                                                                    return $totalSize;
                                                                 }
 
                                                                 //INICIAR VARIABLES
@@ -297,7 +303,7 @@ if (isset($_SESSION['CONFIGUSER']['psystemconftemaweb'])) {
                                                                     $recsizebackup = CONFIGFOLDERBACKUPSIZE;
 
                                                                     //OBTENER USADO
-                                                                    $getgigasback = devolverdatos(getfoldersize($rutaarchivo), 1, 2);
+                                                                    $getgigasback = devolverdatos(obtenersizecarpeta($rutaarchivo), 1, 2);
                                                                     ?>
 
                                                                     <tr>
