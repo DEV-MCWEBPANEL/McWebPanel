@@ -76,17 +76,24 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
             $elcomando = "screen -ls | gawk '/\." . $procesorestore . "\t/ {print strtonum($1)'}";
             $elpid2 = shell_exec($elcomando);
 
-
             //SELECTOR TIPO PROCESO
             if ($archivo == "estadobackup") {
-                if ($elpid != "" || $elpid2 != "") {
+
+                if ($elpid != "") {
                     $retorno = "ON";
-                } else {
+                    $_SESSION['BACKUPSTATUS'] = 1;
+                }
+
+                if ($elpi2 != "") {
+                    $retorno = "ON";
+                    $_SESSION['BACKUPSTATUS'] = 1;
+                }
+
+                if ($retorno == "") {
+                    $retorno = "OFF";
                     if ($_SESSION['BACKUPSTATUS'] == 1) {
                         $retorno = "REFRESH";
                         $_SESSION['BACKUPSTATUS'] = 0;
-                    } else {
-                        $retorno = "OFF";
                     }
                 }
             }
