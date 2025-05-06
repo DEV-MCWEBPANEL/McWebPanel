@@ -166,6 +166,7 @@ if (isset($_SESSION['CONFIGUSER']['psystemconftemaweb'])) {
                                                                 $contadorarchivos = 0;
                                                                 $eltamano = "";
                                                                 $archivoconcreto = "";
+                                                                $getgigasback = 0;
 
                                                                 //OBTENER RUTA BACKUPS
                                                                 $rutaarchivo = getcwd();
@@ -174,24 +175,6 @@ if (isset($_SESSION['CONFIGUSER']['psystemconftemaweb'])) {
                                                                 $rutaarchivo .= "/backups";
                                                                 $rutarotate .= "/config" . "/" . "backuprotate.json";
                                                                 $rotateindice = 0;
-
-                                                                //OBTENER RUTA RAIZ
-                                                                $dirraiz = getcwd() . PHP_EOL;
-                                                                $dirraiz = trim($dirraiz);
-
-                                                                //OBTENER IDENFIFICADOR SCREEN
-                                                                $nombrescreen = $dirraiz . "/losbackups";
-                                                                $nombrescreen = str_replace("/", "", $nombrescreen);
-
-                                                                //VER SI HAY UN PROCESO YA EN BACKUP
-                                                                $elcomando = "screen -ls | gawk '/\." . $nombrescreen . "\t/ {print strtonum($1)'}";
-                                                                $elpid = shell_exec($elcomando);
-
-                                                                if ($elpid != "") {
-                                                                    $_SESSION['BACKUPSTATUS'] = 1;
-                                                                } else {
-                                                                    $_SESSION['BACKUPSTATUS'] = 0;
-                                                                }
 
                                                                 //COMPROBAR SI EXISTE CARPETA BACKUP
                                                                 clearstatcache();
@@ -268,6 +251,7 @@ if (isset($_SESSION['CONFIGUSER']['psystemconftemaweb'])) {
                                                                         echo '<tr class="menu-hover" id="' . $files[$i] . '">';
                                                                         echo '<th scope="row">' . $files[$i] . '</th>';
                                                                         echo '<td>' . date("d/m/Y H:i:s", filemtime($archivoconcreto)) . '</td>';
+                                                                        $getgigasback = $getgigasback + filesize($archivoconcreto);
                                                                         $eltamano = devolverdatos(filesize($archivoconcreto), 1, 2);
                                                                         echo '<td>' . $eltamano . '</td>';
                                                                         echo '<td>';
@@ -302,8 +286,8 @@ if (isset($_SESSION['CONFIGUSER']['psystemconftemaweb'])) {
                                                                     //OBTENER TAMAÑO CARPETA BACKUP MAXIMO PERMITIDO
                                                                     $recsizebackup = CONFIGFOLDERBACKUPSIZE;
 
-                                                                    //OBTENER USADO
-                                                                    $getgigasback = devolverdatos(obtenersizecarpeta($rutaarchivo), 1, 2);
+                                                                    //CONVERTIR TAMAÑO USADO
+                                                                    $getgigasback = devolverdatos($getgigasback, 1, 2);
                                                                     ?>
 
                                                                     <tr>
