@@ -259,7 +259,6 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
 
                 if (!$oky) {
                     $retorno = "okrestore";
-                    $_SESSION['BACKUPSTATUS'] = 1;
                 } else {
                     $retorno = "norestore";
                 }
