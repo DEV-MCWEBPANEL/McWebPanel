@@ -356,9 +356,7 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
                 $comando = "cd " . $dirtemp . " && umask 002 && screen -dmS " . $nombrescreen . " sh backup.sh";
                 exec($comando, $out, $oky);
 
-                if (!$oky) {
-                    $_SESSION['BACKUPSTATUS'] = 1;
-                } else {
+                if ($oky) {
                     $retorno = "nobackup";
                 }
             }
