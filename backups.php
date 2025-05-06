@@ -345,7 +345,7 @@ if (isset($_SESSION['CONFIGUSER']['psystemconftemaweb'])) {
                                                                 <button type="button" class="btn btn-danger btn-block btn-lg text-white mt-2" id="cancelarbakup">Cancelar Backup</button>
                                                             </div>
                                                             <div class="col-md-4">
-                                                                <img class="" src="img/loading.gif" id="gifloading" alt="loading">
+                                                                <img class="" src="img/trabajando.gif" id="giftrabajando" alt="trabajando">
                                                             </div>
                                                             <div class="col-md-4">
                                                                 <p class="lead" id="textobackupretorno"></p>
@@ -356,7 +356,7 @@ if (isset($_SESSION['CONFIGUSER']['psystemconftemaweb'])) {
                                                     ?>
                                                         <div class="row">
                                                             <div class="col-md-4">
-                                                                <img class="" src="img/loading.gif" id="gifloading" alt="loading">
+                                                                <img class="" src="img/trabajando.gif" id="giftrabajando" alt="trabajando">
                                                             </div>
                                                             <div class="col-md-4">
                                                                 <p class="lead" id="textobackupretorno"></p>
