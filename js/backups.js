@@ -22,8 +22,8 @@ $(function () {
         document.getElementById("inputbackup").disabled = true;
     }
 
-    if (document.getElementById('gifloading') !== null) {
-        document.getElementById("gifloading").style.visibility = "hidden";
+    if (document.getElementById('giftrabajando') !== null) {
+        document.getElementById("giftrabajando").style.visibility = "hidden";
     }
 
     if (document.getElementById('inputbackup') !== null) {
@@ -235,8 +235,8 @@ $(function () {
                         document.getElementById("crearbackup").disabled = true;
                     }
 
-                    if (document.getElementById('gifloading') !== null) {
-                        document.getElementById("gifloading").style.visibility = "visible";
+                    if (document.getElementById('giftrabajando') !== null) {
+                        document.getElementById("giftrabajando").style.visibility = "visible";
                     }
                 } else if (data == "OFF") {
 
@@ -248,8 +248,8 @@ $(function () {
                         document.getElementById("crearbackup").disabled = false;
                     }
 
-                    if (document.getElementById('gifloading') !== null) {
-                        document.getElementById("gifloading").style.visibility = "hidden";
+                    if (document.getElementById('giftrabajando') !== null) {
+                        document.getElementById("giftrabajando").style.visibility = "hidden";
                     }
                 } else if (data == "REFRESH") {
                     location.reload();
