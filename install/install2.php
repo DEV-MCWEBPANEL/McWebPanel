@@ -197,7 +197,7 @@ require_once "../template/errorreport.php";
                     <option value="purpur">Purpur</option>
                     <option value="forge old">Forge Old</option>
                     <option value="forge new">Forge New</option>
-                    <option value="NeoForge">Forge New</option>
+                    <option value="NeoForge">NeoForge</option>
                     <option value="magma">Magma</option>
                     <option value="otros">Otros</option>
                   </select>
