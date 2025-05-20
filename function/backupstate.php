@@ -53,6 +53,8 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
             $reccarpmine = CONFIGDIRECTORIO;
             $elerror = 0;
             $test = 0;
+            $elpid = "";
+            $elpid2 ="";
 
             $archivo = test_input($_POST['action']);
             $archivo = trim($archivo);
