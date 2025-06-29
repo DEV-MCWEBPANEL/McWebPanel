@@ -86,7 +86,7 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
                     $_SESSION['BACKUPSTATUS'] = 1;
                 }
 
-                if ($elpi2 != "") {
+                if ($elpid2 != "") {
                     $retorno = "ON";
                     $_SESSION['BACKUPSTATUS'] = 1;
                 }
