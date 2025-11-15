@@ -18,7 +18,7 @@ Copyright (C) 2020-2025 DEV-MCWEBPANEL
 */
 
 define("VERSIONPANEL", "0.24");
-define("VERSIONTIPO", "Develop");
+define("VERSIONTIPO", "Release");
 
 error_reporting(E_ALL);
 ini_set("display_errors", 0);
