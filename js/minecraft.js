@@ -396,6 +396,12 @@ $(function () {
         }
     }
 
+    if (document.getElementById("label-log-ips") !== null) {
+        if (document.getElementById("form-log-ips") !== null) {
+            document.getElementById("label-log-ips").innerHTML = htmlEntities("log-ips=" + document.getElementById("form-log-ips").value);
+        }
+    }
+
     if (document.getElementById("label-enable-jmx-monitoring") !== null) {
         if (document.getElementById("form-enable-jmx-monitoring") !== null) {
             document.getElementById("label-enable-jmx-monitoring").innerHTML = htmlEntities("enable-jmx-monitoring=" + document.getElementById("form-enable-jmx-monitoring").value);
@@ -2173,6 +2179,30 @@ $(function () {
 
         if (document.getElementById("label-prevent-proxy-connections") !== null) {
             document.getElementById("label-prevent-proxy-connections").innerHTML = htmlEntities("prevent-proxy-connections=" + document.getElementById("form-prevent-proxy-connections").value);
+        }
+
+    });
+
+    $("#form-log-ips").change(function () {
+        let envioaction = "log-ips";
+        let enviovalor = document.getElementById("form-log-ips").value;
+        $.ajax({
+            type: "POST",
+            url: "function/guardarproperties.php",
+            data: {
+                action: envioaction,
+                valor: enviovalor
+            },
+            success: function (data) {
+                let getdebug = 0;
+                if (getdebug == 1) {
+                    alert(data);
+                }
+            }
+        });
+
+        if (document.getElementById("label-log-ips") !== null) {
+            document.getElementById("label-log-ips").innerHTML = htmlEntities("log-ips=" + document.getElementById("form-log-ips").value);
         }
 
     });

@@ -1999,6 +1999,50 @@ if (isset($_SESSION['CONFIGUSER']['psystemconftemaweb'])) {
                                         <div class="container">
                                             <div class="row">
                                                 <div class="col-md-8">
+                                                    <h3 class=""><strong>Registrar Ips</strong></h3>
+                                                    <p class="lead">Guarda las direcciones IP de los jugadores en los registros del log.</p>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <p class="">Valor Defecto: true<br>Requiere Versión: 1.20.2 o superior</p>
+                                                    <select id="form-log-ips" class="form-control w-100">
+                                                        <?php
+                                                        $lostextos = array('True', 'False');
+                                                        $losvalues = array('true', 'false');
+
+                                                        $obtener = leerlineas('log-ips');
+
+                                                        if ($obtener == "") {
+                                                            echo '<option selected hidden>No hay ninguna opción seleccionada</option>';
+                                                        }
+
+                                                        for ($i = 0; $i < count($lostextos); $i++) {
+
+                                                            if ($obtener == $losvalues[$i]) {
+                                                                echo '<option value="' . $losvalues[$i] . '" selected>' . $lostextos[$i] . '</option>';
+                                                            } else {
+                                                                echo '<option value="' . $losvalues[$i] . '">' . $lostextos[$i] . '</option>';
+                                                            }
+                                                        }
+                                                        ?>
+                                                    </select>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <br>
+                                                    <p id="label-log-ips" class="lead text-center text-white mt-2 bg-primary">log-ips</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Separacion Fin -->
+                                     <hr>
+                                    <!-- Separacion Inicio -->
+                                    <div class="">
+                                        <div class="container">
+                                            <div class="row">
+                                                <div class="col-md-8">
                                                     <h3 class=""><strong>Activar Monitoreo JMX</strong></h3>
                                                     <p class="lead">Monitorear los tiempos de tick del servidor(averageTickTime y tickTimes).</p>
                                                 </div>
