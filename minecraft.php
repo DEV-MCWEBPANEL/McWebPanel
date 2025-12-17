@@ -742,6 +742,56 @@ if (isset($_SESSION['CONFIGUSER']['psystemconftemaweb'])) {
                                     </div>
                                     <!-- Separacion Fin -->
                                     <hr>
+                                    <!-- Separacion Inicio -->
+                                    <div class="">
+                                        <div class="container">
+                                            <div class="row">
+                                                <div class="col-md-8">
+                                                    <h3 class=""><strong>Paquete de recursos deshabilitados al inicio</strong></h3>
+                                                    <p class="lead">Permite deshabilitar qué datapacks no se cargan automáticamente al inicio, aunque estén disponibles en el servidor o vengan incluidos por Minecraft.</p>
+                                                    <p class="lead">Ejemplo: minecraft:bundle,minecraft:trade_rebalance</p>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <p class="">Valor Defecto: Vacío<br>Requiere Versión: 1.19.3 o superior</p>
+                                                    <input id="form-initial-disabled-packs" type="text" class="form-control" spellcheck="false" autocapitalize="none" value="<?php echo htmlentities(leerlineas('initial-disabled-packs')); ?>">
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <br>
+                                                    <p id="label-initial-disabled-packs" class="lead text-center text-white mt-2 bg-primary">initial-disabled-packs</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Separacion Fin -->
+                                     <hr>
+                                     <!-- Separacion Inicio -->
+                                    <div class="">
+                                        <div class="container">
+                                            <div class="row">
+                                                <div class="col-md-8">
+                                                    <h3 class=""><strong>Paquete de recursos habilitados al inicio</strong></h3>
+                                                    <p class="lead">Fuerza a que ciertos datapacks se activen automáticamente cuando se crea un mundo nuevo, incluso si normalmente estarían desactivados.</p>
+                                                    <p class="lead">Ejemplo: minecraft:bundle,minecraft:trade_rebalance</p>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <p class="">Valor Defecto: vanilla<br>Requiere Versión: 1.19.3 o superior</p>
+                                                    <input id="form-initial-enabled-packs" type="text" class="form-control" spellcheck="false" autocapitalize="none" value="<?php echo htmlentities(leerlineas('initial-enabled-packs')); ?>">
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <br>
+                                                    <p id="label-initial-enabled-packs" class="lead text-center text-white mt-2 bg-primary">initial-enabled-packs</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Separacion Fin -->
+                                     <hr>
                                      <!-- Separacion Inicio -->
                                     <div class="">
                                         <div class="container">

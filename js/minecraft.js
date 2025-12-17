@@ -186,6 +186,18 @@ $(function () {
         }
     }
 
+    if (document.getElementById("label-initial-disabled-packs") !== null) {
+        if (document.getElementById("form-initial-disabled-packs") !== null) {
+            document.getElementById("label-initial-disabled-packs").innerHTML = htmlEntities("initial-disabled-packs=" + document.getElementById("form-initial-disabled-packs").value);
+        }
+    }
+
+    if (document.getElementById("label-initial-enabled-packs") !== null) {
+        if (document.getElementById("form-initial-enabled-packs") !== null) {
+            document.getElementById("label-initial-enabled-packs").innerHTML = htmlEntities("initial-enabled-packs=" + document.getElementById("form-initial-enabled-packs").value);
+        }
+    }
+
     if (document.getElementById("label-bug-report-link") !== null) {
         if (document.getElementById("form-bug-report-link") !== null) {
             document.getElementById("label-bug-report-link").innerHTML = htmlEntities("bug-report-link=" + document.getElementById("form-bug-report-link").value);
@@ -928,6 +940,144 @@ $(function () {
 
             if (document.getElementById("label-resource-pack-prompt") !== null) {
                 document.getElementById("label-resource-pack-prompt").innerHTML = "resource-pack-prompt=" + htmlEntities(enviovalor);
+            }
+
+        });
+    }
+
+    $("#form-initial-disabled-packs").keyup(function () {
+        let envioaction = "initial-disabled-packs";
+        let enviovalor = document.getElementById("form-initial-disabled-packs").value;
+        $.ajax({
+            type: "POST",
+            url: "function/guardarproperties.php",
+            data: {
+                action: envioaction,
+                valor: enviovalor
+            },
+            success: function (data) {
+                let getdebug = 0;
+                if (getdebug == 1) {
+                    alert(data);
+                }
+            }
+        });
+
+        if (document.getElementById("label-initial-disabled-packs") !== null) {
+            document.getElementById("label-initial-disabled-packs").innerHTML = htmlEntities("initial-disabled-packs=" + document.getElementById("form-initial-disabled-packs").value);
+        }
+
+    });
+
+    if (document.getElementById("form-initial-disabled-packs") !== null) {
+        document.getElementById("form-initial-disabled-packs").addEventListener('paste', function (event) {
+            let envioaction = "initial-disabled-packs";
+
+            let enviovalor = "";
+            let eltext = "";
+            let textini = "";
+            let textfinal = "";
+            let enviar = "";
+
+            let text = document.getElementById("form-initial-disabled-packs");
+
+            let startPosition = text.selectionStart;
+            let endPosition = text.selectionEnd;
+            let longitud = text.leng;
+
+            eltext = document.getElementById("form-initial-disabled-packs").value;
+            textini = eltext.substring(0, startPosition);
+            textfinal = eltext.substring(endPosition, longitud);
+
+            enviar = textini + event.clipboardData.getData('text') + textfinal;
+            enviovalor = enviar;
+
+            $.ajax({
+                type: "POST",
+                url: "function/guardarproperties.php",
+                data: {
+                    action: envioaction,
+                    valor: enviovalor
+                },
+                success: function (data) {
+                    let getdebug = 0;
+                    if (getdebug == 1) {
+                        alert(data);
+                    }
+                }
+            });
+
+            if (document.getElementById("label-initial-disabled-packs") !== null) {
+                document.getElementById("label-initial-disabled-packs").innerHTML = "initial-disabled-packs=" + htmlEntities(enviovalor);
+            }
+
+        });
+    }
+
+    $("#form-initial-enabled-packs").keyup(function () {
+        let envioaction = "initial-enabled-packs";
+        let enviovalor = document.getElementById("form-initial-enabled-packs").value;
+        $.ajax({
+            type: "POST",
+            url: "function/guardarproperties.php",
+            data: {
+                action: envioaction,
+                valor: enviovalor
+            },
+            success: function (data) {
+                let getdebug = 0;
+                if (getdebug == 1) {
+                    alert(data);
+                }
+            }
+        });
+
+        if (document.getElementById("label-initial-enabled-packs") !== null) {
+            document.getElementById("label-initial-enabled-packs").innerHTML = htmlEntities("initial-enabled-packs=" + document.getElementById("form-initial-enabled-packs").value);
+        }
+
+    });
+
+    if (document.getElementById("form-initial-enabled-packs") !== null) {
+        document.getElementById("form-initial-enabled-packs").addEventListener('paste', function (event) {
+            let envioaction = "initial-enabled-packs";
+
+            let enviovalor = "";
+            let eltext = "";
+            let textini = "";
+            let textfinal = "";
+            let enviar = "";
+
+            let text = document.getElementById("form-initial-enabled-packs");
+
+            let startPosition = text.selectionStart;
+            let endPosition = text.selectionEnd;
+            let longitud = text.leng;
+
+            eltext = document.getElementById("form-initial-enabled-packs").value;
+            textini = eltext.substring(0, startPosition);
+            textfinal = eltext.substring(endPosition, longitud);
+
+            enviar = textini + event.clipboardData.getData('text') + textfinal;
+            enviovalor = enviar;
+
+            $.ajax({
+                type: "POST",
+                url: "function/guardarproperties.php",
+                data: {
+                    action: envioaction,
+                    valor: enviovalor
+                },
+                success: function (data) {
+                    let getdebug = 0;
+                    if (getdebug == 1) {
+                        alert(data);
+                    }
+                }
+            });
+
+            if (document.getElementById("label-initial-enabled-packs") !== null) {
+                document.getElementById("label-initial-enabled-packs").innerHTML = "initial-enabled-packs=" + htmlEntities(enviovalor);
             }
 
         });
