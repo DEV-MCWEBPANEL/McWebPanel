@@ -766,8 +766,8 @@ if (isset($_SESSION['CONFIGUSER']['psystemconftemaweb'])) {
                                         </div>
                                     </div>
                                     <!-- Separacion Fin -->
-                                     <hr>
-                                     <!-- Separacion Inicio -->
+                                    <hr>
+                                    <!-- Separacion Inicio -->
                                     <div class="">
                                         <div class="container">
                                             <div class="row">
@@ -791,8 +791,8 @@ if (isset($_SESSION['CONFIGUSER']['psystemconftemaweb'])) {
                                         </div>
                                     </div>
                                     <!-- Separacion Fin -->
-                                     <hr>
-                                     <!-- Separacion Inicio -->
+                                    <hr>
+                                    <!-- Separacion Inicio -->
                                     <div class="">
                                         <div class="container">
                                             <div class="row">
@@ -1907,6 +1907,52 @@ if (isset($_SESSION['CONFIGUSER']['psystemconftemaweb'])) {
                                         <div class="container">
                                             <div class="row">
                                                 <div class="col-md-8">
+                                                    <h3 class=""><strong>Habilitar Código de Conducta</strong></h3>
+                                                    <p class="lead">Obliga a que los jugadores acepten el código de conducta de Minecraft/Microsoft antes de poder jugar en el servidor.</p>
+                                                    <p class="lead">Si el jugador no lo ha aceptado, no podrá entrar al servidor, esta aceptación está vinculada a la cuenta de Microsoft no al servidor.</p>
+                                                    <p class="lead">No es recomendable utilizarlo en servidores Minecraft no premium.</p>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <p class="">Valor Defecto: false<br>Requiere Versión: 1.21.9 o superior</p>
+                                                    <select id="form-enable-code-of-conduct" class="form-control w-100">
+                                                        <?php
+                                                        $lostextos = array('False', 'True');
+                                                        $losvalues = array('false', 'true');
+
+                                                        $obtener = leerlineas('enable-code-of-conduct');
+
+                                                        if ($obtener == "") {
+                                                            echo '<option selected hidden>No hay ninguna opción seleccionada</option>';
+                                                        }
+
+                                                        for ($i = 0; $i < count($lostextos); $i++) {
+
+                                                            if ($obtener == $losvalues[$i]) {
+                                                                echo '<option value="' . $losvalues[$i] . '" selected>' . $lostextos[$i] . '</option>';
+                                                            } else {
+                                                                echo '<option value="' . $losvalues[$i] . '">' . $lostextos[$i] . '</option>';
+                                                            }
+                                                        }
+                                                        ?>
+                                                    </select>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <br>
+                                                    <p id="label-enable-code-of-conduct" class="lead text-center text-white mt-2 bg-primary">enable-code-of-conduct</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Separacion Fin -->
+                                    <hr>
+                                    <!-- Separacion Inicio -->
+                                    <div class="">
+                                        <div class="container">
+                                            <div class="row">
+                                                <div class="col-md-8">
                                                     <h3 class=""><strong>Vista Previa De Chat</strong></h3>
                                                     <p class="lead">Al habilitarse, los servidores pueden obtener una vista previa de los mensajes con estilos aplicados, como emojis o colores de chat.</p>
                                                     <p class="lead">Vista previa de chat envía mensajes de chat al servidor a medida que se escriben, incluso antes de que se envíen</p>
@@ -2037,7 +2083,7 @@ if (isset($_SESSION['CONFIGUSER']['psystemconftemaweb'])) {
                                         </div>
                                     </div>
                                     <!-- Separacion Fin -->
-                                     <hr>
+                                    <hr>
                                     <!-- Separacion Inicio -->
                                     <div class="">
                                         <div class="container">

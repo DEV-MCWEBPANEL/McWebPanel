@@ -384,6 +384,12 @@ $(function () {
         }
     }
 
+    if (document.getElementById("label-enable-code-of-conduct") !== null) {
+        if (document.getElementById("form-enable-code-of-conduct") !== null) {
+            document.getElementById("label-enable-code-of-conduct").innerHTML = htmlEntities("enable-code-of-conduct=" + document.getElementById("form-enable-code-of-conduct").value);
+        }
+    }
+
     if (document.getElementById("label-previews-chat") !== null) {
         if (document.getElementById("form-previews-chat") !== null) {
             document.getElementById("label-previews-chat").innerHTML = htmlEntities("previews-chat=" + document.getElementById("form-previews-chat").value);
@@ -2131,6 +2137,30 @@ $(function () {
 
         if (document.getElementById("label-accepts-transfers") !== null) {
             document.getElementById("label-accepts-transfers").innerHTML = htmlEntities("accepts-transfers=" + document.getElementById("form-accepts-transfers").value);
+        }
+
+    });
+
+    $("#form-enable-code-of-conduct").change(function () {
+        let envioaction = "enable-code-of-conduct";
+        let enviovalor = document.getElementById("form-enable-code-of-conduct").value;
+        $.ajax({
+            type: "POST",
+            url: "function/guardarproperties.php",
+            data: {
+                action: envioaction,
+                valor: enviovalor
+            },
+            success: function (data) {
+                let getdebug = 0;
+                if (getdebug == 1) {
+                    alert(data);
+                }
+            }
+        });
+
+        if (document.getElementById("label-enable-code-of-conduct") !== null) {
+            document.getElementById("label-enable-code-of-conduct").innerHTML = htmlEntities("enable-code-of-conduct=" + document.getElementById("form-enable-code-of-conduct").value);
         }
 
     });
