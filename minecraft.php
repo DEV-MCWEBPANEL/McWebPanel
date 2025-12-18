@@ -2414,7 +2414,27 @@ if (isset($_SESSION['CONFIGUSER']['psystemconftemaweb'])) {
                                                                                                                                                                 ?>">
                                                         <br>
                                                     </div>
+
+                                                    <div class="col-md-12 ml-2 ">
+                                                        <div class="row minirow">
+                                                            <div class="bg-dark iconservlist"></div>
+                                                            <div class="imgservlist"><br><span id="visormotd"></div>
+                                                        </div>
+                                                    </div>
+                                                    <br>
                                                     <p id="label-motd" class="lead text-center text-white mt-2 bg-primary">motd</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Separacion Fin -->
+                                    <hr>
+                                    <!-- Separacion Inicio -->
+                                    <div class="pt-3">
+                                        <div class="container">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <h2 class=""><strong>Minecraft Server Management Protocol Version 2.0.0</strong></h2>
                                                 </div>
                                             </div>
                                         </div>
@@ -2426,21 +2446,231 @@ if (isset($_SESSION['CONFIGUSER']['psystemconftemaweb'])) {
                                         <div class="container">
                                             <div class="row">
                                                 <div class="col-md-8">
-                                                    <h3 class=""><strong>Visor MOTD</strong></h3>
+                                                    <h3 class=""><strong>management-server-allowed-origins</strong></h3>
+                                                    <p class="lead">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
                                                 </div>
-
+                                                <div class="col-md-4">
+                                                    <p class="">Valor Defecto: Vacío<br>Requiere Versión: 1.21.11 o superior</p>
+                                                    <input id="form-management-server-allowed-origins" type="text" class="form-control" spellcheck="false" autocapitalize="none" value="<?php echo htmlentities(leerlineas('management-server-allowed-origins')); ?>">
+                                                </div>
                                             </div>
+
                                             <div class="row">
-                                                <div class="col-md-12 ml-2 ">
-                                                    <div class="row minirow">
-                                                        <div class="bg-dark iconservlist"></div>
-                                                        <div class="imgservlist"><br><span id="visormotd"></div>
-                                                    </div>
+                                                <div class="col-md-12">
+                                                    <br>
+                                                    <p id="label-management-server-allowed-origins" class="lead text-center text-white mt-2 bg-primary">management-server-allowed-origins</p>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
+                                    <!-- Separacion Fin -->
+                                    <hr>
+                                    <!-- Separacion Inicio -->
+                                    <div class="">
+                                        <div class="container">
+                                            <div class="row">
+                                                <div class="col-md-8">
+                                                    <h3 class=""><strong>management-server-enabled</strong></h3>
+                                                    <p class="lead">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <p class="">Valor Defecto: false<br>Requiere Versión: 1.21.11 o superior</p>
+                                                    <select id="form-management-server-enabled" class="form-control w-100">
+                                                        <?php
+                                                        $lostextos = array('False', 'True');
+                                                        $losvalues = array('false', 'true');
 
+                                                        $obtener = leerlineas('management-server-enabled');
+
+                                                        if ($obtener == "") {
+                                                            echo '<option selected hidden>No hay ninguna opción seleccionada</option>';
+                                                        }
+
+                                                        for ($i = 0; $i < count($lostextos); $i++) {
+
+                                                            if ($obtener == $losvalues[$i]) {
+                                                                echo '<option value="' . $losvalues[$i] . '" selected>' . $lostextos[$i] . '</option>';
+                                                            } else {
+                                                                echo '<option value="' . $losvalues[$i] . '">' . $lostextos[$i] . '</option>';
+                                                            }
+                                                        }
+                                                        ?>
+                                                    </select>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <br>
+                                                    <p id="label-management-server-enabled" class="lead text-center text-white mt-2 bg-primary">management-server-enabled</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Separacion Fin -->
+                                    <hr>
+                                    <!-- Separacion Inicio -->
+                                    <div class="">
+                                        <div class="container">
+                                            <div class="row">
+                                                <div class="col-md-8">
+                                                    <h3 class=""><strong>management-server-host</strong></h3>
+                                                    <p class="lead">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <p class="">Valor Defecto: localhost<br>Requiere Versión: 1.21.11 o superior</p>
+                                                    <input id="form-management-server-host" type="text" class="form-control" spellcheck="false" autocapitalize="none" value="<?php echo htmlentities(leerlineas('management-server-host')); ?>">
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <br>
+                                                    <p id="label-management-server-host" class="lead text-center text-white mt-2 bg-primary">management-server-host</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Separacion Fin -->
+                                    <hr>
+                                    <!-- Separacion Inicio -->
+                                    <div class="">
+                                        <div class="container">
+                                            <div class="row">
+                                                <div class="col-md-8">
+                                                    <h3 class=""><strong>management-server-port</strong></h3>
+                                                    <p class="lead">Establece el puerto management-server.</p>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <p class="">Valor Defecto: 0<br>Valor Min: 1025 - Valor Max: 65535<br>Requiere Versión: 1.21.11 o superior</p>
+                                                    <input id="form-management-server-port" type="number" class="form-control" min="1025" max="65535" value="<?php echo leerlineas('management-server-port'); ?>">
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <br>
+                                                    <p id="label-management-server-port" class="lead text-center text-white mt-2 bg-primary">management-server-port</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Separacion Fin -->
+                                     <hr>
+                                     <!-- Separacion Inicio -->
+                                    <div class="">
+                                        <div class="container">
+                                            <div class="row">
+                                                <div class="col-md-8">
+                                                    <h3 class=""><strong>management-server-secret</strong></h3>
+                                                    <p class="lead">El codigo secreto se genera al iniciar el servidor por primera vez.</p>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <p class="">Valor Defecto: Vacío<br>Requiere Versión: 1.21.11 o superior</p>
+                                                    <input id="form-management-server-secret" type="text" class="form-control" spellcheck="false" autocapitalize="none" value="<?php echo htmlentities(leerlineas('management-server-secret')); ?>">
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <br>
+                                                    <p id="label-management-server-secret" class="lead text-center text-white mt-2 bg-primary">management-server-secret</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Separacion Fin -->
+                                     <hr>
+                                     <!-- Separacion Inicio -->
+                                    <div class="">
+                                        <div class="container">
+                                            <div class="row">
+                                                <div class="col-md-8">
+                                                    <h3 class=""><strong>management-server-tls-enabled</strong></h3>
+                                                    <p class="lead">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <p class="">Valor Defecto: true<br>Requiere Versión: 1.21.11 o superior</p>
+                                                    <select id="form-management-server-tls-enabled" class="form-control w-100">
+                                                        <?php
+                                                        $lostextos = array('False', 'True');
+                                                        $losvalues = array('false', 'true');
+
+                                                        $obtener = leerlineas('management-server-tls-enabled');
+
+                                                        if ($obtener == "") {
+                                                            echo '<option selected hidden>No hay ninguna opción seleccionada</option>';
+                                                        }
+
+                                                        for ($i = 0; $i < count($lostextos); $i++) {
+
+                                                            if ($obtener == $losvalues[$i]) {
+                                                                echo '<option value="' . $losvalues[$i] . '" selected>' . $lostextos[$i] . '</option>';
+                                                            } else {
+                                                                echo '<option value="' . $losvalues[$i] . '">' . $lostextos[$i] . '</option>';
+                                                            }
+                                                        }
+                                                        ?>
+                                                    </select>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <br>
+                                                    <p id="label-management-server-tls-enabled" class="lead text-center text-white mt-2 bg-primary">management-server-tls-enabled</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Separacion Fin -->
+                                     <hr>
+                                     <!-- Separacion Inicio -->
+                                    <div class="">
+                                        <div class="container">
+                                            <div class="row">
+                                                <div class="col-md-8">
+                                                    <h3 class=""><strong>management-server-tls-keystore</strong></h3>
+                                                    <p class="lead">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <p class="">Valor Defecto: Vacío<br>Requiere Versión: 1.21.11 o superior</p>
+                                                    <input id="form-management-server-tls-keystore" type="text" class="form-control" spellcheck="false" autocapitalize="none" value="<?php echo htmlentities(leerlineas('management-server-tls-keystore')); ?>">
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <br>
+                                                    <p id="label-management-server-tls-keystore" class="lead text-center text-white mt-2 bg-primary">management-server-tls-keystore</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Separacion Fin -->
+                                     <hr>
+                                     <!-- Separacion Inicio -->
+                                    <div class="">
+                                        <div class="container">
+                                            <div class="row">
+                                                <div class="col-md-8">
+                                                    <h3 class=""><strong>management-server-tls-keystore-password</strong></h3>
+                                                    <p class="lead">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <p class="">Valor Defecto: Vacío<br>Requiere Versión: 1.21.11 o superior</p>
+                                                    <input id="form-management-server-tls-keystore-password" type="text" class="form-control" spellcheck="false" autocapitalize="none" value="<?php echo htmlentities(leerlineas('management-server-tls-keystore-password')); ?>">
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <br>
+                                                    <p id="label-management-server-tls-keystore-password" class="lead text-center text-white mt-2 bg-primary">management-server-tls-keystore-password</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                     <!-- Separacion Fin -->
                                     <hr>
                                     <!-- Separacion Inicio -->
