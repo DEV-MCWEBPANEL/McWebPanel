@@ -2447,7 +2447,8 @@ if (isset($_SESSION['CONFIGUSER']['psystemconftemaweb'])) {
                                             <div class="row">
                                                 <div class="col-md-8">
                                                     <h3 class=""><strong>management-server-allowed-origins</strong></h3>
-                                                    <p class="lead">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                                                    <p class="lead">Configura la lista de sitios web que pueden conectarse al servidor de administración.</p>
+                                                    <p class="lead">Ejemplo 1: https://mcwebpanel.com,https://minecraft.net<br>Ejemplo 2: * (Esto permite que cualquier web pueda conectarse, solo para pruebas)</p>
                                                 </div>
                                                 <div class="col-md-4">
                                                     <p class="">Valor Defecto: Vacío<br>Requiere Versión: 1.21.11 o superior</p>
@@ -2471,7 +2472,7 @@ if (isset($_SESSION['CONFIGUSER']['psystemconftemaweb'])) {
                                             <div class="row">
                                                 <div class="col-md-8">
                                                     <h3 class=""><strong>management-server-enabled</strong></h3>
-                                                    <p class="lead">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                                                    <p class="lead">Activar Minecraft Server Management Protocol.</p>
                                                 </div>
                                                 <div class="col-md-4">
                                                     <p class="">Valor Defecto: false<br>Requiere Versión: 1.21.11 o superior</p>
@@ -2515,7 +2516,8 @@ if (isset($_SESSION['CONFIGUSER']['psystemconftemaweb'])) {
                                             <div class="row">
                                                 <div class="col-md-8">
                                                     <h3 class=""><strong>management-server-host</strong></h3>
-                                                    <p class="lead">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                                                    <p class="lead">Configura la ip la cual se conectara al servidor de administración.</p>
+                                                    <p class="lead">Ejemplo: Localhost (192.0.0.1)<br>Ejemplo 2: 192.0.1.85</p>
                                                 </div>
                                                 <div class="col-md-4">
                                                     <p class="">Valor Defecto: localhost<br>Requiere Versión: 1.21.11 o superior</p>
@@ -2539,7 +2541,7 @@ if (isset($_SESSION['CONFIGUSER']['psystemconftemaweb'])) {
                                             <div class="row">
                                                 <div class="col-md-8">
                                                     <h3 class=""><strong>management-server-port</strong></h3>
-                                                    <p class="lead">Establece el puerto management-server.</p>
+                                                    <p class="lead">Establece el puerto de escucha del servidor de administración.</p>
                                                 </div>
                                                 <div class="col-md-4">
                                                     <p class="">Valor Defecto: 0<br>Valor Min: 1025 - Valor Max: 65535<br>Requiere Versión: 1.21.11 o superior</p>
@@ -2556,14 +2558,14 @@ if (isset($_SESSION['CONFIGUSER']['psystemconftemaweb'])) {
                                         </div>
                                     </div>
                                     <!-- Separacion Fin -->
-                                     <hr>
-                                     <!-- Separacion Inicio -->
+                                    <hr>
+                                    <!-- Separacion Inicio -->
                                     <div class="">
                                         <div class="container">
                                             <div class="row">
                                                 <div class="col-md-8">
                                                     <h3 class=""><strong>management-server-secret</strong></h3>
-                                                    <p class="lead">El codigo secreto se genera al iniciar el servidor por primera vez.</p>
+                                                    <p class="lead">Código secreto del servidor de administración.<br>Se genera automáticamente al iniciar el servidor por primera vez.</p>
                                                 </div>
                                                 <div class="col-md-4">
                                                     <p class="">Valor Defecto: Vacío<br>Requiere Versión: 1.21.11 o superior</p>
@@ -2580,14 +2582,17 @@ if (isset($_SESSION['CONFIGUSER']['psystemconftemaweb'])) {
                                         </div>
                                     </div>
                                     <!-- Separacion Fin -->
-                                     <hr>
-                                     <!-- Separacion Inicio -->
+                                    <hr>
+                                    <!-- Separacion Inicio -->
                                     <div class="">
                                         <div class="container">
                                             <div class="row">
                                                 <div class="col-md-8">
                                                     <h3 class=""><strong>management-server-tls-enabled</strong></h3>
-                                                    <p class="lead">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                                                    <p class="lead">Activar si quieres cifrado en la comunicación al servidor de administración.</p>
+                                                    <p class="lead">TLS no es necesario si se utiliza en localhost.</p>
+                                                    <p class="lead">Requiere tener configurado certificado y la clave y que el panel funcione por HTTPS.</p>
+                                                    <p class="lead">Si el certificado no es válido el servidor de administración no arrancará.</p>
                                                 </div>
                                                 <div class="col-md-4">
                                                     <p class="">Valor Defecto: true<br>Requiere Versión: 1.21.11 o superior</p>
@@ -2624,14 +2629,16 @@ if (isset($_SESSION['CONFIGUSER']['psystemconftemaweb'])) {
                                         </div>
                                     </div>
                                     <!-- Separacion Fin -->
-                                     <hr>
-                                     <!-- Separacion Inicio -->
+                                    <hr>
+                                    <!-- Separacion Inicio -->
                                     <div class="">
                                         <div class="container">
                                             <div class="row">
                                                 <div class="col-md-8">
                                                     <h3 class=""><strong>management-server-tls-keystore</strong></h3>
-                                                    <p class="lead">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                                                    <p class="lead">Indica la ruta que contiene el certificado TLS que usara el servidor de administración.</p>
+                                                    <p class="lead">La ruta puede ser relativa o absoluta, archivos .pfx .p12 y .keystore</p>
+                                                    <p class="lead">Ejemplo Ruta Absoluta: /home/minecraft/certs/management.pfx.<br>Ejemplo Ruta Relativa: certs/certadmin.keystone</p>
                                                 </div>
                                                 <div class="col-md-4">
                                                     <p class="">Valor Defecto: Vacío<br>Requiere Versión: 1.21.11 o superior</p>
@@ -2648,14 +2655,14 @@ if (isset($_SESSION['CONFIGUSER']['psystemconftemaweb'])) {
                                         </div>
                                     </div>
                                     <!-- Separacion Fin -->
-                                     <hr>
-                                     <!-- Separacion Inicio -->
+                                    <hr>
+                                    <!-- Separacion Inicio -->
                                     <div class="">
                                         <div class="container">
                                             <div class="row">
                                                 <div class="col-md-8">
                                                     <h3 class=""><strong>management-server-tls-keystore-password</strong></h3>
-                                                    <p class="lead">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                                                    <p class="lead">La contraseña de la clave (keystore) asignada en el TLS para poder utilizarla.</p>
                                                 </div>
                                                 <div class="col-md-4">
                                                     <p class="">Valor Defecto: Vacío<br>Requiere Versión: 1.21.11 o superior</p>
