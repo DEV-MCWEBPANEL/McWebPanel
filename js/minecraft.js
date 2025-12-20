@@ -480,6 +480,54 @@ $(function () {
         }
     }
 
+    if (document.getElementById("label-management-server-allowed-origins") !== null) {
+        if (document.getElementById("form-management-server-allowed-origins") !== null) {
+            document.getElementById("label-management-server-allowed-origins").innerHTML = htmlEntities("management-server-allowed-origins=" + document.getElementById("form-management-server-allowed-origins").value);
+        }
+    }
+
+    if (document.getElementById("label-management-server-enabled") !== null) {
+        if (document.getElementById("form-management-server-enabled") !== null) {
+            document.getElementById("label-management-server-enabled").innerHTML = htmlEntities("management-server-enabled=" + document.getElementById("form-management-server-enabled").value);
+        }
+    }
+
+    if (document.getElementById("label-management-server-host") !== null) {
+        if (document.getElementById("form-management-server-host") !== null) {
+            document.getElementById("label-management-server-host").innerHTML = htmlEntities("management-server-host=" + document.getElementById("form-management-server-host").value);
+        }
+    }
+
+    if (document.getElementById("label-management-server-port") !== null) {
+        if (document.getElementById("form-management-server-port") !== null) {
+            document.getElementById("label-management-server-port").innerHTML = htmlEntities("management-server-port=" + document.getElementById("form-management-server-port").value);
+        }
+    }
+
+    if (document.getElementById("label-management-server-secret") !== null) {
+        if (document.getElementById("form-management-server-secret") !== null) {
+            document.getElementById("label-management-server-secret").innerHTML = htmlEntities("management-server-secret=" + document.getElementById("form-management-server-secret").value);
+        }
+    }
+
+    if (document.getElementById("label-management-server-tls-enabled") !== null) {
+        if (document.getElementById("form-management-server-tls-enabled") !== null) {
+            document.getElementById("label-management-server-tls-enabled").innerHTML = htmlEntities("management-server-tls-enabled=" + document.getElementById("form-management-server-tls-enabled").value);
+        }
+    }
+
+    if (document.getElementById("label-management-server-tls-keystore") !== null) {
+        if (document.getElementById("form-management-server-tls-keystore") !== null) {
+            document.getElementById("label-management-server-tls-keystore").innerHTML = htmlEntities("management-server-tls-keystore=" + document.getElementById("form-management-server-tls-keystore").value);
+        }
+    }
+
+    if (document.getElementById("label-management-server-tls-keystore-password") !== null) {
+        if (document.getElementById("form-management-server-tls-keystore-password") !== null) {
+            document.getElementById("label-management-server-tls-keystore-password").innerHTML = htmlEntities("management-server-tls-keystore-password=" + document.getElementById("form-management-server-tls-keystore-password").value);
+        }
+    }
+
     $("#form-gamemode").change(function () {
         let envioaction = "gamemode";
         let enviovalor = document.getElementById("form-gamemode").value;
@@ -2622,6 +2670,362 @@ $(function () {
 
             if (document.getElementById("visormotd") !== null) {
                 updatemotd(enviovalor);
+            }
+
+        });
+    }
+
+    $("#form-management-server-allowed-origins").keyup(function () {
+        let envioaction = "management-server-allowed-origins";
+        let enviovalor = document.getElementById("form-management-server-allowed-origins").value;
+        $.ajax({
+            type: "POST",
+            url: "function/guardarproperties.php",
+            data: {
+                action: envioaction,
+                valor: enviovalor
+            },
+            success: function (data) {
+                let getdebug = 0;
+                if (getdebug == 1) {
+                    alert(data);
+                }
+            }
+        });
+
+        if (document.getElementById("label-management-server-allowed-origins") !== null) {
+            document.getElementById("label-management-server-allowed-origins").innerHTML = htmlEntities("management-server-allowed-origins=" + document.getElementById("form-management-server-allowed-origins").value);
+        }
+
+    });
+
+    if (document.getElementById("form-management-server-allowed-origins") !== null) {
+        document.getElementById("form-management-server-allowed-origins").addEventListener('paste', function (event) {
+            let envioaction = "management-server-allowed-origins";
+
+            let enviovalor = "";
+            let eltext = "";
+            let textini = "";
+            let textfinal = "";
+            let enviar = "";
+
+            let text = document.getElementById("form-management-server-allowed-origins");
+
+            let startPosition = text.selectionStart;
+            let endPosition = text.selectionEnd;
+            let longitud = text.leng;
+
+            eltext = document.getElementById("form-management-server-allowed-origins").value;
+            textini = eltext.substring(0, startPosition);
+            textfinal = eltext.substring(endPosition, longitud);
+
+            enviar = textini + event.clipboardData.getData('text') + textfinal;
+            enviovalor = enviar;
+
+            $.ajax({
+                type: "POST",
+                url: "function/guardarproperties.php",
+                data: {
+                    action: envioaction,
+                    valor: enviovalor
+                },
+                success: function (data) {
+                    let getdebug = 0;
+                    if (getdebug == 1) {
+                        alert(data);
+                    }
+                }
+            });
+
+            if (document.getElementById("label-management-server-allowed-origins") !== null) {
+                document.getElementById("label-management-server-allowed-origins").innerHTML = "management-server-allowed-origins=" + htmlEntities(enviovalor);
+            }
+
+        });
+    }
+
+    $("#form-management-server-enabled").change(function () {
+        let envioaction = "management-server-enabled";
+        let enviovalor = document.getElementById("form-management-server-enabled").value;
+        $.ajax({
+            type: "POST",
+            url: "function/guardarproperties.php",
+            data: {
+                action: envioaction,
+                valor: enviovalor
+            },
+            success: function (data) {
+                let getdebug = 0;
+                if (getdebug == 1) {
+                    alert(data);
+                }
+            }
+        });
+
+        if (document.getElementById("label-management-server-enabled") !== null) {
+            document.getElementById("label-management-server-enabled").innerHTML = htmlEntities("management-server-enabled=" + document.getElementById("form-management-server-enabled").value);
+        }
+
+    });
+
+    $("#form-management-server-port").change(function () {
+        let errores = 0;
+        let envioaction = "management-server-port";
+        let enviovalor = document.getElementById("form-management-server-port").value;
+
+        if (enviovalor !== 0 && (enviovalor < 1025 || enviovalor > 65535)) {
+            errores = 1;
+        }
+
+        if (errores == 0) {
+
+            $.ajax({
+                type: "POST",
+                url: "function/guardarproperties.php",
+                data: {
+                    action: envioaction,
+                    valor: enviovalor
+                },
+                success: function (data) {
+                    let getdebug = 0;
+                    if (getdebug == 1) {
+                        alert(data);
+                    }
+                }
+            });
+
+            if (document.getElementById("label-management-server-port") !== null) {
+                document.getElementById("label-management-server-port").innerHTML = htmlEntities("management-server-port=" + document.getElementById("form-management-server-port").value);
+            }
+        }
+    });
+
+    $("#form-management-server-secret").keyup(function () {
+        let envioaction = "management-server-secret";
+        let enviovalor = document.getElementById("form-management-server-secret").value;
+        $.ajax({
+            type: "POST",
+            url: "function/guardarproperties.php",
+            data: {
+                action: envioaction,
+                valor: enviovalor
+            },
+            success: function (data) {
+                let getdebug = 0;
+                if (getdebug == 1) {
+                    alert(data);
+                }
+            }
+        });
+
+        if (document.getElementById("label-management-server-secret") !== null) {
+            document.getElementById("label-management-server-secret").innerHTML = htmlEntities("management-server-secret=" + document.getElementById("form-management-server-secret").value);
+        }
+
+    });
+
+    if (document.getElementById("form-management-server-secret") !== null) {
+        document.getElementById("form-management-server-secret").addEventListener('paste', function (event) {
+            let envioaction = "management-server-secret";
+
+            let enviovalor = "";
+            let eltext = "";
+            let textini = "";
+            let textfinal = "";
+            let enviar = "";
+
+            let text = document.getElementById("form-management-server-secret");
+
+            let startPosition = text.selectionStart;
+            let endPosition = text.selectionEnd;
+            let longitud = text.leng;
+
+            eltext = document.getElementById("form-management-server-secret").value;
+            textini = eltext.substring(0, startPosition);
+            textfinal = eltext.substring(endPosition, longitud);
+
+            enviar = textini + event.clipboardData.getData('text') + textfinal;
+            enviovalor = enviar;
+
+            $.ajax({
+                type: "POST",
+                url: "function/guardarproperties.php",
+                data: {
+                    action: envioaction,
+                    valor: enviovalor
+                },
+                success: function (data) {
+                    let getdebug = 0;
+                    if (getdebug == 1) {
+                        alert(data);
+                    }
+                }
+            });
+
+            if (document.getElementById("label-management-server-secret") !== null) {
+                document.getElementById("label-management-server-secret").innerHTML = "management-server-secret=" + htmlEntities(enviovalor);
+            }
+
+        });
+    }
+
+    $("#form-management-server-tls-enabled").change(function () {
+        let envioaction = "management-server-tls-enabled";
+        let enviovalor = document.getElementById("form-management-server-tls-enabled").value;
+        $.ajax({
+            type: "POST",
+            url: "function/guardarproperties.php",
+            data: {
+                action: envioaction,
+                valor: enviovalor
+            },
+            success: function (data) {
+                let getdebug = 0;
+                if (getdebug == 1) {
+                    alert(data);
+                }
+            }
+        });
+
+        if (document.getElementById("label-management-server-tls-enabled") !== null) {
+            document.getElementById("label-management-server-tls-enabled").innerHTML = htmlEntities("management-server-tls-enabled=" + document.getElementById("form-management-server-tls-enabled").value);
+        }
+
+    });
+
+    $("#form-management-server-tls-keystore").keyup(function () {
+        let envioaction = "management-server-tls-keystore";
+        let enviovalor = document.getElementById("form-management-server-tls-keystore").value;
+        $.ajax({
+            type: "POST",
+            url: "function/guardarproperties.php",
+            data: {
+                action: envioaction,
+                valor: enviovalor
+            },
+            success: function (data) {
+                let getdebug = 0;
+                if (getdebug == 1) {
+                    alert(data);
+                }
+            }
+        });
+
+        if (document.getElementById("label-management-server-tls-keystore") !== null) {
+            document.getElementById("label-management-server-tls-keystore").innerHTML = htmlEntities("management-server-tls-keystore=" + document.getElementById("form-management-server-tls-keystore").value);
+        }
+
+    });
+
+    if (document.getElementById("form-management-server-tls-keystore") !== null) {
+        document.getElementById("form-management-server-tls-keystore").addEventListener('paste', function (event) {
+            let envioaction = "management-server-tls-keystore";
+
+            let enviovalor = "";
+            let eltext = "";
+            let textini = "";
+            let textfinal = "";
+            let enviar = "";
+
+            let text = document.getElementById("form-management-server-tls-keystore");
+
+            let startPosition = text.selectionStart;
+            let endPosition = text.selectionEnd;
+            let longitud = text.leng;
+
+            eltext = document.getElementById("form-management-server-tls-keystore").value;
+            textini = eltext.substring(0, startPosition);
+            textfinal = eltext.substring(endPosition, longitud);
+
+            enviar = textini + event.clipboardData.getData('text') + textfinal;
+            enviovalor = enviar;
+
+            $.ajax({
+                type: "POST",
+                url: "function/guardarproperties.php",
+                data: {
+                    action: envioaction,
+                    valor: enviovalor
+                },
+                success: function (data) {
+                    let getdebug = 0;
+                    if (getdebug == 1) {
+                        alert(data);
+                    }
+                }
+            });
+
+            if (document.getElementById("label-management-server-tls-keystore") !== null) {
+                document.getElementById("label-management-server-tls-keystore").innerHTML = "management-server-tls-keystore=" + htmlEntities(enviovalor);
+            }
+
+        });
+    }
+
+    $("#form-management-server-tls-keystore-password").keyup(function () {
+        let envioaction = "management-server-tls-keystore-password";
+        let enviovalor = document.getElementById("form-management-server-tls-keystore-password").value;
+        $.ajax({
+            type: "POST",
+            url: "function/guardarproperties.php",
+            data: {
+                action: envioaction,
+                valor: enviovalor
+            },
+            success: function (data) {
+                let getdebug = 0;
+                if (getdebug == 1) {
+                    alert(data);
+                }
+            }
+        });
+
+        if (document.getElementById("label-management-server-tls-keystore-password") !== null) {
+            document.getElementById("label-management-server-tls-keystore-password").innerHTML = htmlEntities("management-server-tls-keystore-password=" + document.getElementById("form-management-server-tls-keystore-password").value);
+        }
+
+    });
+
+    if (document.getElementById("form-management-server-tls-keystore-password") !== null) {
+        document.getElementById("form-management-server-tls-keystore-password").addEventListener('paste', function (event) {
+            let envioaction = "management-server-tls-keystore-password";
+
+            let enviovalor = "";
+            let eltext = "";
+            let textini = "";
+            let textfinal = "";
+            let enviar = "";
+
+            let text = document.getElementById("form-management-server-tls-keystore-password");
+
+            let startPosition = text.selectionStart;
+            let endPosition = text.selectionEnd;
+            let longitud = text.leng;
+
+            eltext = document.getElementById("form-management-server-tls-keystore-password").value;
+            textini = eltext.substring(0, startPosition);
+            textfinal = eltext.substring(endPosition, longitud);
+
+            enviar = textini + event.clipboardData.getData('text') + textfinal;
+            enviovalor = enviar;
+
+            $.ajax({
+                type: "POST",
+                url: "function/guardarproperties.php",
+                data: {
+                    action: envioaction,
+                    valor: enviovalor
+                },
+                success: function (data) {
+                    let getdebug = 0;
+                    if (getdebug == 1) {
+                        alert(data);
+                    }
+                }
+            });
+
+            if (document.getElementById("label-management-server-tls-keystore-password") !== null) {
+                document.getElementById("label-management-server-tls-keystore-password").innerHTML = "management-server-tls-keystore-password=" + htmlEntities(enviovalor);
             }
 
         });
