@@ -634,7 +634,7 @@ if (isset($_SESSION['CONFIGUSER']['psystemconftemaweb'])) {
                                                 </div>
                                                 <div class="col-md-4">
                                                     <p class="">Valor Defecto: Vacío<br><br>Tamaño Resource:<br>1.0-1.14.4 = 50 MB<br>1.15-1.17.1 = 100 MB<br>1.18 > = 250 MB</p>
-                                                    <input id="form-resource-pack" type="text" class="form-control" spellcheck="false" autocapitalize="none" value="<?php echo htmlentities(leerlineas('resource-pack')); ?>">
+                                                    <input id="form-resource-pack" type="text" class="form-control" spellcheck="false" autocapitalize="none" value="<?php echo htmlentities(leerlineas('resource-pack') ?? ''); ?>">
                                                 </div>
                                             </div>
 
@@ -728,7 +728,7 @@ if (isset($_SESSION['CONFIGUSER']['psystemconftemaweb'])) {
                                                 </div>
                                                 <div class="col-md-4">
                                                     <p class="">Valor Defecto: Vacío<br>Requiere Versión: 1.17 o superior</p>
-                                                    <input id="form-resource-pack-prompt" type="text" class="form-control" spellcheck="false" autocapitalize="none" value="<?php echo htmlentities(leerlineas('resource-pack-prompt')); ?>">
+                                                    <input id="form-resource-pack-prompt" type="text" class="form-control" spellcheck="false" autocapitalize="none" value="<?php echo htmlentities(leerlineas('resource-pack-prompt') ?? ''); ?>">
                                                 </div>
                                             </div>
 
@@ -753,7 +753,7 @@ if (isset($_SESSION['CONFIGUSER']['psystemconftemaweb'])) {
                                                 </div>
                                                 <div class="col-md-4">
                                                     <p class="">Valor Defecto: Vacío<br>Requiere Versión: 1.19.3 o superior</p>
-                                                    <input id="form-initial-disabled-packs" type="text" class="form-control" spellcheck="false" autocapitalize="none" value="<?php echo htmlentities(leerlineas('initial-disabled-packs')); ?>">
+                                                    <input id="form-initial-disabled-packs" type="text" class="form-control" spellcheck="false" autocapitalize="none" value="<?php echo htmlentities(leerlineas('initial-disabled-packs') ?? ''); ?>">
                                                 </div>
                                             </div>
 
@@ -778,7 +778,7 @@ if (isset($_SESSION['CONFIGUSER']['psystemconftemaweb'])) {
                                                 </div>
                                                 <div class="col-md-4">
                                                     <p class="">Valor Defecto: vanilla<br>Requiere Versión: 1.19.3 o superior</p>
-                                                    <input id="form-initial-enabled-packs" type="text" class="form-control" spellcheck="false" autocapitalize="none" value="<?php echo htmlentities(leerlineas('initial-enabled-packs')); ?>">
+                                                    <input id="form-initial-enabled-packs" type="text" class="form-control" spellcheck="false" autocapitalize="none" value="<?php echo htmlentities(leerlineas('initial-enabled-packs') ?? ''); ?>">
                                                 </div>
                                             </div>
 
@@ -802,7 +802,7 @@ if (isset($_SESSION['CONFIGUSER']['psystemconftemaweb'])) {
                                                 </div>
                                                 <div class="col-md-4">
                                                     <p class="">Valor Defecto: Vacío<br>Requiere Versión: 1.21 o superior</p>
-                                                    <input id="form-bug-report-link" type="text" class="form-control" spellcheck="false" autocapitalize="none" value="<?php echo htmlentities(leerlineas('bug-report-link')); ?>">
+                                                    <input id="form-bug-report-link" type="text" class="form-control" spellcheck="false" autocapitalize="none" value="<?php echo htmlentities(leerlineas('bug-report-link') ?? ''); ?>">
                                                 </div>
                                             </div>
 
@@ -930,7 +930,7 @@ if (isset($_SESSION['CONFIGUSER']['psystemconftemaweb'])) {
                                                 </div>
                                                 <div class="col-md-4">
                                                     <p class="">Valor Defecto: Vacío</p>
-                                                    <input id="form-generator-settings" type="text" class="form-control" spellcheck="false" autocapitalize="none" value="<?php echo htmlentities(leerlineas('generator-settings')); ?>">
+                                                    <input id="form-generator-settings" type="text" class="form-control" spellcheck="false" autocapitalize="none" value="<?php echo htmlentities(leerlineas('generator-settings') ?? ''); ?>">
                                                 </div>
                                             </div>
 
@@ -1513,7 +1513,7 @@ if (isset($_SESSION['CONFIGUSER']['psystemconftemaweb'])) {
                                                 </div>
                                                 <div class="col-md-4">
                                                     <p class="">Valor Defecto: Vacío</p>
-                                                    <input id="form-rcon-password" type="text" class="form-control" spellcheck="false" autocapitalize="none" value="<?php echo htmlentities(leerlineas('rcon.password')); ?>">
+                                                    <input id="form-rcon-password" type="text" class="form-control" spellcheck="false" autocapitalize="none" value="<?php echo htmlentities(leerlineas('rcon.password') ?? ''); ?>">
                                                 </div>
                                             </div>
 
@@ -2408,7 +2408,7 @@ if (isset($_SESSION['CONFIGUSER']['psystemconftemaweb'])) {
                                                         <br>
                                                         <input id="form-motd" type="text" class="form-control" spellcheck="false" autocapitalize="none" value="<?php
                                                                                                                                                                 $elmotd = "";
-                                                                                                                                                                $elmotd = leerlineas('motd');
+                                                                                                                                                                $elmotd = leerlineas('motd') ?? '';
                                                                                                                                                                 $elmotd = str_replace("<?php", htmlentities("<?php"), $elmotd);
                                                                                                                                                                 echo $elmotd;
                                                                                                                                                                 ?>">
@@ -2452,7 +2452,7 @@ if (isset($_SESSION['CONFIGUSER']['psystemconftemaweb'])) {
                                                 </div>
                                                 <div class="col-md-4">
                                                     <p class="">Valor Defecto: Vacío<br>Requiere Versión: 1.21.11 o superior</p>
-                                                    <input id="form-management-server-allowed-origins" type="text" class="form-control" spellcheck="false" autocapitalize="none" value="<?php echo htmlentities(leerlineas('management-server-allowed-origins')); ?>">
+                                                    <input id="form-management-server-allowed-origins" type="text" class="form-control" spellcheck="false" autocapitalize="none" value="<?php echo htmlentities(leerlineas('management-server-allowed-origins') ?? ''); ?>">
                                                 </div>
                                             </div>
 
@@ -2521,7 +2521,7 @@ if (isset($_SESSION['CONFIGUSER']['psystemconftemaweb'])) {
                                                 </div>
                                                 <div class="col-md-4">
                                                     <p class="">Valor Defecto: localhost<br>Requiere Versión: 1.21.11 o superior</p>
-                                                    <input id="form-management-server-host" type="text" class="form-control" spellcheck="false" autocapitalize="none" value="<?php echo htmlentities(leerlineas('management-server-host')); ?>">
+                                                    <input id="form-management-server-host" type="text" class="form-control" spellcheck="false" autocapitalize="none" value="<?php echo htmlentities(leerlineas('management-server-host') ?? ''); ?>">
                                                 </div>
                                             </div>
 
@@ -2569,7 +2569,7 @@ if (isset($_SESSION['CONFIGUSER']['psystemconftemaweb'])) {
                                                 </div>
                                                 <div class="col-md-4">
                                                     <p class="">Valor Defecto: Vacío<br>Requiere Versión: 1.21.11 o superior</p>
-                                                    <input id="form-management-server-secret" type="text" class="form-control" spellcheck="false" autocapitalize="none" value="<?php echo htmlentities(leerlineas('management-server-secret')); ?>">
+                                                    <input id="form-management-server-secret" type="text" class="form-control" spellcheck="false" autocapitalize="none" value="<?php echo htmlentities(leerlineas('management-server-secret') ?? ''); ?>">
                                                 </div>
                                             </div>
 
@@ -2642,7 +2642,7 @@ if (isset($_SESSION['CONFIGUSER']['psystemconftemaweb'])) {
                                                 </div>
                                                 <div class="col-md-4">
                                                     <p class="">Valor Defecto: Vacío<br>Requiere Versión: 1.21.11 o superior</p>
-                                                    <input id="form-management-server-tls-keystore" type="text" class="form-control" spellcheck="false" autocapitalize="none" value="<?php echo htmlentities(leerlineas('management-server-tls-keystore')); ?>">
+                                                    <input id="form-management-server-tls-keystore" type="text" class="form-control" spellcheck="false" autocapitalize="none" value="<?php echo htmlentities(leerlineas('management-server-tls-keystore') ?? ''); ?>">
                                                 </div>
                                             </div>
 
@@ -2666,7 +2666,7 @@ if (isset($_SESSION['CONFIGUSER']['psystemconftemaweb'])) {
                                                 </div>
                                                 <div class="col-md-4">
                                                     <p class="">Valor Defecto: Vacío<br>Requiere Versión: 1.21.11 o superior</p>
-                                                    <input id="form-management-server-tls-keystore-password" type="text" class="form-control" spellcheck="false" autocapitalize="none" value="<?php echo htmlentities(leerlineas('management-server-tls-keystore-password')); ?>">
+                                                    <input id="form-management-server-tls-keystore-password" type="text" class="form-control" spellcheck="false" autocapitalize="none" value="<?php echo htmlentities(leerlineas('management-server-tls-keystore-password') ?? ''); ?>">
                                                 </div>
                                             </div>
 
