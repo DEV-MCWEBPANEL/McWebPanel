@@ -20,6 +20,13 @@ $(function () {
 
     document.getElementById("binstalar").disabled = false;
 
+    const select = document.getElementById("zonahoraria");
+
+    if (select && select.options.length > 0) {
+        const lazonahoraria = Intl.DateTimeFormat().resolvedOptions().timeZone;
+        if (lazonahoraria) select.value = lazonahoraria;
+    }
+
     $("#verpassword").click(function () {
         let x1 = document.getElementById("elpass");
         if (x1.type === "password") {
