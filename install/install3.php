@@ -94,6 +94,7 @@ require_once "../template/errorreport.php";
         $elpuerto = "";
         $laram = "";
         $eltiposerver = "";
+        $eltemawebuser = "";
         $elzonahoraria = "";
         $loserrores = 0;
         $lakey = "";
@@ -140,10 +141,11 @@ require_once "../template/errorreport.php";
         $eltiposerver = test_input($_POST["eltipserv"]);
         $elmaxupload = test_input($_POST["maxupload"]);
         $elzonahoraria = test_input($_POST["zonahoraria"]);
+        $eltemawebuser = test_input($_POST["temawebuser"]);
         $elpostmax = $elmaxupload + 1;
 
         //COMPROBAR NO ESTEN VACIOS
-        if ($elusuario == "" || $elpassword == "" || $elrepassword == "" || $elnombreservidor == "" || $eldirectorio == "" || $elpuerto == "" || $laram == "" || $eltiposerver == "" || $elmaxupload == "") {
+        if ($elusuario == "" || $elpassword == "" || $elrepassword == "" || $elnombreservidor == "" || $eldirectorio == "" || $elpuerto == "" || $laram == "" || $eltiposerver == "" || $elmaxupload == "" || $elzonahoraria == "" || $eltemawebuser == "") {
             exit;
         }
 
@@ -284,7 +286,7 @@ require_once "../template/errorreport.php";
         $arrayadmin[0]['hash'] = hash("sha3-512", $elpassword);
         $arrayadmin[0]['rango'] = 1;
         $arrayadmin[0]['estado'] = "activado";
-        $arrayadmin[0]['psystemconftemaweb'] = 1;
+        $arrayadmin[0]['psystemconftemaweb'] = intval($eltemawebuser);
 
         $serialized = serialize($arrayadmin);
         file_put_contents($rutaescribir, $serialized);

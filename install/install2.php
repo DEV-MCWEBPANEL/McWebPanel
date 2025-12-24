@@ -205,6 +205,15 @@ require_once "../template/errorreport.php";
               </div>
 
               <div class="form-row">
+                <div class="form-group col-md-12"><label for="temawebuser" class="">Seleccionar Tema Web:</label>
+                  <select id="temawebuser" name="temawebuser" class="form-control" required="required">
+                    <option value="1" selected>Claro</option>
+                    <option value="2">Oscuro</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="form-row">
                 <div class="form-group col-md-12">
                   <label for="zonahoraria" class="">Zona Horaria:</label>
                   <select id="zonahoraria" name="zonahoraria" class="form-control" required="required">
