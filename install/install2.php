@@ -152,7 +152,7 @@ require_once "../template/errorreport.php";
                     $servidorweb = php_sapi_name();
 
                     if ($servidorweb == "apache" || $servidorweb == "apache2handler") {
-                      $opcionesserver = array('128', '256', '386', '512', '640', '768', '896', '1024', '2048', '3072', '4096', '5120');
+                      $opcionesserver = array('100', '128', '200', '256', '386', '500', '512', '640', '768', '896', '1024', '2048', '3072', '4096', '5120');
                       for ($i = 0; $i < count($opcionesserver); $i++) {
                         echo '<option value="' . $opcionesserver[$i] . '">' . $opcionesserver[$i] . " MB" . '</option>';
                       }

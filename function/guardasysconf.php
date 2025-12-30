@@ -321,7 +321,7 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
           if ($_SESSION['CONFIGUSER']['rango'] == 1 || array_key_exists('psystemconfsubida', $_SESSION['CONFIGUSER']) && $_SESSION['CONFIGUSER']['psystemconfsubida'] == 1) {
             if (isset($_POST["elmaxupload"])) {
               $eluploadmax = test_input($_POST["elmaxupload"]);
-              $opcionesserver = array('128', '256', '386', '512', '640', '768', '896', '1024', '2048', '3072', '4096', '5120');
+              $opcionesserver = array('100', '128', '200', '256', '386', '500', '512', '640', '768', '896', '1024', '2048', '3072', '4096', '5120');
               if ($elerror == 0) {
                 if (!in_array($eluploadmax, $opcionesserver)) {
                   $retorno = "badmaxupload";
