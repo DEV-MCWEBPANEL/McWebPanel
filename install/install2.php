@@ -44,6 +44,7 @@ require_once "../template/errorreport.php";
 
   <!-- Bootstrap core CSS -->
   <link rel="stylesheet" href="../css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/install1.css">
 
   <!-- Script AJAX -->
   <script src="../js/jquery.min.js" integrity="sha384-1H217gwSVyLSIfaLxHbE7dRb3v4mYCKbpQvzx0cegeju1MVsGrX5xXxAvs/HgeFs" crossorigin="anonymous"></script>

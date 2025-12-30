@@ -30,3 +30,19 @@ Copyright (C) 2020-2025 DEV-MCWEBPANEL
     display: inline-block;
     border-radius: 5px;
   }
+
+
+@media (prefers-color-scheme: dark) {
+    body {
+        background-color: #1F1F1F;
+        color: white;
+    }
+    
+    table {
+        color: white!important
+    }
+
+    hr {
+        border-top: 1px solid rgb(180, 180, 180);;
+    }
+}
