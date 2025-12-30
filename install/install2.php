@@ -99,12 +99,12 @@ require_once "../template/errorreport.php";
           <div class="mx-auto col-lg-6 col-10">
 
             <h4 class="mb-4"><u>Configurar Instalación Inicial</u></h4>
-            <p class="text-center">Completa los campos para terminar la instalación, la configuración podrá ser modificada posteriormente desde el apartado System Config en el menú principal, recuerda no introducir datos personales ni contraseñas inseguras.</p>
+            <p class="text-center">Completa la información necesaria para configurar McWebPanel.<br>Podrás modificar esta configuración más adelante desde System Config, en el menú principal. Por motivos de seguridad, no introduzcas datos personales ni contraseñas inseguras.</p>
             <hr>
             <form class="text-left" action="install3.php" method="POST" id="login-install2">
 
               <div class="form-group">
-                <label for="eluser" class="">Nombre Usuario (SuperAdmin):</label>
+                <label for="eluser" class="">Nombre usuario (SuperAdmin):</label>
                 <input type="text" class="form-control" id="eluser" name="eluser" spellcheck="false" autocapitalize="off" required="required" maxlength="255">
               </div>
 
@@ -116,7 +116,7 @@ require_once "../template/errorreport.php";
                 </div>
 
                 <div class="form-group col-md-6">
-                  <label for="elrepass">Confirmar Contraseña:</label>
+                  <label for="elrepass">Confirmar contraseña:</label>
                   <input type="password" class="form-control" id="elrepass" name="elrepass" spellcheck="false" autocapitalize="off" placeholder="••••" required="required">
                 </div>
 
@@ -133,7 +133,7 @@ require_once "../template/errorreport.php";
               </div>
 
               <div class="form-group">
-                <label for="elnomserv">Nombre Servidor:</label>
+                <label for="elnomserv">Nombre del servidor:</label>
                 <input type="text" class="form-control" id="elnomserv" name="elnomserv" required="required" placeholder="McWebPanel">
               </div>
 
@@ -145,7 +145,7 @@ require_once "../template/errorreport.php";
                 </div>
 
                 <div class="form-group col-md-6">
-                  <label for="maxupload">Subida Archivos (Limite MB):</label>
+                  <label for="maxupload">Subida de archivos (Limite MB):</label>
                   <select id="maxupload" name="maxupload" class="form-control" required="required">
                     <?php
 
@@ -165,7 +165,7 @@ require_once "../template/errorreport.php";
               </div>
 
               <div class="form-row">
-                <div class="form-group col-md-6"> <label for="elram" class="">Memoria Ram Límite:</label>
+                <div class="form-group col-md-6"> <label for="elram" class="">Memoria máxima asignada:</label>
                   <select id="elram" name="elram" class="form-control" required="required">
                     <?php
 
@@ -189,7 +189,7 @@ require_once "../template/errorreport.php";
                   </select>
                 </div>
                 <div class="form-group col-md-6">
-                  <label for="eltipserv">Tipo Servidor:</label>
+                  <label for="eltipserv">Tipo de servidor:</label>
                   <select id="eltipserv" name="eltipserv" class="form-control" required="required">
                     <option value="vanilla">Vanilla</option>
                     <option value="spigot">Spigot</option>
@@ -205,7 +205,7 @@ require_once "../template/errorreport.php";
               </div>
 
               <div class="form-row">
-                <div class="form-group col-md-12"><label for="temawebuser" class="">Seleccionar Tema Web:</label>
+                <div class="form-group col-md-12"><label for="temawebuser" class="">Tema web:</label>
                   <select id="temawebuser" name="temawebuser" class="form-control" required="required">
                     <option value="1" selected>Claro</option>
                     <option value="2">Oscuro</option>
@@ -215,7 +215,7 @@ require_once "../template/errorreport.php";
 
               <div class="form-row">
                 <div class="form-group col-md-12">
-                  <label for="zonahoraria" class="">Zona Horaria:</label>
+                  <label for="zonahoraria" class="">Zona horaria:</label>
                   <select id="zonahoraria" name="zonahoraria" class="form-control" required="required">
                     <?php
                     $zonas_horarias = timezone_identifiers_list();
@@ -237,7 +237,7 @@ require_once "../template/errorreport.php";
               </div>
 
               <p class="lead" id="errorsubmit"></p>
-              <button type="submit" id="binstalar" class="btn btn-primary btn-block">Finalizar Instalación</button>
+              <button type="submit" id="binstalar" class="btn btn-primary btn-block">Finalizar instalación</button>
             </form>
             <br>
           </div>
