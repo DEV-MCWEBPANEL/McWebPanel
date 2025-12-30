@@ -79,7 +79,7 @@ $estamodulo = "";
                 </div>
               </div>
               <hr>
-              <p>Bienvenidos a McWebPanel, un panel de código abierto para la administración de Servidores Minecraft construido con PHP, jQuery y Bootstrap. Diseñado para una fácil instalación y una UI intuitiva tanto para administradores como usuarios. Completa el proceso de instalación para usar McWebPanel (Solo tomará unos minutos).</p>
+              <p class="text-center">¡Bienvenido a McWebPanel!, Un panel de código abierto para administrar servidores Minecraft, creado con PHP, jQuery y Bootstrap.<br>Su instalación es rápida y su interfaz es intuitiva, pensada tanto para administradores como para usuarios.<br>Completa la instalación y comienza a usar McWebPanel en solo unos minutos.</p>
               <hr>
             </div>
           </div>
@@ -377,7 +377,7 @@ $estamodulo = "";
               if ($losrequisitos == 1) {
                 echo '<div class="alert alert-danger text-center" role="alert">No cumples los requisitos para continuar la instalación.</div>';
               } elseif ($losrequisitos == 0) {
-                echo '<button type="submit" class="btn btn-primary btn-block">Continuar Instalación</button>';
+                echo '<button type="submit" class="btn btn-primary btn-block">Continuar instalación</button>';
               }
 
               ?>
