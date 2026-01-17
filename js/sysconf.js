@@ -247,6 +247,13 @@ $(function () {
         });
     }
 
+    if (document.getElementById('basura3') !== null) {
+        $("#basura3").change(function () {
+            document.getElementById("guardaserver").disabled = false;
+            document.getElementById("result").innerHTML = "";
+        });
+    }
+
     if (document.getElementById('opforceupgrade') !== null) {
         $("#opforceupgrade").change(function () {
             document.getElementById("guardaserver").disabled = false;
