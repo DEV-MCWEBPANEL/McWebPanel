@@ -937,6 +937,13 @@ if (isset($_SESSION['CONFIGUSER']['psystemconftemaweb'])) {
                                                                             <label for="basura2">Usar G1GC (Java 8/11 o superior)</label>
                                                                         </div>
 
+                                                                        <div>
+                                                                            <input type="radio" id="basura3" name="recbasura" value="3" <?php if ($recgarbagecolector == "3") {
+                                                                                                                                            echo "checked";
+                                                                                                                                        } ?>>
+                                                                            <label for="basura3">Usar ZGC (Java 21 y Minecraft 26.1 o superior)</label>
+                                                                        </div>
+
                                                                     </div>
 
                                                                     <div class="form-group col-md-6">
