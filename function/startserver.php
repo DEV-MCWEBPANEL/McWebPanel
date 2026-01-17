@@ -552,6 +552,9 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
                 } elseif ($recgarbagecolector == "2") {
                     $comandoserver .= "-XX:+UseG1GC" . " ";
                     $inigc = "-XX:+UseG1GC";
+                } elseif ($recgarbagecolector == "3"){
+                    $comandoserver .= "-XX:+UseZGC" . " ";
+                    $inigc = "-XX:+UseZGC";
                 }
 
                 //AÑADE FILE ENCODING
