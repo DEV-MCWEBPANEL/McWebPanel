@@ -72,7 +72,7 @@ $(function () {
                     document.getElementById("textoretorno").innerHTML = "<div class='alert alert-danger' role='alert'>Error: Faltan las librerias necesarias para iniciar el servidor de Forge/NeoForge.</div>";
                 } else if (data == "noforgenew") {
                     document.getElementById("textoretorno").innerHTML = "<div class='alert alert-danger' role='alert'>Error: No se encontro la carpeta /libraries/net/minecraftforge/forge/</div>";
-                } else if (data == "noforgenew") {
+                } else if (data == "noneoforge") {
                     document.getElementById("textoretorno").innerHTML = "<div class='alert alert-danger' role='alert'>Error: No se encontro la carpeta /libraries/net/neoforged/neoforge/</div>";
                 }else if (data == "forgenewtoomany") {
                     document.getElementById("textoretorno").innerHTML = "<div class='alert alert-danger' role='alert'>Error: Se ha encontrado más de una versión en /libraries/net/minecraftforge/forge/ revisa la carpeta y deja solamente la versión a utilizar.</div>";
