@@ -26,7 +26,7 @@ Servidor Web:
 Apache2 / Nginx
 
 Versiones PHP compatibles:
-PHP 8.0 | PHP 8.1 | PHP 8.2 | PHP 8.3
+PHP 8.0 | PHP 8.1 | PHP 8.2 | PHP 8.3 | PHP 8.4
 
 OpenJDK             (Maquina Virtual Java)
 screen              (GNU Screen)
