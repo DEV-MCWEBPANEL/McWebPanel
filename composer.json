@@ -8,6 +8,7 @@
 	],
     "require": {
         "php": ">=8.0",
-        "xpaw/php-minecraft-query": "^5.0.0"
+        "xpaw/php-minecraft-query": "^5.0.0",
+		"jquery": "^4.0.0"
     }
 }
