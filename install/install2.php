@@ -47,7 +47,7 @@ require_once "../template/errorreport.php";
   <link rel="stylesheet" href="css/install1.css">
 
   <!-- Script AJAX -->
-  <script src="../js/jquery.min.js" integrity="sha384-1H217gwSVyLSIfaLxHbE7dRb3v4mYCKbpQvzx0cegeju1MVsGrX5xXxAvs/HgeFs" crossorigin="anonymous"></script>
+  <script src="../js/jquery.min.js" integrity="sha384-fgGyf7Mo7DURSOMnOy7ed+dkq5Job205Gnzu6QIg0BOHKaqt4D76Dt8VlDCzcMHV" crossorigin="anonymous"></script>
 
   <!-- Favicons -->
   <link rel="apple-touch-icon" href="../img/icons/apple-icon-180x180.png" sizes="180x180">
