@@ -27,11 +27,13 @@ $retorno = "";
 //COMPROBAR SI SESSION EXISTE SINO CREARLA CON NO
 if (!isset($_SESSION['VALIDADO']) || !isset($_SESSION['KEYSECRETA'])) {
     $_SESSION = array();
+    session_unset();
     session_destroy();
     $retorno = "SALIR";
 } else {
     if ($_SESSION['VALIDADO'] == "NO" && $_SESSION['KEYSECRETA'] == "0") {
         $_SESSION = array();
+        session_unset();
         session_destroy();
         $retorno = "SALIR";
     } else {
@@ -41,6 +43,7 @@ if (!isset($_SESSION['VALIDADO']) || !isset($_SESSION['KEYSECRETA'])) {
 
             if ($recmantenimiento == "Activado") {
                 $_SESSION = array();
+                session_unset();
                 session_destroy();
                 $retorno = "SALIR";
             }
