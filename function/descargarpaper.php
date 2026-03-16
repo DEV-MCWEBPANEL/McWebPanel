@@ -74,7 +74,7 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
                 if ($laaction == "getproyect") {
 
                     //OBTENER PROJECTO
-                    $url = "https://api.papermc.io/v2/projects";
+                    $url = "https://fill.papermc.io/v3/projects";
                     $context = stream_context_create(
                         array(
                             "http" => array(
@@ -95,13 +95,18 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
 
                         $versiones = json_decode($contenido, true);
                         $versiones = $versiones['projects'];
-                        $versiones2 = $versiones;
+
+                        for ($i = 0; $i < count($versiones); $i++) {
+                           $arrayversiones [$i] = $versiones[$i]['project']['id'];
+                        }
+
+                        $versiones2 = $arrayversiones;
                         $retorno = "okbuild";
                     }
                 } elseif ($laaction == "getversion") {
 
                     //OBTENER VERSIONES
-                    $url = "https://api.papermc.io/v2/projects/" . $getproyecto;
+                    $url = "https://fill.papermc.io/v3/projects/" . $getproyecto;
                     $context = stream_context_create(
                         array(
                             "http" => array(
@@ -120,7 +125,8 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
 
                         $versiones = json_decode($contenido, true);
                         $versiones = $versiones['versions'];
-                        $versiones2 = array_reverse($versiones);
+                        $keys = array_keys($versiones);
+                        $versiones2 = $keys;
                         $retorno = "okbuild";
                     }
                 } elseif ($laaction == "getbuild") {
@@ -134,7 +140,7 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
                     if ($elerror == 0) {
 
                         //OBTENER BUILDS
-                        $url = "https://api.papermc.io/v2/projects/" . $getproyecto . "/versions/" . $getversion;
+                        $url = "https://fill.papermc.io/v3/projects/" . $getproyecto . "/versions/" . $getversion;
                         $context = stream_context_create(
                             array(
                                 "http" => array(
@@ -152,7 +158,7 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
                         } else {
                             $versiones = json_decode($contenido, true);
                             $versiones = $versiones['builds'];
-                            $versiones2 = array_reverse($versiones);
+                            $versiones2 = $versiones;
                             $retorno = "okbuild";
                         }
                     }
@@ -192,7 +198,7 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
                     //OBTENER DETALLES BUILD
                     if ($elerror == 0) {
 
-                        $url3 = "https://api.papermc.io/v2/projects/" . $getproyecto . "/versions/" . $getversion . "/builds/" . $getbuild;
+                        $url3 = "https://fill.papermc.io/v3/projects/" . $getproyecto . "/versions/" . $getversion . "/builds/" . $getbuild;
                         $context3 = stream_context_create(
                             array(
                                 "http" => array(
@@ -209,17 +215,14 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
                             $elerror = 1;
                         } else {
                             $resultado3 = json_decode($contenido3, true);
-                            $versiones3 = $resultado3['downloads'];
-                            $versiones3 = $versiones3['application'];
-                            $nombrejar = $versiones3['name'];
-                            $elsha256 = $versiones3['sha256'];
+                            $elsha256 = $resultado3 ['downloads']['server:default']['checksums']['sha256'] ?? null;
+                            $urldownjar = $resultado3 ['downloads']['server:default']['url'] ?? null;
                         }
                     }
 
                     //DESCARGAR PAPER
                     if ($elerror == 0) {
 
-                        $urldownjar = "https://api.papermc.io/v2/projects/" . $getproyecto . "/versions/" . $getversion . "/builds/" . $getbuild . "/downloads/" . $nombrejar;
                         $elssh = $dirtemp . "/getpaper.sh";
 
                         //OBTENER FECHA
