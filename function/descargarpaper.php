@@ -125,8 +125,8 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
 
                         $versiones = json_decode($contenido, true);
                         $versiones = $versiones['versions'];
-                        $keys = array_keys($versiones);
-                        $versiones2 = $keys;
+                        $arraycompuesta = array_merge(...array_values($versiones));
+                        $versiones2 = $arraycompuesta;
                         $retorno = "okbuild";
                     }
                 } elseif ($laaction == "getbuild") {
