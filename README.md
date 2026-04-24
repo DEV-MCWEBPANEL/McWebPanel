@@ -20,7 +20,7 @@ Estos son los requisitos para que McWebPanel funcione
 ```
 Sistemas Operativos:
 Debian 12.x | Debian 13.x
-Ubuntu Server 22.04 LTS | 24.04 LTS | 26.04 LTS BETA
+Ubuntu Server 22.04 LTS | 24.04 LTS | 26.04 LTS
 
 Servidor Web:
 Apache2 / Nginx
@@ -85,7 +85,7 @@ Configurar zona horaria (Ubuntu y Debian 11)
 sudo dpkg-reconfigure tzdata
 ```
 
-Editar Servicio Apache (SOLO Ubuntu 26.04 BETA)
+Editar Servicio Apache (SOLO Ubuntu 26.04)
 ```
 sudo systemctl edit apache2
 
@@ -118,6 +118,10 @@ Editar configuración por defecto:
 sudo vim /etc/apache2/sites-available/000-default.conf
 
 Añadir la siguiente configuración:
+
+ServerTokens Prod
+ServerSignature Off
+TraceEnable Off
 
 <VirtualHost *:80>
 
