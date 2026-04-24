@@ -31,27 +31,23 @@ $vidasession = "3600";
 
 $getconflakey = "";
 
-if (PHP_VERSION_ID < 70300) {
-  //VERSION ANTIGUA A 7.3
-  if ((!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') || $_SERVER['SERVER_PORT'] == 443) {
-    //SI ES HTTPS
-    session_set_cookie_params($vidasession, '/', $dominio, true, true);
-  } else {
-    //SI ES HTTP
-    session_set_cookie_params($vidasession, '/', $dominio, false, true);
-  }
-} else {
-  //version mas moderna soporte samesite
-  if ((!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') || $_SERVER['SERVER_PORT'] == 443) {
-    //SI ES HTTPS
-    session_set_cookie_params($vidasession, '/', $dominio, true, true);
-    ini_set('session.cookie_samesite', "Strict");
-  } else {
-    //SI ES HTTP
-    session_set_cookie_params($vidasession, '/', $dominio, false, true);
-    ini_set('session.cookie_samesite', "Strict");
-  }
-}
+$esHttps = (
+  (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ||
+  (isset($_SERVER['SERVER_PORT']) && $_SERVER['SERVER_PORT'] == 443) ||
+  (!empty($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROTO'] === 'https')
+);
+
+session_set_cookie_params([
+  'lifetime' => $vidasession,
+  'path' => '/',
+  'domain' => $dominio,
+  'secure' => $esHttps,
+  'httponly' => true,
+  'samesite' => 'Strict'
+]);
+
+ini_set('session.use_strict_mode', 1);
+ini_set('session.use_only_cookies', 1);
 
 session_start();
 
@@ -69,6 +65,9 @@ if (isset($_SESSION['IDENTIFICARSESSION'])) {
   } else {
     if (file_exists($rutasifunction)) {
       require_once "../config/confopciones.php";
+    } else {
+      echo '<div class="alert alert-danger" role="alert">No se encontró confopciones.php</div>';
+      exit;
     }
   }
 
@@ -90,7 +89,6 @@ if (isset($_SESSION['IDENTIFICARSESSION'])) {
   }
 
   date_default_timezone_set($reczonahoraria);
-  
 }
 
 unset($dominio);
