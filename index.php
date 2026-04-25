@@ -38,27 +38,15 @@ require_once "template/header.php";
     <?php
 
     $elerror = 0;
-    $yainstall = 0;
     $showerrors = "";
 
     $iniverificarpraiz = getcwd();
     $iniverificarpraiz = trim($iniverificarpraiz);
 
-    $iniverifirutatemplate = getcwd();
-    $iniverifirutatemplate = trim($iniverifirutatemplate);
-    $iniverifirutatemplate .= "/template";
-
-    $iniverifirutaconfig = getcwd();
-    $iniverifirutaconfig = trim($iniverifirutaconfig);
-    $iniverifirutaconfig .= "/config";
-
-    $iniverificonfuserjson = getcwd();
-    $iniverificonfuserjson = trim($iniverificonfuserjson);
-    $iniverificonfuserjson .= "/config/confuser.json";
-
-    $iniverificonfopcionesphp = getcwd();
-    $iniverificonfopcionesphp = trim($iniverificonfopcionesphp);
-    $iniverificonfopcionesphp .= "/config/confopciones.php";
+    $iniverifirutatemplate = $iniverificarpraiz . "/template";
+    $iniverifirutaconfig = $iniverificarpraiz . "/config";
+    $iniverificonfuserjson = $iniverificarpraiz . "/config/confuser.json";
+    $iniverificonfopcionesphp = $iniverificarpraiz . "/config/confopciones.php";
 
     //VERIFICAR LECTURA CARPETA RAIZ
     clearstatcache();
@@ -107,10 +95,7 @@ require_once "template/header.php";
       if (!is_readable($iniverifirutaconfig)) {
         $showerrors .= 'Error: No tienes permisos de lectura en la carpeta config, revisa los permisos de linux.<br><br>';
         $elerror = 1;
-        $yainstall = 1;
       }
-    } else {
-      $yainstall = 1;
     }
 
     clearstatcache();
@@ -119,10 +104,7 @@ require_once "template/header.php";
       if (!is_writable($iniverifirutaconfig)) {
         $showerrors .= 'Error: No tienes permisos de escritura en la carpeta config, revisa los permisos de linux.<br><br>';
         $elerror = 1;
-        $yainstall = 1;
       }
-    } else {
-      $yainstall = 1;
     }
 
     clearstatcache();
@@ -131,10 +113,7 @@ require_once "template/header.php";
       if (!is_executable($iniverifirutaconfig)) {
         $showerrors .= 'Error: No tienes permisos de ejecucion en la carpeta config, revisa los permisos de linux.<br><br>';
         $elerror = 1;
-        $yainstall = 1;
       }
-    } else {
-      $yainstall = 1;
     }
 
     //VERIFICAR /config/confuser.json";
@@ -144,10 +123,7 @@ require_once "template/header.php";
       if (!is_readable($iniverificonfuserjson)) {
         $showerrors .= 'Error: No tiene permisos de lectura en el archivo /config/confuser.json, revisa los permisos de linux.<br><br>';
         $elerror = 1;
-        $yainstall = 1;
       }
-    } else {
-      $yainstall = 1;
     }
 
     clearstatcache();
@@ -156,10 +132,7 @@ require_once "template/header.php";
       if (!is_writable($iniverificonfuserjson)) {
         $showerrors .= 'Error: No tiene permisos de escritura en el archivo /config/confuser.json, revisa los permisos de linux.<br><br>';
         $elerror = 1;
-        $yainstall = 1;
       }
-    } else {
-      $yainstall = 1;
     }
 
     //VERIFICAR /config/confopciones.php";
@@ -169,10 +142,7 @@ require_once "template/header.php";
       if (!is_readable($iniverificonfopcionesphp)) {
         $showerrors .= 'Error: No tienes permisos de lectura en el archivo /config/confopciones.php, revisa los permisos de linux.<br><br>';
         $elerror = 1;
-        $yainstall = 1;
       }
-    } else {
-      $yainstall = 1;
     }
 
     clearstatcache();
@@ -181,10 +151,7 @@ require_once "template/header.php";
       if (!is_writable($iniverificonfopcionesphp)) {
         $showerrors .= 'Error: No tienes permisos de escritura en el archivo /config/confopciones.php, revisa los permisos de linux.<br><br>';
         $elerror = 1;
-        $yainstall = 1;
       }
-    } else {
-      $yainstall = 1;
     }
 
     if ($elerror == 1) {
@@ -241,7 +208,7 @@ require_once "template/header.php";
       echo '<div class="alert alert-danger" role="alert">Error: Faltan archivos de configuración, vuelve a realizar la instalación.<br><br><a href="/install/index.php">Pulsa para instalar</a></div>';
       exit;
     } elseif ($sumaconfig == 0 && $sumainstall == 1) {
-      $laruta = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
+      $laruta = rtrim(dirname($_SERVER['SCRIPT_NAME']), '/\\');
       header("Location: {$laruta}/install/index.php");
       exit;
     } elseif ($sumaconfig == 2 && $sumainstall == 0) {
@@ -260,7 +227,12 @@ require_once "template/header.php";
 
       require_once "config/confopciones.php";
     }
-    $recnombreserv = CONFIGNOMBRESERVER;
+
+    if (defined('CONFIGNOMBRESERVER')) {
+      $recnombreserv = CONFIGNOMBRESERVER;
+    } else {
+      $recnombreserv = "McWebPanel";
+    }
     ?>
 
     <img class="mb-4" src="img/icons/apple-icon-72x72.png" alt="LOGO" width="72" height="72">
