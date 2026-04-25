@@ -76,7 +76,7 @@ require_once "template/header.php";
 
     //VERIFICAR EJECUCION CARPETA RAIZ
     clearstatcache();
-    if (!is_executable($iniverifirutatemplate)) {
+    if (!is_executable($iniverificarpraiz)) {
       $showerrors .= 'Error: No tienes permisos de ejecucion en la carpeta raíz, revisa los permisos de linux.<br><br>';
       $elerror = 1;
     }
