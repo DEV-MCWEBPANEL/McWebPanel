@@ -29,7 +29,6 @@ header('Pragma: no-cache');
 header('Expires: 0');
 
 require_once "../template/errorreport.php";
-
 ?>
 
 <!doctype html>
@@ -41,7 +40,7 @@ require_once "../template/errorreport.php";
     <meta name="robots" content="noindex, nofollow">
     <meta name="description" content="Instalador">
     <meta name="author" content="DEV-MCWEBPANEL">
-    <title>McWebPanel Install</title>
+    <title>Instalación McWebPanel</title>
 
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="../css/bootstrap.min.css">
@@ -151,6 +150,7 @@ require_once "../template/errorreport.php";
 
         //COMPROBAR LONGITUD USUARIO
         if (strlen($elusuario) > 255) {
+            echo "El usuario no puede tener mas de 255 caracteres";
             exit;
         }
 
