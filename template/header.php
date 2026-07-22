@@ -17,13 +17,15 @@ Copyright (C) 2020-2026 DEV-MCWEBPANEL
     along with McWebPanel.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-header("Content-Security-Policy: default-src 'none'; style-src 'self'; img-src 'self'; script-src 'self'; form-action 'self'; base-uri 'none'; connect-src 'self'; frame-ancestors 'none'");
+header("Content-Security-Policy: default-src 'none'; style-src 'self'; img-src 'self'; media-src 'self'; script-src 'self'; font-src 'self'; worker-src 'self'; manifest-src 'self'; object-src 'none'; form-action 'self'; base-uri 'none'; connect-src 'self'; frame-ancestors 'none'");
+header("X-Frame-Options: DENY");
 header("Cross-Origin-Resource-Policy: same-origin");
+header("Cross-Origin-Opener-Policy: same-origin");
 header('X-Content-Type-Options: nosniff');
 header('Strict-Transport-Security: max-age=63072000; includeSubDomains; preload');
 header("X-XSS-Protection: 1; mode=block");
 header("Referrer-Policy: no-referrer");
-header('Permissions-Policy: geolocation=(), microphone=()');
+header('Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=(), usb=(), bluetooth=()');
 header('Cache-Control: no-store, no-cache, must-revalidate, max-age=0');
 header('Pragma: no-cache');
 header('Expires: 0');
@@ -43,7 +45,7 @@ header('Expires: 0');
   <!-- Menu CSS -->
   <link rel="stylesheet" href="css/menu.css">
 
-  <!-- Script AJAX -->
+  <!-- jQuery -->
   <!-- openssl dgst -sha384 -binary jquery.min.js | openssl base64 -A -->
   <script src="js/jquery.min.js" integrity="sha384-fgGyf7Mo7DURSOMnOy7ed+dkq5Job205Gnzu6QIg0BOHKaqt4D76Dt8VlDCzcMHV" crossorigin="anonymous"></script>
 
