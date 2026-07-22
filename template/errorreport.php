@@ -17,8 +17,8 @@ Copyright (C) 2020-2026 DEV-MCWEBPANEL
     along with McWebPanel.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-define("VERSIONPANEL", "0.25");
-define("VERSIONTIPO", "Release");
+define("VERSIONPANEL", "0.26");
+define("VERSIONTIPO", "Develop");
 
 error_reporting(E_ALL);
 ini_set("display_errors", 0);
