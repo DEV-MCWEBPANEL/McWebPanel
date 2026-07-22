@@ -162,7 +162,7 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
                     $array[0]['excluido'] = $rutadesdemine;
                     $array[0]['completa'] = $archivo;
                     $serialized = serialize($array);
-                    file_put_contents($rutaarchivo, $serialized);
+                    file_put_contents($rutaarchivo, $serialized, LOCK_EX);
                     $retorno = "ok";
                 } else {
                     clearstatcache();
@@ -176,7 +176,7 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
                         $arrayobtenido[$elindice]['excluido'] = $rutadesdemine;
                         $arrayobtenido[$elindice]['completa'] = $archivo;
                         $serialized = serialize($arrayobtenido);
-                        file_put_contents($rutaarchivo, $serialized);
+                        file_put_contents($rutaarchivo, $serialized, LOCK_EX);
                         $retorno = "ok";
                     }
                 }

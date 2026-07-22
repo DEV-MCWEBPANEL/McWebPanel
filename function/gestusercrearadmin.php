@@ -49,7 +49,6 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
             $retorno = "";
             $elerror = 0;
             $test = 0;
-            $permiso;
 
             //OBTENER VARIABLES Y PASARLO A ARRAY
 
@@ -343,7 +342,7 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
 
                 //GUARDAR EN ARCHIVO
                 $serialized = serialize($arrayobtenido);
-                file_put_contents($elarchivo, $serialized);
+                file_put_contents($elarchivo, $serialized, LOCK_EX);
                 $retorno = "OK";
             }
         }

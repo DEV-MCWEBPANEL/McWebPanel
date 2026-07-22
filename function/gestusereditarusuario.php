@@ -483,7 +483,7 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
 
                 //GUARDAR EN ARCHIVO
                 $serialized = serialize($nuevoarray);
-                file_put_contents($elarchivo, $serialized);
+                file_put_contents($elarchivo, $serialized, LOCK_EX);
                 $_SESSION['SEGEDITARUSUARIO'] = 0;
                 $retorno = "OK";
             }

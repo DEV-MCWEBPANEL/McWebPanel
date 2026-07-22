@@ -154,7 +154,7 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
                                 unlink($rutaarchivo);
                             } else {
                                 $serialized = serialize($nuevoarray);
-                                file_put_contents($rutaarchivo, $serialized);
+                                file_put_contents($rutaarchivo, $serialized, LOCK_EX);
                             }
                             $retorno = "ok";
                         } else {

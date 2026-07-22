@@ -298,7 +298,7 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
                             }
 
                             $serialized = serialize($arrayobtenido);
-                            file_put_contents($elarchivo, $serialized);
+                            file_put_contents($elarchivo, $serialized, LOCK_EX);
                             $retorno = "OK";
                         }
                     } else {

@@ -1051,7 +1051,7 @@ if ($elerror == 0) {
                                                                                 $arraycreate[0]['archivo'] = "AUTO-" . $t . ".tar.gz";
                                                                                 $arraycreate[0]['fecha'] = $tget;
                                                                                 $serialized = serialize($arraycreate);
-                                                                                file_put_contents($rutarotate, $serialized);
+                                                                                file_put_contents($rutarotate, $serialized, LOCK_EX);
                                                                             } else {
                                                                                 clearstatcache();
                                                                                 if (is_writable($rutarotate)) {
@@ -1125,7 +1125,7 @@ if ($elerror == 0) {
                                                                                     $elarrayrotate[$rotateindice]['archivo'] = "AUTO-" . $t . ".tar.gz";
                                                                                     $elarrayrotate[$rotateindice]['fecha'] = $tget;
                                                                                     $serialized2 = serialize($elarrayrotate);
-                                                                                    file_put_contents($rutarotate, $serialized2);
+                                                                                    file_put_contents($rutarotate, $serialized2, LOCK_EX);
                                                                                 }
                                                                             }
                                                                         }

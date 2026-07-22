@@ -1086,7 +1086,7 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
 
                       //GUARDAR LISTADO ROTATE
                       $serializedlimpia = serialize($arraylimpieza);
-                      file_put_contents($rutarotate, $serializedlimpia);
+                      file_put_contents($rutarotate, $serializedlimpia, LOCK_EX);
                     }
                   }
                 }

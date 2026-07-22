@@ -105,7 +105,7 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
                         }
                     } else {
                         $serializedlimpia = serialize($arraylimpieza);
-                        file_put_contents($rutarotate, $serializedlimpia);
+                        file_put_contents($rutarotate, $serializedlimpia, LOCK_EX);
                     }
 
                     $retorno = 1;

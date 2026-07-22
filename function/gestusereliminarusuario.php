@@ -151,7 +151,7 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
                     }
 
                     $serialized = serialize($nuevoarray);
-                    file_put_contents($elarchivo, $serialized);
+                    file_put_contents($elarchivo, $serialized, LOCK_EX);
                     $retorno = "OK";
                     
                 } elseif ($_SESSION['CONFIGUSER']['rango'] == 2 && array_key_exists('psystemcreateuser', $_SESSION['CONFIGUSER']) && $_SESSION['CONFIGUSER']['psystemcreateuser'] == 1) {
@@ -169,7 +169,7 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
                     }
 
                     $serialized = serialize($nuevoarray);
-                    file_put_contents($elarchivo, $serialized);
+                    file_put_contents($elarchivo, $serialized, LOCK_EX);
                     $retorno = "OK";
                 }
             }

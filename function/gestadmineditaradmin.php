@@ -421,7 +421,7 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
                 //GUARDAR EN ARCHIVO
                 if ($elerror == 0) {
                     $serialized = serialize($nuevoarray);
-                    file_put_contents($elarchivo, $serialized);
+                    file_put_contents($elarchivo, $serialized, LOCK_EX);
                     $_SESSION['SEGEDITARSUPER'] = 0;
                     $retorno = "OK";
                 }

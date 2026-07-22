@@ -119,7 +119,7 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
 
                   //GUARDAR ARRAY EN ARCHIVO
                   $serialized = serialize($array);
-                  file_put_contents($archbuffer, $serialized);
+                  file_put_contents($archbuffer, $serialized, LOCK_EX);
                 } else {
 
                   //COMPROBAR SI SE PUEDE LEER EL JSON
@@ -155,7 +155,7 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
                         //CUANDO NO SE SUPERA EL LIMITE
                         $arrayobtenido[$elindice]['comando'] = test_input2($_POST['action']);
                         $serialized = serialize($arrayobtenido);
-                        file_put_contents($archbuffer, $serialized);
+                        file_put_contents($archbuffer, $serialized, LOCK_EX);
                       } else {
                         //CUANDO SE SUPERA EL LIMITE
                         $elcontador = 0;
@@ -166,7 +166,7 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
                         $elindice = count($auxarray);
                         $auxarray[$elindice]['comando'] = test_input2($_POST['action']);
                         $serialized = serialize($auxarray);
-                        file_put_contents($archbuffer, $serialized);
+                        file_put_contents($archbuffer, $serialized, LOCK_EX);
                       }
                     }
                   }
